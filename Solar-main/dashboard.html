@@ -254,8 +254,10 @@
         }
 
         .report-form .signature-cell {
-            height: 60px;
+            min-height: 60px;
+            height: auto;
             vertical-align: top;
+            padding: 8px !important;
         }
 
         .report-form .full-width {
@@ -318,8 +320,10 @@
         }
 
         .serial-form .signature-cell {
-            height: 50px;
+            min-height: 60px;
+            height: auto;
             vertical-align: top;
+            padding: 8px !important;
         }
 
         /* Print Styles */
@@ -682,22 +686,23 @@
 
         .preview-container {
             width: 100%;
-            height: 60px;
-            /* Fixed height to prevent expansion */
+            min-height: 60px;
+            height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            border: 1px dashed #ccc;
+            border: none;
             background: #fafafa;
+            margin-bottom: 5px;
         }
 
         .preview-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* Fill the field completely as requested */
+            max-width: 100%;
+            max-height: 250px;
+            height: auto;
+            object-fit: contain;
             display: none;
         }
 
@@ -712,7 +717,7 @@
         .passport-photo-box {
             width: 80px;
             height: 100px;
-            border: 1px dashed #666;
+            border: none;
             margin: 0 auto;
             position: relative;
             display: flex;
@@ -723,7 +728,6 @@
         }
 
         .passport-photo-box:hover {
-            border-color: #6b8e23;
             background: #f0f4e8;
         }
 
@@ -756,6 +760,42 @@
 
         .remove-photo-btn.active {
             display: flex;
+        }
+
+        /* Compact Upload Controls for Serial Numbers */
+        .serial-field-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .compact-upload-controls {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .compact-upload-controls .preview-container {
+            width: 40px;
+            height: 25px;
+            min-height: 25px;
+            margin-bottom: 0;
+            border-radius: 3px;
+        }
+
+        .compact-upload-controls .action-btn {
+            padding: 2px 5px;
+            font-size: 9px;
+        }
+
+        .compact-upload-controls .remove-photo-btn {
+            width: 14px;
+            height: 14px;
+            font-size: 8px;
+            top: -5px;
+            right: -5px;
         }
     </style>
 </head>
@@ -1065,7 +1105,33 @@
                                     Chargable</label>
                             </td>
                             <td class="label-cell">UNIT SL No:</td>
-                            <td colspan="3"><input type="text" id="unitSlNo" placeholder="Enter unit SL no"></td>
+                            <td colspan="3">
+                                <div style="display: flex; align-items: center; gap: 10px; width: 100%;">
+                                    <input type="text" id="unitSlNo" placeholder="Enter unit SL no" style="flex: 1;">
+                                    <div class="upload-controls" style="width: auto;">
+                                        <div class="preview-container"
+                                            style="min-width: 50px; min-height: 30px; height: auto;">
+                                            <img id="unitSlNoPreview" class="preview-img">
+                                            <button class="remove-photo-btn" id="unitSlNoRemove"
+                                                onclick="removeImage(event, 'unitSlNoPreview', 'unitSlNoImage', null, 'unitSlNoRemove')">&times;</button>
+                                            <input type="hidden" id="unitSlNoImage">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('unitSlNoInput')" title="Upload Image">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('unitSlNoPreview', 'unitSlNoImage', 'unitSlNoRemove')"
+                                                title="Take Photo">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="unitSlNoInput" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'unitSlNoPreview', 'unitSlNoImage', null, 'unitSlNoRemove')">
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
 
                         <!-- Call Attended/Completed Date Row -->
@@ -1281,16 +1347,16 @@
 
                         <!-- Engineer & Customer Remarks Row -->
                         <tr>
-                            <td class="label-cell" colspan="2">ENGINEER REMARKS:</td>
-                            <td colspan="2"><textarea id="engineerRemarks1" placeholder="Enter remarks"></textarea></td>
-                            <td class="label-cell" colspan="2">CUSTOMER REMARKS:</td>
-                            <td colspan="2"><textarea id="customerRemarks1" placeholder="Enter remarks"></textarea></td>
+                            <td class="label-cell">ENGINEER REMARKS:</td>
+                            <td colspan="3"><textarea id="engineerRemarks1" placeholder="Enter remarks"></textarea></td>
+                            <td class="label-cell">CUSTOMER REMARKS:</td>
+                            <td colspan="3"><textarea id="customerRemarks1" placeholder="Enter remarks"></textarea></td>
                         </tr>
 
                         <!-- Signature Row -->
                         <tr>
-                            <td class="label-cell signature-cell" colspan="2">SIGNATURE:</td>
-                            <td colspan="2" class="signature-cell">
+                            <td class="label-cell signature-cell">SIGNATURE:</td>
+                            <td colspan="3" class="signature-cell">
                                 <div class="upload-controls">
                                     <div class="preview-container">
                                         <img id="engineerSignaturePreview1" class="preview-img">
@@ -1312,8 +1378,8 @@
                                         onchange="handleImageUpload(event, 'engineerSignaturePreview1', 'engineerSignature1', null, 'engineerSigRemove1')">
                                 </div>
                             </td>
-                            <td class="label-cell signature-cell" colspan="2">SIGNATURE:</td>
-                            <td colspan="2" class="signature-cell">
+                            <td class="label-cell signature-cell">SIGNATURE:</td>
+                            <td colspan="3" class="signature-cell">
                                 <div class="upload-controls">
                                     <div class="preview-container">
                                         <img id="customerSignaturePreview1" class="preview-img">
@@ -1422,7 +1488,33 @@
                             <td><input type="text" id="unitRatingQty" placeholder="QTY"></td>
                             <td><input type="text" id="unitRatingNo" placeholder="NO"></td>
                             <td class="label-cell">SERIAL No:</td>
-                            <td><input type="text" id="unitRatingSerial" placeholder="Enter serial number"></td>
+                            <td>
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="unitRatingSerial" placeholder="Enter serial number">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="unitRatingSerialPreview" class="preview-img">
+                                            <button class="remove-photo-btn" id="unitRatingSerialRemove"
+                                                onclick="removeImage(event, 'unitRatingSerialPreview', 'unitRatingSerialImage', null, 'unitRatingSerialRemove')">&times;</button>
+                                            <input type="hidden" id="unitRatingSerialImage">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('unitRatingSerialInput')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('unitRatingSerialPreview', 'unitRatingSerialImage', 'unitRatingSerialRemove')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="unitRatingSerialInput" style="display:none"
+                                            accept="image/*"
+                                            onchange="handleImageUpload(event, 'unitRatingSerialPreview', 'unitRatingSerialImage', null, 'unitRatingSerialRemove')">
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
 
                         <!-- AJB/DCDB Row -->
@@ -1432,7 +1524,32 @@
                             <td><input type="text" id="ajbQty" placeholder="QTY"></td>
                             <td><input type="text" id="ajbNo" placeholder="NO"></td>
                             <td class="label-cell">SERIAL No:</td>
-                            <td><input type="text" id="ajbSerial" placeholder="Enter serial number"></td>
+                            <td>
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="ajbSerial" placeholder="Enter serial number">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="ajbSerialPreview" class="preview-img">
+                                            <button class="remove-photo-btn" id="ajbSerialRemove"
+                                                onclick="removeImage(event, 'ajbSerialPreview', 'ajbSerialImage', null, 'ajbSerialRemove')">&times;</button>
+                                            <input type="hidden" id="ajbSerialImage">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('ajbSerialInput')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('ajbSerialPreview', 'ajbSerialImage', 'ajbSerialRemove')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="ajbSerialInput" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'ajbSerialPreview', 'ajbSerialImage', null, 'ajbSerialRemove')">
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
 
                         <!-- ACDB Row -->
@@ -1442,7 +1559,32 @@
                             <td><input type="text" id="acdbQty" placeholder="QTY"></td>
                             <td><input type="text" id="acdbNo" placeholder="NO"></td>
                             <td class="label-cell">SERIAL No:</td>
-                            <td><input type="text" id="acdbSerial" placeholder="Enter serial number"></td>
+                            <td>
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="acdbSerial" placeholder="Enter serial number">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="acdbSerialPreview" class="preview-img">
+                                            <button class="remove-photo-btn" id="acdbSerialRemove"
+                                                onclick="removeImage(event, 'acdbSerialPreview', 'acdbSerialImage', null, 'acdbSerialRemove')">&times;</button>
+                                            <input type="hidden" id="acdbSerialImage">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('acdbSerialInput')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('acdbSerialPreview', 'acdbSerialImage', 'acdbSerialRemove')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="acdbSerialInput" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'acdbSerialPreview', 'acdbSerialImage', null, 'acdbSerialRemove')">
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
 
                         <!-- Solar Monitoring Row -->
@@ -1452,7 +1594,33 @@
                             <td><input type="text" id="solarMonQty" placeholder="QTY"></td>
                             <td><input type="text" id="solarMonNo" placeholder="NO"></td>
                             <td class="label-cell">SERIAL No:</td>
-                            <td><input type="text" id="solarMonSerial" placeholder="Enter serial number"></td>
+                            <td>
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="solarMonSerial" placeholder="Enter serial number">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="solarMonSerialPreview" class="preview-img">
+                                            <button class="remove-photo-btn" id="solarMonSerialRemove"
+                                                onclick="removeImage(event, 'solarMonSerialPreview', 'solarMonSerialImage', null, 'solarMonSerialRemove')">&times;</button>
+                                            <input type="hidden" id="solarMonSerialImage">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('solarMonSerialInput')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('solarMonSerialPreview', 'solarMonSerialImage', 'solarMonSerialRemove')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="solarMonSerialInput" style="display:none"
+                                            accept="image/*"
+                                            onchange="handleImageUpload(event, 'solarMonSerialPreview', 'solarMonSerialImage', null, 'solarMonSerialRemove')">
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
 
                         <!-- Batteries/Panel Header Row -->
@@ -1463,94 +1631,823 @@
 
                         <!-- Empty rows for batteries/panel serial numbers (left and right columns) -->
                         <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery1" placeholder="Enter batch code/serial"></td>
-                            <td colspan="3"><input type="text" id="battery2" placeholder="Enter batch code/serial"></td>
-                        </tr>
-                        <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery3" placeholder="Enter batch code/serial"></td>
-                            <td colspan="3"><input type="text" id="battery4" placeholder="Enter batch code/serial"></td>
-                        </tr>
-                        <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery5" placeholder="Enter batch code/serial"></td>
-                            <td colspan="3"><input type="text" id="battery6" placeholder="Enter batch code/serial"></td>
-                        </tr>
-                        <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery7" placeholder="Enter batch code/serial"></td>
-                            <td colspan="3"><input type="text" id="battery8" placeholder="Enter batch code/serial"></td>
-                        </tr>
-                        <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery9" placeholder="Enter batch code/serial"></td>
-                            <td colspan="3"><input type="text" id="battery10" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery1" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview1" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove1"
+                                                onclick="removeImage(event, 'batteryPreview1', 'batteryImage1', null, 'batteryRemove1')">&times;</button>
+                                            <input type="hidden" id="batteryImage1">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput1')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview1', 'batteryImage1', 'batteryRemove1')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput1" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview1', 'batteryImage1', null, 'batteryRemove1')">
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery2" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview2" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove2"
+                                                onclick="removeImage(event, 'batteryPreview2', 'batteryImage2', null, 'batteryRemove2')">&times;</button>
+                                            <input type="hidden" id="batteryImage2">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput2')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview2', 'batteryImage2', 'batteryRemove2')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput2" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview2', 'batteryImage2', null, 'batteryRemove2')">
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery11" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery3" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview3" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove3"
+                                                onclick="removeImage(event, 'batteryPreview3', 'batteryImage3', null, 'batteryRemove3')">&times;</button>
+                                            <input type="hidden" id="batteryImage3">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput3')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview3', 'batteryImage3', 'batteryRemove3')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput3" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview3', 'batteryImage3', null, 'batteryRemove3')">
+                                    </div>
+                                </div>
                             </td>
-                            <td colspan="3"><input type="text" id="battery12" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery4" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview4" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove4"
+                                                onclick="removeImage(event, 'batteryPreview4', 'batteryImage4', null, 'batteryRemove4')">&times;</button>
+                                            <input type="hidden" id="batteryImage4">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput4')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview4', 'batteryImage4', 'batteryRemove4')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput4" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview4', 'batteryImage4', null, 'batteryRemove4')">
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery13" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery5" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview5" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove5"
+                                                onclick="removeImage(event, 'batteryPreview5', 'batteryImage5', null, 'batteryRemove5')">&times;</button>
+                                            <input type="hidden" id="batteryImage5">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput5')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview5', 'batteryImage5', 'batteryRemove5')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput5" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview5', 'batteryImage5', null, 'batteryRemove5')">
+                                    </div>
+                                </div>
                             </td>
-                            <td colspan="3"><input type="text" id="battery14" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery6" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview6" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove6"
+                                                onclick="removeImage(event, 'batteryPreview6', 'batteryImage6', null, 'batteryRemove6')">&times;</button>
+                                            <input type="hidden" id="batteryImage6">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput6')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview6', 'batteryImage6', 'batteryRemove6')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput6" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview6', 'batteryImage6', null, 'batteryRemove6')">
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery15" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery7" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview7" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove7"
+                                                onclick="removeImage(event, 'batteryPreview7', 'batteryImage7', null, 'batteryRemove7')">&times;</button>
+                                            <input type="hidden" id="batteryImage7">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput7')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview7', 'batteryImage7', 'batteryRemove7')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput7" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview7', 'batteryImage7', null, 'batteryRemove7')">
+                                    </div>
+                                </div>
                             </td>
-                            <td colspan="3"><input type="text" id="battery16" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery8" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview8" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove8"
+                                                onclick="removeImage(event, 'batteryPreview8', 'batteryImage8', null, 'batteryRemove8')">&times;</button>
+                                            <input type="hidden" id="batteryImage8">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput8')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview8', 'batteryImage8', 'batteryRemove8')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput8" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview8', 'batteryImage8', null, 'batteryRemove8')">
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery17" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery9" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview9" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove9"
+                                                onclick="removeImage(event, 'batteryPreview9', 'batteryImage9', null, 'batteryRemove9')">&times;</button>
+                                            <input type="hidden" id="batteryImage9">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput9')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview9', 'batteryImage9', 'batteryRemove9')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput9" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview9', 'batteryImage9', null, 'batteryRemove9')">
+                                    </div>
+                                </div>
                             </td>
-                            <td colspan="3"><input type="text" id="battery18" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery10" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview10" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove10"
+                                                onclick="removeImage(event, 'batteryPreview10', 'batteryImage10', null, 'batteryRemove10')">&times;</button>
+                                            <input type="hidden" id="batteryImage10">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput10')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview10', 'batteryImage10', 'batteryRemove10')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput10" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview10', 'batteryImage10', null, 'batteryRemove10')">
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery19" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery11" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview11" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove11"
+                                                onclick="removeImage(event, 'batteryPreview11', 'batteryImage11', null, 'batteryRemove11')">&times;</button>
+                                            <input type="hidden" id="batteryImage11">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput11')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview11', 'batteryImage11', 'batteryRemove11')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput11" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview11', 'batteryImage11', null, 'batteryRemove11')">
+                                    </div>
+                                </div>
                             </td>
-                            <td colspan="3"><input type="text" id="battery20" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery12" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview12" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove12"
+                                                onclick="removeImage(event, 'batteryPreview12', 'batteryImage12', null, 'batteryRemove12')">&times;</button>
+                                            <input type="hidden" id="batteryImage12">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput12')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview12', 'batteryImage12', 'batteryRemove12')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput12" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview12', 'batteryImage12', null, 'batteryRemove12')">
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery21" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery13" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview13" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove13"
+                                                onclick="removeImage(event, 'batteryPreview13', 'batteryImage13', null, 'batteryRemove13')">&times;</button>
+                                            <input type="hidden" id="batteryImage13">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput13')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview13', 'batteryImage13', 'batteryRemove13')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput13" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview13', 'batteryImage13', null, 'batteryRemove13')">
+                                    </div>
+                                </div>
                             </td>
-                            <td colspan="3"><input type="text" id="battery22" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery14" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview14" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove14"
+                                                onclick="removeImage(event, 'batteryPreview14', 'batteryImage14', null, 'batteryRemove14')">&times;</button>
+                                            <input type="hidden" id="batteryImage14">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput14')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview14', 'batteryImage14', 'batteryRemove14')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput14" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview14', 'batteryImage14', null, 'batteryRemove14')">
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery23" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery15" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview15" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove15"
+                                                onclick="removeImage(event, 'batteryPreview15', 'batteryImage15', null, 'batteryRemove15')">&times;</button>
+                                            <input type="hidden" id="batteryImage15">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput15')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview15', 'batteryImage15', 'batteryRemove15')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput15" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview15', 'batteryImage15', null, 'batteryRemove15')">
+                                    </div>
+                                </div>
                             </td>
-                            <td colspan="3"><input type="text" id="battery24" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery16" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview16" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove16"
+                                                onclick="removeImage(event, 'batteryPreview16', 'batteryImage16', null, 'batteryRemove16')">&times;</button>
+                                            <input type="hidden" id="batteryImage16">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput16')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview16', 'batteryImage16', 'batteryRemove16')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput16" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview16', 'batteryImage16', null, 'batteryRemove16')">
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery25" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery17" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview17" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove17"
+                                                onclick="removeImage(event, 'batteryPreview17', 'batteryImage17', null, 'batteryRemove17')">&times;</button>
+                                            <input type="hidden" id="batteryImage17">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput17')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview17', 'batteryImage17', 'batteryRemove17')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput17" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview17', 'batteryImage17', null, 'batteryRemove17')">
+                                    </div>
+                                </div>
                             </td>
-                            <td colspan="3"><input type="text" id="battery26" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery18" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview18" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove18"
+                                                onclick="removeImage(event, 'batteryPreview18', 'batteryImage18', null, 'batteryRemove18')">&times;</button>
+                                            <input type="hidden" id="batteryImage18">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput18')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview18', 'batteryImage18', 'batteryRemove18')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput18" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview18', 'batteryImage18', null, 'batteryRemove18')">
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery27" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery19" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview19" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove19"
+                                                onclick="removeImage(event, 'batteryPreview19', 'batteryImage19', null, 'batteryRemove19')">&times;</button>
+                                            <input type="hidden" id="batteryImage19">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput19')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview19', 'batteryImage19', 'batteryRemove19')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput19" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview19', 'batteryImage19', null, 'batteryRemove19')">
+                                    </div>
+                                </div>
                             </td>
-                            <td colspan="3"><input type="text" id="battery28" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery20" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview20" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove20"
+                                                onclick="removeImage(event, 'batteryPreview20', 'batteryImage20', null, 'batteryRemove20')">&times;</button>
+                                            <input type="hidden" id="batteryImage20">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput20')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview20', 'batteryImage20', 'batteryRemove20')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput20" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview20', 'batteryImage20', null, 'batteryRemove20')">
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                         <tr class="empty-row">
-                            <td colspan="3"><input type="text" id="battery29" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery21" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview21" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove21"
+                                                onclick="removeImage(event, 'batteryPreview21', 'batteryImage21', null, 'batteryRemove21')">&times;</button>
+                                            <input type="hidden" id="batteryImage21">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput21')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview21', 'batteryImage21', 'batteryRemove21')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput21" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview21', 'batteryImage21', null, 'batteryRemove21')">
+                                    </div>
+                                </div>
                             </td>
-                            <td colspan="3"><input type="text" id="battery30" placeholder="Enter batch code/serial">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery22" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview22" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove22"
+                                                onclick="removeImage(event, 'batteryPreview22', 'batteryImage22', null, 'batteryRemove22')">&times;</button>
+                                            <input type="hidden" id="batteryImage22">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput22')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview22', 'batteryImage22', 'batteryRemove22')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput22" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview22', 'batteryImage22', null, 'batteryRemove22')">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="empty-row">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery23" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview23" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove23"
+                                                onclick="removeImage(event, 'batteryPreview23', 'batteryImage23', null, 'batteryRemove23')">&times;</button>
+                                            <input type="hidden" id="batteryImage23">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput23')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview23', 'batteryImage23', 'batteryRemove23')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput23" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview23', 'batteryImage23', null, 'batteryRemove23')">
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery24" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview24" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove24"
+                                                onclick="removeImage(event, 'batteryPreview24', 'batteryImage24', null, 'batteryRemove24')">&times;</button>
+                                            <input type="hidden" id="batteryImage24">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput24')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview24', 'batteryImage24', 'batteryRemove24')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput24" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview24', 'batteryImage24', null, 'batteryRemove24')">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="empty-row">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery25" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview25" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove25"
+                                                onclick="removeImage(event, 'batteryPreview25', 'batteryImage25', null, 'batteryRemove25')">&times;</button>
+                                            <input type="hidden" id="batteryImage25">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput25')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview25', 'batteryImage25', 'batteryRemove25')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput25" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview25', 'batteryImage25', null, 'batteryRemove25')">
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery26" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview26" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove26"
+                                                onclick="removeImage(event, 'batteryPreview26', 'batteryImage26', null, 'batteryRemove26')">&times;</button>
+                                            <input type="hidden" id="batteryImage26">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput26')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview26', 'batteryImage26', 'batteryRemove26')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput26" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview26', 'batteryImage26', null, 'batteryRemove26')">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="empty-row">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery27" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview27" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove27"
+                                                onclick="removeImage(event, 'batteryPreview27', 'batteryImage27', null, 'batteryRemove27')">&times;</button>
+                                            <input type="hidden" id="batteryImage27">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput27')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview27', 'batteryImage27', 'batteryRemove27')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput27" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview27', 'batteryImage27', null, 'batteryRemove27')">
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery28" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview28" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove28"
+                                                onclick="removeImage(event, 'batteryPreview28', 'batteryImage28', null, 'batteryRemove28')">&times;</button>
+                                            <input type="hidden" id="batteryImage28">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput28')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview28', 'batteryImage28', 'batteryRemove28')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput28" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview28', 'batteryImage28', null, 'batteryRemove28')">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="empty-row">
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery29" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview29" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove29"
+                                                onclick="removeImage(event, 'batteryPreview29', 'batteryImage29', null, 'batteryRemove29')">&times;</button>
+                                            <input type="hidden" id="batteryImage29">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput29')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview29', 'batteryImage29', 'batteryRemove29')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput29" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview29', 'batteryImage29', null, 'batteryRemove29')">
+                                    </div>
+                                </div>
+                            </td>
+                            <td colspan="3">
+                                <div class="serial-field-wrapper">
+                                    <input type="text" id="battery30" placeholder="Enter batch code/serial">
+                                    <div class="compact-upload-controls">
+                                        <div class="preview-container">
+                                            <img id="batteryPreview30" class="preview-img">
+                                            <button class="remove-photo-btn" id="batteryRemove30"
+                                                onclick="removeImage(event, 'batteryPreview30', 'batteryImage30', null, 'batteryRemove30')">&times;</button>
+                                            <input type="hidden" id="batteryImage30">
+                                        </div>
+                                        <div class="action-btn-group">
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerFileInput('batteryInput30')" title="Upload">
+                                                <i class="fas fa-upload"></i>
+                                            </button>
+                                            <button type="button" class="action-btn"
+                                                onclick="triggerCamera('batteryPreview30', 'batteryImage30', 'batteryRemove30')"
+                                                title="Camera">
+                                                <i class="fas fa-camera"></i>
+                                            </button>
+                                        </div>
+                                        <input type="file" id="batteryInput30" style="display:none" accept="image/*"
+                                            onchange="handleImageUpload(event, 'batteryPreview30', 'batteryImage30', null, 'batteryRemove30')">
+                                    </div>
+                                </div>
                             </td>
                         </tr>
 
                         <!-- Engineer & Customer Remarks Row -->
                         <tr>
-                            <td class="label-cell" colspan="2">ENGINEER REMARKS:</td>
-                            <td colspan="1"><textarea id="engineerRemarks2" placeholder="Enter remarks"
+                            <td class="label-cell">ENGINEER REMARKS:</td>
+                            <td colspan="2"><textarea id="engineerRemarks2" placeholder="Enter remarks"
                                     style="min-height:40px;"></textarea></td>
-                            <td class="label-cell" colspan="2">CUSTOMER REMARKS:</td>
-                            <td colspan="1"><textarea id="customerRemarks2" placeholder="Enter remarks"
+                            <td class="label-cell">CUSTOMER REMARKS:</td>
+                            <td colspan="2"><textarea id="customerRemarks2" placeholder="Enter remarks"
                                     style="min-height:40px;"></textarea></td>
                         </tr>
 
@@ -2052,7 +2949,13 @@
                     engineerSignature1: document.getElementById('engineerSignature1')?.value || '',
                     customerSignature1: document.getElementById('customerSignature1')?.value || '',
                     engineerPhoto1: document.getElementById('engineerPhoto1')?.value || '',
-                    customerPhoto1: document.getElementById('customerPhoto1')?.value || ''
+                    customerPhoto1: document.getElementById('customerPhoto1')?.value || '',
+                    unitSlNoImage: document.getElementById('unitSlNoImage')?.value || '',
+                    // Main serial number images
+                    unitRatingSerialImage: document.getElementById('unitRatingSerialImage')?.value || '',
+                    ajbSerialImage: document.getElementById('ajbSerialImage')?.value || '',
+                    acdbSerialImage: document.getElementById('acdbSerialImage')?.value || '',
+                    solarMonSerialImage: document.getElementById('solarMonSerialImage')?.value || ''
                 },
                 // Serial Numbers Form Data
                 serialNumbers: {
@@ -2080,15 +2983,19 @@
                     engineerPhoto2: document.getElementById('engineerPhoto2')?.value || '',
                     customerPhoto2: document.getElementById('customerPhoto2')?.value || ''
                 },
-                // Battery serial numbers
+                // Battery serial numbers and images
                 batteries: []
             };
 
-            // Collect battery serial numbers
+            // Collect battery serial numbers and images
             for (let i = 1; i <= 30; i++) {
                 const batteryField = document.getElementById('battery' + i);
+                const batteryImageField = document.getElementById('batteryImage' + i);
                 if (batteryField) {
-                    formData.batteries.push(batteryField.value || '');
+                    formData.batteries.push({
+                        value: batteryField.value || '',
+                        image: batteryImageField?.value || ''
+                    });
                 }
             }
 
@@ -2140,8 +3047,16 @@
 
             const hiddenFields = [
                 'engineerSignature1', 'customerSignature1', 'engineerPhoto1', 'customerPhoto1',
-                'engineerSignature2', 'customerSignature2', 'engineerPhoto2', 'customerPhoto2'
+                'engineerSignature2', 'customerSignature2', 'engineerPhoto2', 'customerPhoto2',
+                'unitSlNoImage',
+                // New serial number images
+                'unitRatingSerialImage', 'ajbSerialImage', 'acdbSerialImage', 'solarMonSerialImage'
             ];
+
+            // Add all battery images to hiten fields to clear
+            for (let i = 1; i <= 30; i++) {
+                hiddenFields.push('batteryImage' + i);
+            }
             hiddenFields.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.value = '';
@@ -2206,10 +3121,33 @@
 
                 // Load battery data
                 if (formData.batteries) {
-                    formData.batteries.forEach((value, index) => {
-                        const element = document.getElementById('battery' + (index + 1));
+                    formData.batteries.forEach((data, index) => {
+                        const batteryNum = index + 1;
+                        const element = document.getElementById('battery' + batteryNum);
                         if (element) {
-                            element.value = value;
+                            // Support both old and new data format
+                            element.value = typeof data === 'object' ? data.value : data;
+                        }
+
+                        // Load battery images if available
+                        if (typeof data === 'object' && data.image) {
+                            const preview = document.getElementById('batteryPreview' + batteryNum);
+                            const hidden = document.getElementById('batteryImage' + batteryNum);
+                            const removeBtn = document.getElementById('batteryRemove' + batteryNum);
+
+                            if (hidden) hidden.value = data.image;
+                            if (preview) {
+                                preview.src = data.image;
+                                preview.classList.add('active');
+                            }
+                            if (removeBtn) removeBtn.classList.add('active');
+
+                            // Hide upload controls
+                            const container = preview?.closest('.upload-controls') || preview?.closest('.compact-upload-controls');
+                            if (container) {
+                                const btnGroup = container.querySelector('.action-btn-group');
+                                if (btnGroup) btnGroup.classList.add('hidden');
+                            }
                         }
                     });
                 }
@@ -2221,7 +3159,13 @@
                     { form: 'serviceReport', id: 'customerSignature1', preview: 'customerSignaturePreview1' },
                     { form: 'serviceReport', id: 'engineerPhoto1', preview: 'engineerPhotoPreview1' },
                     { form: 'serviceReport', id: 'customerPhoto1', preview: 'customerPhotoPreview1' },
-                    // Form 2
+                    { form: 'serviceReport', id: 'unitSlNoImage', preview: 'unitSlNoPreview' },
+                    // Form 2 Main Component Serials
+                    { form: 'serviceReport', id: 'unitRatingSerialImage', preview: 'unitRatingSerialPreview' },
+                    { form: 'serviceReport', id: 'ajbSerialImage', preview: 'ajbSerialPreview' },
+                    { form: 'serviceReport', id: 'acdbSerialImage', preview: 'acdbSerialPreview' },
+                    { form: 'serviceReport', id: 'solarMonSerialImage', preview: 'solarMonSerialPreview' },
+                    // Form 2 Signatures/Photos
                     { form: 'serialNumbers', id: 'engineerSignature2', preview: 'engineerSignaturePreview2' },
                     { form: 'serialNumbers', id: 'customerSignature2', preview: 'customerSignaturePreview2' },
                     { form: 'serialNumbers', id: 'engineerPhoto2', preview: 'engineerPhotoPreview2' },
@@ -2237,7 +3181,9 @@
                         const preview = document.getElementById(imgInfo.preview);
                         let rBtnId = '';
                         if (imgInfo.id.includes('Signature')) rBtnId = imgInfo.id.replace('Signature', 'SigRemove');
-                        else rBtnId = imgInfo.id.replace('Photo', 'PhotoRemove');
+                        else if (imgInfo.id.includes('Photo')) rBtnId = imgInfo.id.replace('Photo', 'PhotoRemove');
+                        else if (imgInfo.id === 'unitSlNoImage') rBtnId = 'unitSlNoRemove';
+                        else if (imgInfo.id.includes('SerialImage')) rBtnId = imgInfo.id.replace('Image', 'Remove');
 
                         const removeBtn = document.getElementById(rBtnId);
 
