@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--<< Header Area >>-->
+
+<head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="MN Enterprises">
+    <meta name="description"
+        content="Glimpses of our journey, successful solar installations, and memories at MN Enterprises, Anantapur.">
+    <!-- ======== Page title ============ -->
+    <title>Gallery - MN Enterprises Memories</title>
+    <!--<< Favicon >>-->
+    <link rel="shortcut icon" href="assets/img/logo/MN LOGO.svg">
+    <!--<< Bootstrap min.css >>-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!--<< Font Awesome.css >>-->
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <script src="https://kit.fontawesome.com/630ffb3b6c.js" crossorigin="anonymous"></script>
+    <!--<< Animate.css >>-->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <!--<< Magnific Popup.css >>-->
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <!--<< MeanMenu.css >>-->
+    <link rel="stylesheet" href="assets/css/meanmenu.css">
+    <!--<< Swiper Bundle.css >>-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+    <!--<< Nice Select.css >>-->
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <!--<< Main.css >>-->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!--<< Style.css >>-->
+    <link rel="stylesheet" href="style.css">
+    <!--<< Custom Navbar CSS >>-->
+    <link rel="stylesheet" href="assets/css/custom-navbar.css">
+    <!--<< Footer Custom CSS >>-->
+    <link rel="stylesheet" href="assets/css/footer-custom.css">
+
+    <style>
+        /* Gallery Specific Styles to match the reference image */
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            min-height: 110vh;
+            background-color: #ffffff;
+            background-image:
+                linear-gradient(45deg, #f8faf7 25%, transparent 25%),
+                linear-gradient(-45deg, #f8faf7 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #f8faf7 75%),
+                linear-gradient(-45deg, transparent 75%, #f8faf7 75%);
+            background-size: 100px 100px;
+            background-position: 0 0, 0 50px, 50px 50px, 50px 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 0 150px;
+        }
+
+        .gallery-center-text {
+            text-align: center;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px 45px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(91, 155, 55, 0.1);
+            border: 1px solid rgba(91, 155, 55, 0.1);
+        }
+
+        .gallery-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 0;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .gallery-title span {
+            color: #5B9B37;
+            /* Official theme green */
+        }
+
+        .gallery-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            color: #4a4a4a;
+            margin-top: 5px;
+            letter-spacing: 2px;
+        }
+
+        .polaroid-item {
+            position: absolute;
+            background: #fff;
+            padding: 10px 10px 40px 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            z-index: 1;
+            cursor: pointer;
+            width: 220px;
+            text-decoration: none !important;
+            display: block;
+        }
+
+        .polaroid-item:hover {
+            z-index: 20 !important;
+            transform: scale(1.1) rotate(0deg) !important;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .polaroid-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border: 1px solid #eee;
+        }
+
+        /* Positions for polaroids - scattered around */
+        .p1 {
+            top: 10%;
+            left: 5%;
+            transform: rotate(-10deg);
+        }
+
+        .p2 {
+            top: 5%;
+            left: 25%;
+            transform: rotate(15deg);
+        }
+
+        .p3 {
+            top: 15%;
+            left: 75%;
+            transform: rotate(-5deg);
+        }
+
+        .p4 {
+            top: 5%;
+            left: 85%;
+            transform: rotate(12deg);
+        }
+
+        .p5 {
+            top: 40%;
+            left: 2%;
+            transform: rotate(-8deg);
+        }
+
+        .p6 {
+            top: 35%;
+            left: 80%;
+            transform: rotate(8deg);
+        }
+
+        .p7 {
+            bottom: 10%;
+            left: 8%;
+            transform: rotate(5deg);
+        }
+
+        .p8 {
+            bottom: 5%;
+            left: 30%;
+            transform: rotate(-12deg);
+        }
+
+        .p9 {
+            bottom: 15%;
+            left: 55%;
+            transform: rotate(10deg);
+        }
+
+        .p10 {
+            bottom: 10%;
+            left: 82%;
+            transform: rotate(-15deg);
+        }
+
+        .p11 {
+            top: 45%;
+            left: 20%;
+            transform: rotate(5deg);
+        }
+
+        .p12 {
+            top: 55%;
+            left: 70%;
+            transform: rotate(-12deg);
+        }
+
+        .p13 {
+            top: 70%;
+            left: 15%;
+            transform: rotate(18deg);
+        }
+
+        .p14 {
+            top: 75%;
+            left: 40%;
+            transform: rotate(-5deg);
+        }
+
+        .p15 {
+            top: 30%;
+            left: 10%;
+            transform: rotate(-15deg);
+        }
+
+        @media (max-width: 991px) {
+            .gallery-container {
+                flex-direction: column;
+                min-height: auto;
+                padding: 100px 20px;
+            }
+
+            .polaroid-item {
+                position: relative !important;
+                margin: 20px auto;
+                transform: rotate(0deg) !important;
+                top: auto !important;
+                left: auto !important;
+                bottom: auto !important;
+                right: auto !important;
+                width: 90%;
+                max-width: 300px;
+            }
+
+            .gallery-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Preloader Start -->
+    <div id="preloader" class="preloader">
+        <div class="animation-preloader">
+            <div class="spinner"></div>
+            <div class="txt-loading">
+                <span data-text-preloader="M" class="letters-loading">M</span>
+                <span data-text-preloader="N" class="letters-loading">N</span>
+                <span data-text-preloader="E" class="letters-loading">E</span>
+                <span data-text-preloader="N" class="letters-loading">N</span>
+                <span data-text-preloader="T" class="letters-loading">T</span>
+                <span data-text-preloader="E" class="letters-loading">E</span>
+                <span data-text-preloader="R" class="letters-loading">R</span>
+                <span data-text-preloader="P" class="letters-loading">P</span>
+                <span data-text-preloader="R" class="letters-loading">R</span>
+                <span data-text-preloader="I" class="letters-loading">I</span>
+                <span data-text-preloader="S" class="letters-loading">S</span>
+                <span data-text-preloader="E" class="letters-loading">E</span>
+                <span data-text-preloader="S" class="letters-loading">S</span>
+            </div>
+            <p class="text-center">Loading</p>
+        </div>
+        <div class="loader">
+            <div class="row">
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back To Top Start -->
+    <div class="scroll-up">
+        <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+
+    <!-- Offcanvas Area Start -->
+    <div class="fix-area">
+        <div class="offcanvas__info">
+            <div class="offcanvas__wrapper">
+                <div class="offcanvas__content">
+                    <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
+                        <div class="offcanvas__logo">
+                            <a href="index.html">
+                                <img src="assets/img/logo/MN LOGO.svg" style=" width: 10rem;" alt="logo-img">
+                            </a>
+                        </div>
+                        <div class="offcanvas__close">
+                            <button><i class="fas fa-times"></i></button>
+                        </div>
+                    </div>
+                    <div class="mobile-menu fix mb-3"></div>
+                    <div class="offcanvas__contact">
+                        <h4>Contact Info</h4>
+                        <ul>
+                            <li class="d-flex align-items-center">
+                                <div class="offcanvas__contact-icon"><i class="fal fa-map-marker-alt"></i></div>
+                                <div class="offcanvas__contact-text">
+                                    <a target="_blank" href="#">6‑71, Near ACB Office, TV Tower, Lenin Nagar, Anantapur
+                                        – 515001.</a>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="offcanvas__contact-icon mr-15"><i class="fal fa-envelope"></i></div>
+                                <div class="offcanvas__contact-text">
+                                    <a href="mailto:mnenterprises.atp@gmail.com">mnenterprises.atp@gmail.com</a>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="offcanvas__contact-icon mr-15"><i class="fa-solid fa-phone"></i></div>
+                                <div class="offcanvas__contact-text">
+                                    <a href="tel:+919010100175">+919010100175</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="social-icon d-flex align-items-center mt-4">
+                            <a href="https://www.facebook.com/share/1CZJM6XeSp" target="_blank"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/mnenterprises2025" target="_blank"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/919010100175" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://youtube.com/@mnenterprisesatp?si=rsqrIqAk492jJwlB" target="_blank"><i
+                                    class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas__overlay"></div>
+
+    <!-- Header Section Start -->
+    <header id="header-sticky" class="header-1 header-light-bg">
+        <div class="container-fluid">
+            <div class="mega-menu-wrapper">
+                <div class="header-main">
+                    <div class="logo">
+                        <a href="index.html" class="header-logo">
+                            <img src="assets/img/logo/MN LOGO.svg" style=" width: 10rem;" alt="logo-img">
+                        </a>
+                    </div>
+                    <div class="header-left">
+                        <div class="mean__menu-wrapper">
+                            <div class="main-menu">
+                                <nav id="mobile-menu">
+                                    <ul>
+                                        <li><a href="index.html">Home</a></li>
+                                        <li><a href="service.html">Services</a></li>
+                                        <li><a href="about.html">About Us</a></li>
+                                        <li><a href="news.html">Blog</a></li>
+                                        <li class="active"><a href="gallery.html">Gallery</a></li>
+                                        <li><a href="contact.html">Contact</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-right d-flex justify-content-end align-items-center">
+                        <div class="header-button">
+                            <a href="contact.html" class="theme-btn">Get a quote <i
+                                    class="fas fa-arrow-right-long"></i></a>
+                        </div>
+                        <div class="header__hamburger d-xl-none my-auto">
+                            <div class="sidebar__toggle"><i class="fas fa-bars"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Gallery Section -->
+    <section class="gallery-container">
+        <!-- Central Title -->
+        <div class="gallery-center-text wow zoomIn">
+            <h1 class="gallery-title"><span>MN Enterprises</span> Memories</h1>
+            <p class="gallery-subtitle">Excellence in Solar & Power</p>
+        </div>
+
+        <!-- Polaroids (Scattered) -->
+        <a href="assets/img/gallery/gallery-1.jpg" class="polaroid-item p1 wow fadeInDown img-popup"
+            data-wow-delay=".2s">
+            <img src="assets/img/gallery/gallery-1.jpg" alt="Memory 1">
+        </a>
+        <a href="assets/img/gallery/gallery-2.jpg" class="polaroid-item p2 wow fadeInUp img-popup" data-wow-delay=".4s">
+            <img src="assets/img/gallery/gallery-2.jpg" alt="Memory 2">
+        </a>
+        <a href="assets/img/gallery/gallery-3.jpg" class="polaroid-item p3 wow fadeInLeft img-popup"
+            data-wow-delay=".6s">
+            <img src="assets/img/gallery/gallery-3.jpg" alt="Memory 3">
+        </a>
+        <a href="assets/img/gallery/gallery-4.jpg" class="polaroid-item p4 wow fadeInRight img-popup"
+            data-wow-delay=".8s">
+            <img src="assets/img/gallery/gallery-4.jpg" alt="Memory 4">
+        </a>
+        <a href="assets/img/gallery/gallery-5.jpg" class="polaroid-item p5 wow zoomIn img-popup" data-wow-delay="1s">
+            <img src="assets/img/gallery/gallery-5.jpg" alt="Memory 5">
+        </a>
+        <a href="assets/img/service/energy2.jpg" class="polaroid-item p6 wow bounceIn img-popup" data-wow-delay="1.2s">
+            <img src="assets/img/service/energy2.jpg" alt="Memory 6">
+        </a>
+        <a href="assets/img/service/energy3.jpg" class="polaroid-item p7 wow flipInX img-popup" data-wow-delay="1.4s">
+            <img src="assets/img/service/energy3.jpg" alt="Memory 7">
+        </a>
+        <a href="assets/img/service/energy4.jpg" class="polaroid-item p8 wow flipInY img-popup" data-wow-delay="1.6s">
+            <img src="assets/img/service/energy4.jpg" alt="Memory 8">
+        </a>
+        <a href="assets/img/service/energy5.jpg" class="polaroid-item p9 wow rotateIn img-popup" data-wow-delay="1.8s">
+            <img src="assets/img/service/energy5.jpg" alt="Memory 9">
+        </a>
+        <a href="assets/img/about/solar5.png" class="polaroid-item p10 wow slideInUp img-popup" data-wow-delay="2s">
+            <img src="assets/img/about/solar5.png" alt="Memory 10">
+        </a>
+        <a href="assets/img/news/post-1.jpg" class="polaroid-item p11 wow bounceInDown img-popup" data-wow-delay="2.2s">
+            <img src="assets/img/news/post-1.jpg" alt="Memory 11">
+        </a>
+        <a href="assets/img/news/post-2.jpg" class="polaroid-item p12 wow zoomInLeft img-popup" data-wow-delay="2.4s">
+            <img src="assets/img/news/post-2.jpg" alt="Memory 12">
+        </a>
+        <a href="assets/img/news/post-3.jpg" class="polaroid-item p13 wow zoomInRight img-popup" data-wow-delay="2.6s">
+            <img src="assets/img/news/post-3.jpg" alt="Memory 13">
+        </a>
+        <a href="assets/img/news/post-4.jpg" class="polaroid-item p14 wow fadeIn img-popup" data-wow-delay="2.8s">
+            <img src="assets/img/news/post-4.jpg" alt="Memory 14">
+        </a>
+        <a href="assets/img/service/energy1.jpg" class="polaroid-item p15 wow fadeInUp img-popup" data-wow-delay="3s">
+            <img src="assets/img/service/energy1.jpg" alt="Memory 15">
+        </a>
+    </section>
+
+
+
+    <!--<< All JS Plugins >>-->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <script src="assets/js/viewport.jquery.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <script src="assets/js/jquery.waypoints.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="assets/js/circle-progress.js"></script>
+    <script src="assets/js/jquery.meanmenu.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+</body>
+
+</html>

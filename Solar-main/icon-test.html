@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Test</title>
+    <script src="https://kit.fontawesome.com/630ffb3b6c.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 50px;
+            background: #f5f5f5;
+        }
+
+        .test-box {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-row {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 18px;
+        }
+
+        .icon-row i {
+            margin-right: 15px;
+            font-size: 24px;
+            width: 30px;
+        }
+
+        .status {
+            margin-left: auto;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .working {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .broken {
+            background: #f44336;
+            color: white;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #666;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🔍 FontAwesome Icon Test</h1>
+
+    <div class="test-box">
+        <h2>Arrow Icons (Should Work)</h2>
+        <div class="icon-row">
+            <i class="fas fa-arrow-right-long"></i>
+            <span>fas fa-arrow-right-long</span>
+            <span class="status working">✓ Should Work</span>
+        </div>
+        <div class="icon-row">
+            <i class="fas fa-arrow-right"></i>
+            <span>fas fa-arrow-right</span>
+            <span class="status working">✓ Should Work</span>
+        </div>
+        <div class="icon-row">
+            <i class="fa-solid fa-arrow-right-long"></i>
+            <span>fa-solid fa-arrow-right-long</span>
+            <span class="status working">✓ Should Work</span>
+        </div>
+    </div>
+
+    <div class="test-box">
+        <h2>Pro Icons (May Not Work - Require License)</h2>
+        <div class="icon-row">
+            <i class="far fa-arrow-right-long"></i>
+            <span>far fa-arrow-right-long (Regular)</span>
+            <span class="status broken">⚠ Requires Pro</span>
+        </div>
+        <div class="icon-row">
+            <i class="fal fa-arrow-right-long"></i>
+            <span>fal fa-arrow-right-long (Light)</span>
+            <span class="status broken">⚠ Requires Pro</span>
+        </div>
+    </div>
+
+    <div class="test-box">
+        <h2>Other Common Icons</h2>
+        <div class="icon-row">
+            <i class="fas fa-phone"></i>
+            <span>fas fa-phone</span>
+            <span class="status working">✓ Should Work</span>
+        </div>
+        <div class="icon-row">
+            <i class="fas fa-envelope"></i>
+            <span>fas fa-envelope</span>
+            <span class="status working">✓ Should Work</span>
+        </div>
+        <div class="icon-row">
+            <i class="fab fa-facebook-f"></i>
+            <span>fab fa-facebook-f</span>
+            <span class="status working">✓ Should Work</span>
+        </div>
+    </div>
+
+    <div class="test-box" style="background: #fff3cd; border-left: 4px solid #ffc107;">
+        <h2 style="color: #856404;">📝 Instructions</h2>
+        <p style="color: #856404; line-height: 1.6;">
+            <strong>If you see squares (□) instead of arrows:</strong><br>
+            1. Press <kbd>Ctrl+Shift+R</kbd> (Windows) or <kbd>Cmd+Shift+R</kbd> (Mac) to hard refresh<br>
+            2. Clear your browser cache<br>
+            3. Make sure you're viewing the file through a web server (not file:///)<br>
+            4. Check browser console (F12) for any errors
+        </p>
+    </div>
+</body>
+
+</html>

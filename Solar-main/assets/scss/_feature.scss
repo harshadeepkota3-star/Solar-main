@@ -1,0 +1,508 @@
+.counter-section{
+    position: relative;
+    z-index: 1;
+    background-attachment: fixed;
+
+    &::before {
+        @include before;
+        background-color: $theme-color;
+        opacity: .9;
+        z-index: -1;
+    }
+
+   &::after {
+        @include before;
+        background-color: $white;
+        z-index: -1;
+        top: 60%;
+   }
+}
+
+.counter-wrapper {
+    @include flex;
+    justify-content: space-between;
+
+    @include breakpoint (max-xxl){
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+
+
+    .counter-items {
+        @include flex;
+        gap: 30px;
+
+        .icon {
+            width: 80px;
+            height: 80px;
+            line-height: 74px;
+            text-align: center;
+            border: 2px solid $white;
+            background-color: transparent;
+            border-radius: 50px;
+        }
+        .content {
+            h2 {
+                font-size: 50px;
+                color: $white;
+
+                @include breakpoint (max-md){
+                    font-size: 44px;
+                }
+
+                @include breakpoint (max-sm){
+                    font-size: 36px;
+                }
+            }
+
+            p {
+                color: $white;
+            }
+        }
+    }
+}
+
+.work-process-left {
+
+    span {
+        font-size: 16px;
+        font-weight: 600;
+        color: $theme-color;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 50px;
+        margin-bottom: 20px;
+
+        @include breakpoint (max-lg){
+            font-size: 44px;
+        }
+
+        @include breakpoint (max-md){
+            font-size: 38px;
+        }
+
+        @include breakpoint (max-sm){
+            font-size: 32px;
+        }
+    }
+}
+
+.work-process-card-items {
+    border: 1px solid $border-color;
+    border-radius: 5px;
+    padding: 30px;
+
+    h2 {
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: $theme-color;
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: $theme-color;
+        -webkit-text-fill-color: transparent;
+        font-size: 50px;
+        margin-bottom: 15px;
+    }
+
+    h5 {
+        margin-bottom: 10px;
+    }
+
+    .link-btn {
+        text-transform: uppercase;
+        letter-spacing: 1.28px;
+        color: $theme-color;
+        margin-top: 20px;
+
+        &:hover {
+            color: $theme-color-2;
+        }
+    }
+}
+
+.feature-wrapper {
+    .feature-image {
+        img {
+            @include imgw;
+        }
+    }
+
+    .feature-content {
+        margin-left: 30px;
+
+        @include breakpoint (max-lg){
+            margin-left: 0;
+        }
+
+        .list {
+            margin-top: 30px;
+
+            li {
+                font-size: 18px;
+                color: $header-color;
+                font-family: $heading-font;
+
+                @include breakpoint (max-md){
+                    font-size: 16px;
+                }
+
+                @include breakpoint (max-sm){
+                    font-size: 14px;
+                }
+
+                &:not(:last-child){
+                    margin-bottom: 10px;
+                }
+
+                i {
+                    margin-right: 5px;
+                    color: $theme-color;
+                }
+            }
+        }
+
+        .circle-progress-bar-wrapper {
+            @include flex;
+            gap: 70px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+
+            @include breakpoint (max-xxl){
+                gap: 30px;
+            }
+
+            @include breakpoint (max-lg){
+                margin-top: 40px;
+                gap: 70px;
+            }
+
+            @include breakpoint (max-lg){
+                gap: 20px;
+            }
+
+            @include breakpoint (max-sm){
+                margin-top: 30px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+           
+            .single-circle-bar{
+                @include flex;
+                gap: 10px;
+                
+                span {
+                    font-size: 16px;
+                    line-height: 1;
+                    font-weight: 700;
+                }
+                .content{
+                    h6{
+                        display: block;
+                        margin-bottom: 0;
+                    }
+
+                    br {
+                        @include breakpoint (max-sm){
+                            display: block;
+                        }
+                    }
+                }
+                .circle-bar {
+                    position: relative;
+                    height: 120px;
+                    width: 120px;
+                }
+                    
+                .circle-bar div {
+                    position: absolute;
+                    height: 100px;
+                    width: 100px;
+                    border-radius: 50%;
+                }
+                    
+                .circle-bar div span {
+                    position: absolute;
+                    font-size: 30px;
+                    line-height: 92px;
+                    height: 90px;
+                    width: 90px;
+                    left: 5px;
+                    top: 5px;
+                    font-weight: 700;
+                    text-align: center;
+                    border-radius: 50%;
+                    background-color: $white;
+                    color: $header-color ;
+
+                    @include breakpoint (max-sm){
+                       font-size: 24px;
+                    }
+                }
+                    
+                .circle-bar .background {
+                    background-color: #E3E3E3 !important;
+                }
+                
+                .circle-bar .rotate {
+                    clip: rect(0 50px 100px 0);
+                    background-color: $theme-color !important;
+                }
+                
+                .circle-bar .left {
+                    clip: rect(0 50px 100px 0);
+                    opacity: 1;
+                    background-color: #E3E3E3 !important;
+                }
+                
+                .circle-bar .right {
+                    clip: rect(0 50px 100px 0);
+                    -webkit-transform: rotate(180deg);
+                    transform: rotate(180deg);
+                    opacity: 0;
+                    background-color: $theme-color !important;
+                }
+            }
+
+            &.style-2 {
+                .single-circle-bar{
+                    @include flex;
+                    gap: 10px;
+                    
+                    span {
+                        font-size: 16px;
+                        line-height: 1;
+                        font-weight: 700;
+                    }
+                    .content{
+                        h6{
+                            display: block;
+                            margin-bottom: 0;
+                        }
+    
+                        br {
+                            @include breakpoint (max-sm){
+                                display: block;
+                            }
+                        }
+                    }
+                    .circle-bar {
+                        position: relative;
+                        height: 120px;
+                        width: 120px;
+                    }
+                        
+                    .circle-bar div {
+                        position: absolute;
+                        height: 100px;
+                        width: 100px;
+                        border-radius: 50%;
+                    }
+                        
+                    .circle-bar div span {
+                        position: absolute;
+                        font-size: 30px;
+                        line-height: 92px;
+                        height: 90px;
+                        width: 90px;
+                        left: 5px;
+                        top: 5px;
+                        font-weight: 700;
+                        text-align: center;
+                        border-radius: 50%;
+                        background-color: $white;
+                        color: $header-color ;
+    
+                        @include breakpoint (max-sm){
+                           font-size: 24px;
+                        }
+                    }
+                        
+                    .circle-bar .background {
+                        background-color: $bg-color !important;
+                    }
+                    
+                    .circle-bar .rotate {
+                        background-color: $theme-color !important;
+                    }
+                    
+                    .circle-bar .left {
+                        clip: rect(0 50px 100px 0);
+                        opacity: 1;
+                        background-color: $bg-color !important;
+                    }
+                    
+                    .circle-bar .right {
+                        background-color: $theme-color !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.work-process-box-items {
+    margin-top: 30px;
+    position: relative;
+    z-index: 9;
+
+    .post-cat {
+        background-color: $theme-color;
+        color: $white;
+        padding: 4px 15px;
+        display: inline-block;
+        font-weight: 500;
+    }
+
+    .icon-items {
+        @include flex;
+        gap: 22px;
+        margin-top: 25px;
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: $header-color;
+        font-size: 17px;
+        margin-bottom: 30px;
+    }
+
+    .theme-btn {
+        background-color: transparent;
+        border: 2px solid $border-color;
+        color: $theme-color;
+        font-family: $heading-font;
+
+        &::before {
+            border-top: 35px solid $theme-color;
+            border-bottom: 35px solid $theme-color;
+        }
+    
+        &::after {
+            border-top: 35px solid $theme-color;
+            border-bottom: 35px solid $theme-color;
+        }
+
+        &:hover {
+            color: $white;
+            border: 2px solid $theme-color;
+        }
+    }
+}
+
+.work-process-section {
+    position: relative;
+
+    .map-shape {
+        position: absolute;
+        left: 50%;
+        top: 10%;
+        transform: translateX(-50%);
+    }
+}
+
+.work-process-thumb {
+    margin-top: 30px;
+
+    img {
+        @include imgw;
+    }
+}
+
+.work-process-right-items {
+    border: 1px solid $border-color;
+    margin-top: 30px;
+    padding: 54px 30px;
+
+    .icon-items {
+        display: flex;
+        gap: 20px;
+
+        @include breakpoint (max-md){
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+
+            br {
+                display: none;
+            }
+        }
+
+        &:not(:last-child){
+            border-bottom: 1px solid $border-color;
+            padding-bottom: 55px;
+            margin-bottom: 55px;
+        }
+
+        .icon {
+            width: 90px;
+            height: 90px;
+            line-height: 90px;
+            text-align: center;
+            background-color: rgba(91, 155, 55, .1);
+        }
+    }
+}
+
+.number-talks-section {
+    position: relative; 
+    z-index: 9;
+
+    &::before {
+        @include before;
+        background-color: $white;
+        z-index: -1;
+        top: 35%;
+    }
+}
+
+.number-talks-wrapper {
+    background-color: $bg-color;
+    padding-right: 30px;
+    position: relative;
+    z-index: 9;
+
+    @include breakpoint (max-xxl){
+        padding-right: 0;
+        padding: 30px;
+    }
+
+    @include breakpoint (max-xl){
+       margin-bottom: -20px;
+    }
+
+    @include breakpoint (max-lg){
+        margin-bottom: -40px;
+     }
+
+    .number-talks-thumb {
+        img {
+            @include imgw;
+        }
+    }
+
+    .counter-box {
+        text-align: center;
+        margin-top: 30px;
+
+        .icon {
+            padding: 30px;
+            background-color: $white;
+            border-bottom: 4px solid $theme-color;
+
+            h2 {
+                font-size: 30px;
+                margin-top: 20px;
+            }
+        }
+
+        p {
+            font-size: 17px;
+            color: $header-color;
+            margin-top: 15px;
+        }
+    }
+}

@@ -1,0 +1,101 @@
+.cta-contact-wrapper {
+    background-color: $theme-color;
+    padding: 70px;
+    @include flex;
+    justify-content: space-between;
+    position: relative;
+
+    @include breakpoint (max-xl){
+        flex-wrap: wrap;
+        gap: 25px;
+        justify-content: center;
+    }
+
+    @include breakpoint (max-lg){
+        padding: 60px 50px;
+    }
+
+    @include breakpoint (max-md){
+        padding: 50px 40px;
+    }
+
+    @include breakpoint (max-sm){
+        padding: 40px 30px;
+    }
+
+    .contact-shape-1 {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+
+    .contact-shape-2 {
+        position: absolute;
+        right: 20%;
+        bottom: 0;
+    }
+
+    .cta-contact-left {
+        .icon-items {
+            @include flex;
+            gap: 15px;
+            .video-btn {
+                background-color: $theme-color-2;
+                color: $white;
+                display: inline-block;
+                font-size: 16px;
+                height: 50px;
+                width: 50px;
+                line-height: 50px;
+                border-radius: 50%;
+                text-align: center;
+                position: relative;
+
+                &::before {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    right: 0;
+                    bottom: 0;
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    border: 1px solid $theme-color-2;
+                    content: "";
+                    transform: translate(-50%,-50%);
+                }
+
+                &.ripple {
+                   &::before,&::after {
+                        width: 60px;
+                        height: 60px;
+                        box-shadow: 0 0 0 0  rgba(248, 188, 38, .5);
+                   }
+                }
+            }
+
+            .content {
+                p {
+                    color: $white;
+                }
+
+                h5 {
+                    a {
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+
+    .contact-image {
+        max-width: 356px;
+        margin-bottom: -70px;
+        position: relative;
+        z-index: 1;
+
+        img {
+            @include imgw;
+        }
+    }
+}

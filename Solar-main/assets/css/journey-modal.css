@@ -1,0 +1,205 @@
+/* Journey Modal Styles */
+.journey-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.journey-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.journey-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.journey-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    max-height: 90vh;
+    background-color: #6ba43a;
+    border-radius: 15px;
+    padding: 60px 40px 40px;
+    overflow-y: auto;
+    z-index: 100000;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.4s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.journey-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100001;
+}
+
+.journey-modal-close:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+.journey-modal-body {
+    color: #ffffff;
+}
+
+.journey-modal-body h2 {
+    color: #ffffff;
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.journey-modal-body h3 {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 35px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.journey-modal-body p {
+    color: #ffffff;
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.journey-modal-body ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 25px 0;
+}
+
+.journey-modal-body ul li {
+    color: #ffffff;
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    padding-left: 30px;
+    position: relative;
+    font-weight: 500;
+}
+
+.journey-modal-body ul li:before {
+    content: "●";
+    position: absolute;
+    left: 0;
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+.journey-modal-body strong {
+    font-weight: 700;
+}
+
+/* Hide Scrollbar */
+.journey-modal-content {
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+}
+
+.journey-modal-content::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .journey-modal-content {
+        width: 95%;
+        padding: 50px 25px 30px;
+        max-height: 85vh;
+    }
+
+    .journey-modal-body h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .journey-modal-body h3 {
+        font-size: 24px;
+        margin-top: 25px;
+        margin-bottom: 15px;
+    }
+
+    .journey-modal-body p,
+    .journey-modal-body ul li {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .journey-modal-close {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        top: 15px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .journey-modal-content {
+        width: 98%;
+        padding: 45px 20px 25px;
+    }
+
+    .journey-modal-body h2 {
+        font-size: 26px;
+    }
+
+    .journey-modal-body h3 {
+        font-size: 20px;
+    }
+
+    .journey-modal-body p,
+    .journey-modal-body ul li {
+        font-size: 14px;
+    }
+}

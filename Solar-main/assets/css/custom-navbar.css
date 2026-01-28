@@ -1,0 +1,218 @@
+/* Custom Navbar Styling - Solar Background with Transparency */
+
+/* Base navbar styling with background image - sticks to corners */
+.header-1 {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('../img/navbar-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 0;
+    overflow: visible;
+    margin: 0;
+    width: 100%;
+}
+
+/* Light navbar version for non-home pages */
+.header-1.header-light-bg {
+    background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)),
+        url('../img/navbar-bg.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
+
+.header-1.header-light-bg .main-menu ul li a {
+    color: #333 !important;
+}
+
+.header-1.header-light-bg .search-icon i,
+.header-1.header-light-bg .sidebar__toggle i {
+    color: #333 !important;
+}
+
+.header-1.header-light-bg .main-menu ul li a:hover {
+    color: #6b8e23 !important;
+}
+
+/* Navbar main area styling */
+.header-main {
+    padding: 8px 15px !important;
+}
+
+/* Ensure text is white and visible on dark background */
+.header-1 .main-menu ul li a {
+    color: #fff !important;
+}
+
+.header-1 .main-menu ul li a:hover {
+    color: #6b8e23 !important;
+}
+
+/* =============================================
+   DROPDOWN STYLING - Using exact main.css selectors
+   ============================================= */
+
+/* Dropdown container - white background */
+.header-main .main-menu ul li .submenu {
+    background: #fff !important;
+    background-color: #fff !important;
+}
+
+/* Dropdown links - dark text for visibility */
+.header-main .main-menu ul li .submenu li a {
+    color: #333 !important;
+    background-color: transparent !important;
+}
+
+/* Dropdown hover - green background, white text */
+.header-main .main-menu ul li .submenu li:hover>a,
+.header-main .main-menu ul li .submenu li a:hover {
+    background: #6b8e23 !important;
+    background-color: #6b8e23 !important;
+    color: #fff !important;
+}
+
+/* ============================================= */
+
+/* Search icon styling */
+.header-1 .search-icon i {
+    color: #fff !important;
+}
+
+/* Hamburger menu icon */
+.header-1 .sidebar__toggle i {
+    color: #fff !important;
+}
+
+/* Sticky navbar styling - compact, no logo, lighter background with image */
+.sticky.header-1 {
+    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+        url('../img/navbar-bg.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    border-radius: 0;
+    margin: 0;
+    max-width: 100%;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hide logo when scrolled */
+.sticky.header-1 .logo {
+    display: none !important;
+}
+
+/* Reduce padding when scrolled for compact navbar */
+.sticky.header-1 .header-main {
+    padding: 5px 15px !important;
+}
+
+/* Dark text for sticky navbar (light background) */
+.sticky.header-1 .main-menu ul li a {
+    color: #333 !important;
+}
+
+.sticky.header-1 .main-menu ul li a:hover {
+    color: #6b8e23 !important;
+}
+
+/* Sticky search icon - dark */
+.sticky.header-1 .search-icon i {
+    color: #333 !important;
+}
+
+/* Sticky hamburger icon - dark */
+.sticky.header-1 .sidebar__toggle i {
+    color: #333 !important;
+}
+
+/* Adjust menu item padding */
+.header-main .main-menu ul li a {
+    padding: 12px 0 !important;
+}
+
+/* Logo styling */
+.header-main .logo {
+    display: flex;
+    align-items: center;
+}
+
+/* Header right alignment */
+.header-main .header-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Theme button on dark background */
+.header-1 .theme-btn {
+    background: linear-gradient(135deg, #6b8e23 0%, #556b2f 100%);
+    color: #fff !important;
+}
+
+.header-1 .theme-btn:hover {
+    background: linear-gradient(135deg, #556b2f 0%, #6b8e23 100%);
+}
+
+/* ========================================
+   HOME PAGE ONLY - Navbar overlays on hero
+   ======================================== */
+.header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    background: transparent !important;
+}
+
+.header-overlay.sticky {
+    position: fixed;
+    background: linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)),
+        url('../img/navbar-bg.jpg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Reduce hero section top padding for home page */
+.hero-3 {
+    padding-top: 220px !important;
+}
+
+/* Reduce team section top padding on about page */
+.team-section.section-padding {
+    padding-top: 40px !important;
+}
+
+/* For home page team section - respect pt-0 */
+.team-section.section-padding.pt-0 {
+    padding-top: 0 !important;
+}
+
+/* Reduce spacing above Our Journey section */
+.work-process-section {
+    padding-top: 40px !important;
+}
+
+/* Reduce spacing above Creative Members section on home page */
+.brand-section-2 {
+    padding-bottom: 0 !important;
+}
+
+.brand-wrapper-2 {
+    padding-bottom: 10px !important;
+}
+
+.number-talks-section {
+    padding-bottom: 10px !important;
+}
+
+/* Pull team section up on home page */
+.team-section.section-padding.pt-0 {
+    padding-top: 0 !important;
+    margin-top: -50px !important;
+}

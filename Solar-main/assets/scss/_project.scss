@@ -1,0 +1,299 @@
+.project-card-items {
+    margin-top: 30px;
+
+    .project-image {
+        position: relative;
+
+        img {
+            @include imgw;
+            border-radius: 5px;
+        }
+
+        &::before {
+            @include before;
+            border-radius: 5px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, 0.80) 100%);
+        }
+
+        .project-content {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            z-index: 9;
+
+            p {
+                color: $white;
+                margin-bottom: 5px;
+            }
+
+            h3 {
+                a {
+                    color: $white;
+
+                    &:hover {
+                        color: $theme-color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.project-box-items {
+    text-align: center;
+    padding: 80px 10px;
+    background-color: $bg-color;
+    height: 100%;
+
+    @include breakpoint (max-xxl){
+        padding: 36px 10px;
+    }
+
+    @include breakpoint (max-xl){
+        padding: 80px 10px;
+    }
+
+    @include breakpoint (max-lg){
+        padding: 26px 15px;
+    }
+
+    @include breakpoint (max-md){
+        padding: 50px 30px;
+    }
+
+    .section-title {
+        h2 {
+            font-size: 42px;
+
+            @include breakpoint (max-md){
+                font-size: 38px;
+            }
+
+            @include breakpoint (max-sm){
+                font-size: 32px;
+            }
+        }
+    }
+}
+
+.project-thumb {
+    position: relative;
+
+    img {
+        @include imgw;
+    }
+
+    &::before {
+        @include before;
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+        opacity: 0;
+        visibility: hidden;
+        @include transition;
+    }
+
+    .project-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+        @include transition;
+
+        p {
+            color: $white;
+            margin-bottom: 5px;
+        }
+
+        h4 {
+            a {
+                color: $white;
+
+                &:hover {
+                    color: $theme-color-2;
+                }
+            }
+        }
+    }
+
+    &:hover {
+        &::before {
+            opacity: 1;
+            visibility: visible;
+        }
+    
+        .project-content {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+.portfolio-card-items {
+    margin-top: 30px;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        @include before;
+        background:rgba(91, 155, 55, .9);
+        visibility: hidden;
+        opacity: 0;
+        z-index: 9;
+        @include transition;
+    }
+
+    .portfolio-image {
+        position: relative;
+
+        img {
+            @include imgw;
+        }
+
+        &::before {
+            @include before;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%);
+        }
+
+        .content {
+            position: absolute;
+            bottom: 40px;
+            left: 30px;
+            z-index: 9;
+            transform: translateY(80%);
+            @include transition;
+
+            @include breakpoint (max-xxl){
+                bottom: 50px;
+            }
+
+            span {
+                font-size: 17px;
+                color: $white;
+                margin-bottom: 5px;
+                display: inline-block;
+            }
+
+            p {
+                color: $white;
+                font-size: 17px;
+            }
+
+            h5 {
+                margin-bottom: 20px;
+                
+                a {
+                    color: $white;
+
+                    &:hover {
+                        color: $theme-color-2;
+                    }
+                }
+            }
+        }
+    }
+
+    &:hover {
+        &::before {
+            opacity: 0.9;
+            visibility: visible;
+        }
+
+        .portfolio-image {
+            .content {
+                transform: translateY(0);
+
+                h5 {
+                    margin-bottom: 10px;
+                }
+
+                p {
+                    margin-bottom: -15px;
+                }
+            }
+        }
+    }
+}
+
+.project-box-items-2 {
+    .project-image {
+        position: relative;
+
+        .project-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            background-color: $bg-color;
+            padding: 30px;
+            right: 50px;
+
+            h5 {
+                a {
+                    &:hover {
+                        color: $theme-color;
+                    }
+                }
+            }
+
+            p {
+                margin-bottom: 5px;
+                color: $theme-color;
+                font-weight: 500;
+            }
+
+            .icon-btn {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 30px;
+                display: inline-block;
+                width: 45px;
+                height: 45px;
+                line-height: 45px;
+                text-align: center;
+                border-radius: 5px;
+                background-color: $theme-color;
+                color: $white;
+
+                &:hover {
+                    background-color: $theme-color-2;
+                }
+            }
+
+        }
+    }
+}
+
+.project-details-wrapper {
+    .project-details-content {
+        .content {
+            h2 {
+                margin-bottom: 20px;
+            }
+        }
+
+        .details-image {
+            img {
+                @include imgw;
+            }
+        }
+
+        .list-items {
+            margin-top: 30px;
+
+            span {
+                display: inline-block;
+                color: $header-color;
+                font-family: $heading-font;
+                margin-bottom: 10px;
+
+                i {
+                    color: $theme-color;
+                    margin-right: 5px;
+
+                }
+            }
+        }
+    }
+}

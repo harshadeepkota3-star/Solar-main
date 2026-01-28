@@ -1,0 +1,303 @@
+
+//page scroll bar add
+::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px $theme-color; 
+	border-radius: 5px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: $theme-color;
+	border-radius: 10px;
+}
+//page scroll bar add
+
+//Basic Code Start
+.fix {
+  overflow: hidden;
+}
+
+.ralt{
+ position: relative;
+}
+
+//Basic Code End
+
+//Video Css Start
+.ripple {
+  position: relative;
+
+  &::before,&::after {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 115px;
+      height: 115px;
+      -webkit-transform: translateX(-50%) translateY(-50%);
+      transform: translateX(-50%) translateY(-50%);
+      border-radius: 50%;
+      box-shadow: 0 0 0 0  rgba(248, 96, 72,.5);
+      animation: rippleOne 3s infinite;
+  }
+
+  &::before {
+      -webkit-animation-delay: 0.9s;
+      animation-delay: 0.9s;
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+  }
+
+  &::after {
+      -webkit-animation-delay: 0.6s;
+      animation-delay: 0.6s;
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+  }
+}
+//Video Css End
+
+//pagination default
+//pagination default
+.swiper-dot {
+  .swiper-pagination-bullet {
+      width: 6px;
+      height: 6px;
+      transition: 0.6s;
+      background-color: $theme-color-2;
+      opacity: 1;
+      border-radius: 10px;
+      position: relative;
+
+      &:not(:last-child){
+        margin-right: 20px;
+      }
+  }
+  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+      background-color: $theme-color-2;
+      transition: 0.6s;
+      position: relative;
+
+      &::before{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        line-height: 20px;
+        top: -7px;
+        left: -7px;
+        border-radius: 50%;
+        background-color: transparent;
+        border: 2px solid $theme-color-2;
+        content: "";
+      }
+  }
+
+}
+
+
+.array-button {
+  position: relative;
+  z-index: 99;
+  @include flex;
+  gap: 10px;
+
+  .array-prev {
+      width: 58px;
+      height: 58px;
+      line-height: 58px;
+      border-radius: 8px;
+      background-color: $theme-color;
+      border: 1.5px solid $theme-color;
+      color: $white;
+      font-size: 16px;
+      font-weight: 600;
+      @include transition;
+
+      @include breakpoint (max-sm){
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+      }
+
+      &:hover {
+        background-color: $header-color;
+        color: $white;
+        border: 1.5px solid $header-color;
+      }
+  }
+
+  .array-next {
+      width: 58px;
+      height: 58px;
+      line-height: 58px;
+      border-radius: 8px;
+      background-color: transparent;
+      color: $theme-color;
+      font-size: 16px;
+      font-weight: 600;
+      border: 1.5px solid $border-color;
+      @include transition;
+
+      @include breakpoint (max-sm){
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+      }
+
+      &:hover {
+        background-color: $theme-color;
+        color: $white;
+        border: 1.5px solid $theme-color;
+      }
+  }
+
+}
+
+//pagination default
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+br {
+  @include breakpoint(max-sm){
+    display: none;
+  }
+}
+
+
+/* background */
+.bg-cover {
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  background-position: center;
+}
+
+
+// Nice Select
+.nice-select {
+    background-color: transparent;
+    border: transparent;
+    float: initial;
+    overflow: initial;
+    height: initial;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    line-height: 150%;
+    width: 100%;
+    border: none;
+
+    &:focus, &:hover {
+      border-color: transparent;
+    }
+    &::after {
+      height: 10px;
+      width: 10px;
+      right: 15px;
+      top: initial;
+      border-color: $border-color;
+      border-bottom: 2px solid $header-color;
+      border-right: 2px solid $header-color;  
+    }
+
+	.list {
+		width: initial;
+		background-color: $theme-color;
+		box-shadow: none;
+		overflow: initial;
+		box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+		width: 100%;
+		top: 100%;
+		padding: 0;
+		max-height: 50vh;
+		overflow-x: auto;
+		&::-webkit-scrollbar{
+			width: 2px;
+			opacity: 1;
+			display: block;
+		}
+		&::-webkit-scrollbar-button,
+		&::-webkit-scrollbar-thumb{
+			background: $header-color;
+		}
+	}
+	.option {
+		background-color: transparent;
+		font-size: 16px;
+		line-height: 150%;
+		padding: 4px 5px;
+		min-height: initial;
+		font-weight: 500;
+		&:hover,
+		&:focus,
+		&.selected.focus {
+			background-color: transparent;
+		}
+	}
+	.current{
+		font-weight: 500;
+    color: $header-color;
+	}
+}
+//>>>>> Nice Select Css End <<<<<//
+
+
+
+.footer-bg {
+  background-color: #1F242C;
+}
+
+
+.bg-white {
+    background-color: $white !important;
+}
+
+
+
+.box-shadow {
+  box-shadow: $shadow;
+}
+
+.mt-50 {
+  margin-top: 50px;
+
+    @include breakpoint (max-md){
+      margin-top: 30px;
+    }
+
+    @include breakpoint (max-sm){
+      margin-top: 20px;
+    }
+}
+
+.pt-80 {
+    padding-top: 80px;
+}
+
+.pb-80 {
+  padding-bottom: 80px;
+}
+.theme-bg {
+  background-color: #202426;
+}
+
+.mt-30 {
+  margin-top: 30px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.border-none {
+  border: none !important;
+}

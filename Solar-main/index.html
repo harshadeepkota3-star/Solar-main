@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--<< Header Area >>-->
+
+<head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="modinatheme">
+    <meta name="description" content="SolarGlow & Solar Renewable Energy Html Template">
+    <!-- ======== Page title ============ -->
+    <title>MN-Enterprises</title>
+    <!--<< Favicon >>-->
+    <link rel="shortcut icon" href="assets/img/logo/MN LOGO.svg">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/img/hero/hero-min.jpg" as="image">
+    <link rel="preload" href="assets/css/main.css" as="style">
+    <!--<< Bootstrap min.css >>-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!--<< Font Awesome.css >>-->
+    <link rel="stylesheet" href="assets/css/font-awesome.css">
+    <script src="https://kit.fontawesome.com/630ffb3b6c.js" crossorigin="anonymous" defer></script>
+    <!--<< Animate.css >>-->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <!--<< Magnific Popup.css >>-->
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <!--<< MeanMenu.css >>-->
+    <link rel="stylesheet" href="assets/css/meanmenu.css">
+    <!--<< Swiper Bundle.css >>-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+    <!--<< Nice Select.css >>-->
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <!--<< Main.css >>-->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!--<< Style.css >>-->
+    <link rel="stylesheet" href="style.css">
+    <!--<< Custom Navbar CSS >>-->
+    <link rel="stylesheet" href="assets/css/custom-navbar.css">
+    <!--<< Footer Custom CSS >>-->
+    <link rel="stylesheet" href="assets/css/footer-custom.css">
+
+    <!-- Dashboard Password Modal Styles -->
+    <style>
+        .dashboard-password-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            width: 90%;
+            max-width: 450px;
+            border: 2px solid #6b8e23;
+        }
+
+        .dashboard-password-modal.active {
+            display: block;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        .dashboard-password-modal h3 {
+            color: #6b8e23;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .dashboard-password-modal p {
+            color: #ccc;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .password-input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .password-input-group input {
+            width: 100%;
+            padding: 15px 45px 15px 15px;
+            border: 2px solid #444;
+            border-radius: 8px;
+            background: #1a1a1a;
+            color: #fff !important;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .password-input-group input:focus {
+            outline: none;
+            border-color: #6b8e23;
+            box-shadow: 0 0 10px rgba(107, 142, 35, 0.3);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #888;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #6b8e23;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-submit {
+            background: linear-gradient(135deg, #6b8e23 0%, #556b2f 100%);
+            color: #fff;
+        }
+
+        .modal-btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(107, 142, 35, 0.4);
+        }
+
+        .modal-btn-cancel {
+            background: #444;
+            color: #fff;
+        }
+
+        .modal-btn-cancel:hover {
+            background: #555;
+        }
+
+        .error-message {
+            color: #ff4444;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            75% {
+                transform: translateX(10px);
+            }
+        }
+
+        .footer-m-trigger {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            color: inherit !important;
+        }
+
+        .news-card-items-2 {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .news-card-items-2:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-content {
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .news-image {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .news-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .news-button {
+            padding: 20px 25px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        /* Testimonial Section Redesign */
+        .testimonial-section {
+            background-color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            padding: 40px 0 !important;
+        }
+
+        .testimonial-wrapper {
+            padding: 30px 0;
+        }
+
+        .testimonial-section .section-title {
+            margin-bottom: 30px !important;
+        }
+
+        .testimonial-box-items {
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 20px;
+            border: 1px solid #e1e8dc;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            margin: 10px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .testimonial-box-items:hover {
+            border-color: #556B2F;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(85, 107, 47, 0.1);
+        }
+
+        .testimonial-box-items .quote-icon {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 40px;
+            color: #f0f0f0;
+            z-index: 0;
+        }
+
+        .testimonial-box-items .star {
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-box-items .star i {
+            color: #ffc107;
+            font-size: 13px;
+            margin-right: 2px;
+        }
+
+        .testimonial-box-items p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+            flex-grow: 1;
+        }
+
+        .client-info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .client-info-item .avatar {
+            width: 50px;
+            height: 50px;
+            background: #f4f7f2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #556B2F;
+            font-weight: 700;
+            font-size: 18px;
+            border: 2px solid #e1e8dc;
+        }
+
+        .client-info-item .content h5 {
+            margin-bottom: 2px;
+            font-size: 18px;
+            color: #1a1a1a;
+            font-weight: 700;
+        }
+
+        .client-info-item .content span {
+            font-size: 14px;
+            color: #777;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Preloader Start -->
+    <div id="preloader" class="preloader">
+        <div class="animation-preloader">
+            <div class="spinner">
+            </div>
+            <div class="txt-loading">
+                <span data-text-preloader="M" class="letters-loading">
+                    M
+                </span>
+                <span data-text-preloader="N" class="letters-loading">
+                    N
+                </span>
+                <span data-text-preloader="" class="letters-loading">
+
+                </span>
+                <span data-text-preloader="E" class="letters-loading">
+                    E
+                </span>
+                <span data-text-preloader="N" class="letters-loading">
+                    N
+                </span>
+                <span data-text-preloader="T" class="letters-loading">
+                    T
+                </span>
+                <span data-text-preloader="E" class="letters-loading">
+                    E
+                </span>
+                <span data-text-preloader="R" class="letters-loading">
+                    R
+                </span>
+                <span data-text-preloader="P" class="letters-loading">
+                    P
+                </span>
+                <span data-text-preloader="R" class="letters-loading">
+                    R
+                </span>
+                <span data-text-preloader="I" class="letters-loading">
+                    I
+                </span>
+                <span data-text-preloader="S" class="letters-loading">
+                    S
+                </span>
+                <span data-text-preloader="E" class="letters-loading">
+                    E
+                </span>
+                <span data-text-preloader="S" class="letters-loading">
+                    S
+                </span>
+            </div>
+            <p class="text-center">Loading</p>
+        </div>
+        <div class="loader">
+            <div class="row">
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-left">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+                <div class="col-3 loader-section section-right">
+                    <div class="bg"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Back To Top Start -->
+    <div class="scroll-up">
+        <svg class="scroll-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+            <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+        </svg>
+    </div>
+
+    <!-- Offcanvas Area Start -->
+    <div class="fix-area">
+        <div class="offcanvas__info">
+            <div class="offcanvas__wrapper">
+                <div class="offcanvas__content">
+                    <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
+                        <div class="offcanvas__logo">
+                            <a href="index.html">
+                                <img src="assets/img/logo/MN LOGO.svg" style=" width: 10rem;" alt="logo-img">
+                            </a>
+                        </div>
+                        <div class="offcanvas__close">
+                            <button>
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text d-none d-xl-block">
+                        Nullam dignissim, ante scelerisque the is euismod fermentum odio sem semper the is erat, a
+                        feugiat leo urna eget eros. Duis Aenean a imperdiet risus.
+                    </p>
+                    <div class="mobile-menu fix mb-3"></div>
+                    <div class="offcanvas__contact">
+                        <h4>Contact Info</h4>
+                        <ul>
+                            <li class="d-flex align-items-center">
+                                <div class="offcanvas__contact-icon">
+                                    <i class="fal fa-map-marker-alt"></i>
+                                </div>
+                                <div class="offcanvas__contact-text">
+                                    <a target="_blank" href="#">6‑71, Near ACB Office, TV Tower, Lenin Nagar, Anantapur
+                                        – 515001.</a>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="offcanvas__contact-icon mr-15">
+                                    <i class="fal fa-envelope"></i>
+                                </div>
+                                <div class="offcanvas__contact-text">
+                                    <a href="mnenterprises.atp@gmail.com"><span
+                                            class="mailto:info@example.com">mnenterprises.atp@gmail.com</span></a>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="offcanvas__contact-icon mr-15">
+                                    <i class="fal fa-clock"></i>
+                                </div>
+                                <div class="offcanvas__contact-text">
+                                    <a target="_blank" href="#">Mod-friday, 09am -05pm</a>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="offcanvas__contact-icon mr-15">
+                                    <i class="fa-solid fa-phone"></i>
+                                </div>
+                                <div class="offcanvas__contact-text">
+                                    <a href="tel:+919010100175">+919010100175</a>
+                                    <a href="tel:+919676468976">+919676468976</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="header-button mt-4">
+                            <a href="contact.html" class="theme-btn text-center">
+                                <span>get A Quote<i class="fa-solid fa-arrow-right-long"></i></span>
+                            </a>
+                        </div>
+                        <div class="social-icon d-flex align-items-center">
+                            <a href="https://www.facebook.com/share/1CZJM6XeSp" target="_blank"><i
+                                    class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/mnenterprises2025" target="_blank"><i
+                                    class="fab fa-instagram"></i></a>
+                            <a href="https://wa.me/919010100175" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://youtube.com/@mnenterprisesatp?si=rsqrIqAk492jJwlB" target="_blank"><i
+                                    class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas__overlay"></div>
+
+    <!-- Header Section Start -->
+    <header id="header-sticky" class="header-1 header-overlay">
+        <div class="container-fluid">
+            <div class="mega-menu-wrapper">
+                <div class="header-main">
+                    <div class="logo">
+                        <a href="index.html" class="header-logo">
+                            <img src="assets/img/logo/MN LOGO.svg" style=" width: 10rem;" alt="logo-img">
+                        </a>
+                    </div>
+                    <div class="header-left">
+                        <div class="mean__menu-wrapper">
+                            <div class="main-menu">
+                                <nav id="mobile-menu">
+                                    <ul>
+                                        <li class="active">
+                                            <a href="index.html">Home</a>
+                                        </li>
+                                        <li><a href="service.html">Services</a></li>
+                                        <li>
+                                            <a href="about.html">About Us</a>
+                                        </li>
+                                        <li>
+                                            <a href="news.html">Blog</a>
+                                        </li>
+                                        <li>
+                                            <a href="gallery.html">Gallery</a>
+                                        </li>
+                                        <li>
+                                            <a href="contact.html">Contact</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-right d-flex justify-content-end align-items-center">
+                        <a href="#0" class="search-trigger search-icon"><i class="fal fa-search"></i></a>
+                        <div class="header-button">
+                            <a href="contact.html" class="theme-btn">
+                                Get a quote <i class="fas fa-arrow-right-long"></i>
+                            </a>
+                        </div>
+                        <div class="header__hamburger d-xl-none my-auto">
+                            <div class="sidebar__toggle">
+                                <i class="fas fa-bars"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Area Start -->
+    <div class="search-wrap">
+        <div class="search-inner">
+            <i class="fas fa-times search-close" id="search-close"></i>
+            <div class="search-cell">
+                <form method="get">
+                    <div class="search-field-holder">
+                        <input type="search" class="main-search-input" placeholder="Search...">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section Start -->
+    <section class="hero-section hero-3 bg-cover" style="background-image: url('assets/img/hero/hero-min.jpg');">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-12">
+                    <div class="hero-content">
+                        <h6 class="wow fadeInUp">Powering Anantapur's <span>solar</span> Future with</h6>
+                        <h1 class="wow fadeInUp" data-wow-delay=".3s">
+                            <span style="color: yellowgreen;">Reliable</span> Solar <em style="color:green"> <br>&<br>
+                            </em> Power Solutions
+                        </h1>
+                        <a href="about.html" class="theme-btn wow fadeInUp" data-wow-delay=".5s">Discover More <i
+                                class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section Start -->
+    <section class="about-section fix section-padding">
+        <div class="container">
+            <div class="about-wrapper-3">
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="about-image">
+                            <div class="frame-shape">
+                                <img src="assets/img/about/pattern.png" alt="img" loading="lazy">
+                            </div>
+                            <img src="assets/img/about/solar5.png" alt="img" class="wow fadeInLeft" loading="lazy"
+                                data-wow-delay=".3s">
+                            <!-- <div class="about-image-2 wow fadeInUp" data-wow-delay=".5s">
+                                <img src="assets/img/about/woman-meditates-on-rooftop-of-her-house-with-solar-2025-03-15-19-41-12-utc.JPG"
+                                    style="width: 320px;" alt="img">
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-content">
+                            <div class="section-title">
+                                <span class="wow fadeInUp">About us</span>
+                                <h2 class="wow fadeInUp" data-wow-delay=".3s">A Beacon of Sustainable Progress in
+                                    Anantapur
+                                </h2>
+                            </div>
+                            <p class="mt-3 mt-md-0 wow fadeInUp" data-wow-delay=".5s">
+                                MN Enterprises is a trusted solar and power solutions provider based in Anantapur.
+                                Founded in 2015 by experienced technocrats, we bring over a decade of expertise in
+                                system integration and solar projects. With 10,000+ successful installations, we deliver
+                                reliable, sustainable, and efficient energy solutions for homes and businesses across
+                                Andhra Pradesh.
+                            </p>
+                            <!-- <div class="list-items">
+                                    <ul class="wow fadeInUp" data-wow-delay=".3s">
+                                        <li>
+                                            <span><i class="fas fa-chevron-double-right"></i></span>
+                                            Let’s get digital!
+                                        </li>
+                                        <li>
+                                            <span><i class="fas fa-chevron-double-right"></i></span>
+                                            We’ve got you covered
+                                        </li>
+                                    </ul>
+                                    <ul class="wow fadeInUp" data-wow-delay=".5s">
+                                        <li>
+                                            <span><i class="fas fa-chevron-double-right"></i></span>
+                                            We’ve got you covered
+                                        </li>
+                                        <li>
+                                            <span><i class="fas fa-chevron-double-right"></i></span>
+                                            Digital Transformation
+                                        </li>
+                                    </ul>
+                               </div>
+                               <div class="row mb-5">
+                                    <div class="col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                                        <div class="icon-items">
+                                            <div class="icon">
+                                                <img src="assets/img/about/icon/08.svg" alt="img">
+                                            </div>
+                                            <div class="content">
+                                                <h5>Best Solution</h5>
+                                                <p>We provide customized on-grid, off-grid, and hybrid solar solutions designed to meet diverse power needs with maximum efficiency and reliability.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 wow fadeInUp" data-wow-delay=".5s">
+                                        <div class="icon-items">
+                                            <div class="icon">
+                                                <img src="assets/img/about/icon/09.svg" alt="img">
+                                            </div>
+                                            <div class="content">
+                                                <h5>Super Grow</h5>
+                                                <p>With continuous innovation and ethical practices, we help customers reduce energy costs, achieve energy independence, and move towards a greener future.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                               </div> -->
+                            <a href="about.html" class="theme-btn wow fadeInUp" data-wow-delay=".4s"
+                                style="margin-top: 5% ;">Learn more <i class="fa-solid fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Section Start -->
+    <section class="service-section-3 fix section-padding section-bg" style="margin-top: -40px;">
+        <div class="container" style="margin-top: -70px; margin-bottom: -60px;">
+            <div class="text-center mb-5 wow fadeInUp" data-wow-delay=".2s">
+                <a href="assets/doc/brochure.pdf" download class="theme-btn">
+                    Download our brochure <i class="fas fa-download"></i>
+                </a>
+            </div>
+            <div class="section-title-area">
+                <div class="section-title">
+                    <span class="wow fadeInUp">Our services</span>
+                    <h2 class="wow fadeInUp" data-wow-delay=".3s">Get the Power of the Sun <br> Our Complete Solutions
+                    </h2>
+                </div>
+                <div class="array-button wow fadeInUp" data-wow-delay=".5s">
+                    <button class="array-prev"><i class="fa-solid fa-caret-left"></i></button>
+                    <button class="array-next"><i class="fa-solid fa-caret-right"></i></button>
+                </div>
+            </div>
+            <div class="swiper service-slider">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="service-card-items-2">
+                            <div class="service-title">
+                                <h5><a href="service.html">On-Grid, Off-Grid & Hybrid Solar Systems</a></h5>
+                                <p></p>
+                            </div>
+                            <div class="service-thumb service-image">
+                                <img src="assets/img/service/energy1.jpg" alt="Solar PV Solutions" loading="lazy">
+                                <div class="icon">
+                                    <i class="fas fa-solar-panel" style="font-size: 48px; color: #6b8e23;"></i>
+                                </div>
+                                <a href="solar-specifications.html" class="know-more-strip">Know More</a>
+                            </div>
+                            <div class="service-text">
+                                <p>On-grid systems reduce electricity bills. Off-grid setups provide complete energy
+                                    independence. Hybrid systems combine both. Perfect for homes, businesses, and
+                                    industries.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="service-card-items-2">
+                            <div class="service-title">
+                                <h5><a href="service.html">Servo Stabilizers</a></h5>
+                                <p></p>
+                            </div>
+                            <div class="service-thumb service-image">
+                                <img src="assets/img/service/energy2.jpg" alt="service-img" loading="lazy">
+                                <div class="icon">
+                                    <i class="fas fa-plug" style="font-size: 48px; color: #6b8e23;"></i>
+                                </div>
+                                <a href="stabilizer-specifications.html" class="know-more-strip">Know More</a>
+                            </div>
+                            <div class="service-text">
+                                <p>Protect your equipment from voltage fluctuations. Extend appliance lifespan and
+                                    reduce maintenance costs. Suitable for residential, commercial, and industrial use.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="service-card-items-2">
+                            <div class="service-title">
+                                <h5><a href="service.html">Uninterrupted Power Backup Solutions</a></h5>
+                                <p></p>
+                            </div>
+                            <div class="service-thumb service-image">
+                                <img src="assets/img/service/energy3.jpg" alt="service-img" loading="lazy">
+                                <div class="icon">
+                                    <i class="fas fa-battery-full" style="font-size: 48px; color: #6b8e23;"></i>
+                                </div>
+                                <a href="ups-specifications.html" class="know-more-strip">Know More</a>
+                            </div>
+                            <div class="service-text">
+                                <p>Zero downtime for critical operations. Reliable backup from brief cuts to prolonged
+                                    outages. Essential for businesses, medical equipment, IT infrastructure, and homes.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="service-card-items-2">
+                            <div class="service-title">
+                                <h5><a href="service.html">Durable, High-Capacity Battery Solutions</a></h5>
+                                <p></p>
+                            </div>
+                            <div class="service-thumb service-image">
+                                <img src="assets/img/service/energy4.jpg" alt="service-img" loading="lazy">
+                                <div class="icon">
+                                    <i class="fas fa-car-battery" style="font-size: 48px; color: #6b8e23;"></i>
+                                </div>
+                                <a href="service.html" class="know-more-strip">Know More</a>
+                            </div>
+                            <div class="service-text">
+                                <p>Store solar energy and provide reliable backup. Optimized for Anantapur's climate.
+                                    Deep-cycle solar batteries and inverter batteries with long lifespan. Compatible
+                                    with all our systems.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="service-card-items-2">
+                            <div class="service-title">
+                                <h5><a href="service.html">Complete Security & Surveillance Solutions</a></h5>
+                                <p></p>
+                            </div>
+                            <div class="service-thumb service-image">
+                                <img src="assets/img/service/energy5.jpg" alt="service-img" loading="lazy">
+                                <div class="icon">
+                                    <i class="fas fa-video" style="font-size: 48px; color: #6b8e23;"></i>
+                                </div>
+                                <a href="service.html" class="know-more-strip">Know More</a>
+                            </div>
+                            <div class="service-text">
+                                <p>Professional security systems for homes, businesses, and industries. Indoor and
+                                    outdoor cameras with night vision. Remote monitoring and DVR/NVR recording. Complete
+                                    installation included.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="service-card-items-2">
+                            <div class="service-title">
+                                <h5><a href="service.html">IT Infrastructure & Computer Systems</a></h5>
+                                <p></p>
+                            </div>
+                            <div class="service-thumb service-image">
+                                <img src="assets/img/service/energy6.jpg" alt="service-img" loading="lazy">
+                                <div class="icon">
+                                    <i class="fas fa-desktop" style="font-size: 48px; color: #6b8e23;"></i>
+                                </div>
+                                <a href="service.html" class="know-more-strip">Know More</a>
+                            </div>
+                            <div class="service-text">
+                                <p>Computer systems and IT infrastructure for modern businesses. Desktop and laptop
+                                    systems, networking equipment, and complete setup. Integrated with power backup
+                                    solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section Start -->
+    <section class="portfolio-section fix section-padding" style="margin-top: -60px;">
+        <div class="container">
+            <div class="section-title text-center">
+                <span class="wow fadeInUp">Our Portfolio</span>
+                <h2 class="wow fadeInUp" data-wow-delay=".3s">Energy independence <br> starts with solar</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
+                <div class="portfolio-card-items">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio/p7.jpeg" alt="img" loading="lazy">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
+                <div class="portfolio-card-items">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio/p8.jpeg" alt="img" loading="lazy">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".2s">
+                <div class="portfolio-card-items">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio/p1.jpeg" alt="img" loading="lazy">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".4s">
+                <div class="portfolio-card-items">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio/p2.jpeg" alt="img" loading="lazy">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".5s">
+                <div class="portfolio-card-items">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio/p3.jpeg" alt="img" loading="lazy">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".6s">
+                <div class="portfolio-card-items">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio/p4.jpeg" alt="img" loading="lazy">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".7s">
+                <div class="portfolio-card-items">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio/p5.jpeg" alt="img" loading="lazy">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-6 wow fadeInUp" data-wow-delay=".8s">
+                <div class="portfolio-card-items">
+                    <div class="portfolio-image">
+                        <img src="assets/img/portfolio/p6.jpeg" alt="img" loading="lazy">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Section Start -->
+    <div class="brand-section-2 section-padding pb-0 bg-cover"
+        style="background-image: url('assets/img/declan-sun-FIyl9nD2I3o-unsplash.jpg');">
+        <div class="brand-wrapper-2 section-padding pt-0">
+            <div class="container">
+                <div class="swiper brand-slider">
+                    <!-- <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="brand-thumb center">
+                                    <img src="assets/img/brand/01.png" alt="img">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="brand-thumb center">
+                                    <img src="assets/img/brand/02.png" alt="img">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="brand-thumb center">
+                                    <img src="assets/img/brand/03.png" alt="img">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="brand-thumb center">
+                                    <img src="assets/img/brand/04.png" alt="img">
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="brand-thumb center">
+                                    <img src="assets/img/brand/05.png" alt="img">
+                                </div>
+                            </div>
+                        </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="number-talks-section">
+            <div class="container">
+                <div class="number-talks-wrapper">
+                    <div class="number-talks-content text-center">
+                        <div class="section-title text-center">
+                            <span class="wow fadeInUp"
+                                style="color: #6b8e23; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">Number
+                                talks</span>
+                            <h2 class="wow fadeInUp" data-wow-delay=".3s" style="font-weight: 800; margin-top: 10px;">
+                                Let the Numbers Speak</h2>
+                            <div
+                                style="width: 70px; height: 4px; background: #6b8e23; margin: 20px auto; border-radius: 2px;">
+                            </div>
+                        </div>
+                        <p class="mt-3 mb-5 wow fadeInUp mx-auto" data-wow-delay=".5s"
+                            style="max-width: 800px; font-size: 17px; color: #555;">
+                            Trusted by thousands across Anantapur for quality solar installations, power
+                            solutions, and dedicated support. Our track record speaks for itself.
+                        </p>
+                        <div class="row justify-content-center g-4">
+                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                                <div class="counter-box">
+                                    <div class="icon mx-auto">
+                                        <img src="assets/img/counter-icon/5.svg" alt="img">
+                                    </div>
+                                    <h2><span class="count">10</span>k+</h2>
+                                    <p>Successful Installations</p>
+                                    <span class="stat-description">Solar systems, power backup, and integrated
+                                        solutions delivered across Andhra Pradesh</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".5s">
+                                <div class="counter-box">
+                                    <div class="icon mx-auto">
+                                        <img src="assets/img/counter-icon/6.svg" alt="img">
+                                    </div>
+                                    <h2><span class="count">3</span>+</h2>
+                                    <p>Years of Expertise</p>
+                                    <span class="stat-description">Proven experience in system integration and
+                                        solar project execution</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".7s">
+                                <div class="counter-box">
+                                    <div class="icon mx-auto">
+                                        <img src="assets/img/counter-icon/7.svg" alt="img">
+                                    </div>
+                                    <h2><span class="count">100</span>%</h2>
+                                    <p>Customer Satisfaction</p>
+                                    <span class="stat-description">Reliable products, professional installation,
+                                        and responsive after-sales support</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay=".9s">
+                                <div class="counter-box">
+                                    <div class="icon mx-auto">
+                                        <img src="assets/img/counter-icon/5.svg" alt="img">
+                                    </div>
+                                    <h2><span class="count">24</span>/7</h2>
+                                    <p>Service Support</p>
+                                    <span class="stat-description">Helpdesk and service team available for
+                                        maintenance and troubleshooting</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Team Section Start -->
+    <section class="team-section fix section-padding pt-0">
+        <div class="container">
+            <div class="section-title text-center">
+                <span class="wow fadeInUp">Creative members</span>
+                <h2 class="wow fadeInUp" data-wow-delay=".3s">Enjoy the Spirit of Joy</h2>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                    <div class="team-card-items">
+                        <div class="team-image">
+                            <img src="assets/img/team/madhusudhan1.png" alt="img" loading="lazy">
+                        </div>
+                        <div class="team-content">
+                            <h5><a href="#">Mr. K. Madhu Sudhan</a></h5>
+                            <p>Proprietor &#183; MSc, BEd</p>
+                            <p style="color: black;">Leading our service operations with expertise in electrical
+                                engineering and customer support excellence </p>
+                            <div class="social-icon d-flex align-items-center">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-vimeo-v"></i></a>
+                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
+                    <div class="team-card-items">
+                        <div class="team-image">
+                            <img src="assets/img/team/ramamohan2.png" alt="img" loading="lazy">
+                        </div>
+                        <div class="team-content">
+                            <h5><a href="#">Mr. K. Rama Mohan</a></h5>
+                            <p>Sr. Service Manager &#183; BSc, D.E.E </p>
+                            <p style="color: black;">A leader driving MN Enterprises' mission to make
+                                sustainable energy accessible across Anantapur</p>
+                            <div class="social-icon d-flex align-items-center">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-vimeo-v"></i></a>
+                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".7s">
+                    <div class="team-card-items">
+                        <div class="team-image">
+                            <img src="assets/img/team/anjaneyulu3.png" alt="img" loading="lazy">
+                        </div>
+                        <div class="team-content">
+                            <h5><a href="#">Mr. Anjaneyulu </a></h5>
+                            <p>Sr. Manager &#183; BSc, D.E.C.E </p>
+                            <p style="color: black;">Managing operations and ensuring seamless project execution from
+                                consultation to installation</p>
+                            <div class="social-icon d-flex align-items-center">
+                                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-vimeo-v"></i></a>
+                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section Start -->
+    <section class="contact-section-3 section-padding section-bg" style="margin-top: -50px;">
+        <div class="container">
+            <div class="contact-wrapper-2">
+                <div class="row justify-content-center">
+                    <div class="col-xl-10">
+                        <div class="contact-content">
+                            <div class="section-title text-center">
+                                <span class="wow fadeInUp">Talk to us</span>
+                                <h2 class="wow fadeInUp" data-wow-delay=".3s">Ready to Go Solar? Let's Talk</h2>
+                            </div>
+                            <p class="mt-3 mt-md-0 wow fadeInUp text-center" data-wow-delay=".5s">
+                                Whether you're looking for residential solar, commercial power solutions, or complete
+                                energy independence—our team is here to guide you. Get a free consultation and
+                                customized quote for your energy needs.
+                            </p>
+                            <div class="mt-4 mb-4 wow fadeInUp" data-wow-delay=".6s">
+                                <h5 class="text-center" style="margin-bottom: 25px;">Why Choose MN Enterprises:</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul
+                                            style="list-style-type: disc; padding-left: 25px; line-height: 2; margin-bottom: 0;">
+                                            <li>Free site assessment and energy audit</li>
+                                            <li>Customized solar and power solutions</li>
+                                            <li>Transparent pricing with no hidden costs</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul
+                                            style="list-style-type: disc; padding-left: 25px; line-height: 2; margin-bottom: 0;">
+                                            <li>Professional installation by experienced engineers</li>
+                                            <li>Comprehensive after-sales support and maintenance</li>
+                                            <li>Proven track record with 10,000+ installations</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <form action="#" id="contact-form" method="POST" class="mt-4">
+                                <div class="row g-4">
+                                    <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
+                                        <div class="form-clt">
+                                            <input type="text" name="name" id="name" placeholder="Your Name*" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
+                                        <div class="form-clt">
+                                            <input type="tel" name="phone" id="phone" placeholder="Phone Number*"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 wow fadeInUp" data-wow-delay=".4s">
+                                        <div class="form-clt">
+                                            <input type="email" name="email" id="email" placeholder="Email Address">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 wow fadeInUp" data-wow-delay=".4s">
+                                        <div class="form-clt">
+                                            <input type="text" name="location" id="location"
+                                                placeholder="Location (City/Village)*" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 wow fadeInUp" data-wow-delay=".5s">
+                                        <div class="form-clt">
+                                            <select name="interest" id="interest" class="nice-select" required>
+                                                <option value="">I'm Interested In:*</option>
+                                                <option value="residential-solar">Residential Solar System</option>
+                                                <option value="commercial-solar">Commercial Solar Installation</option>
+                                                <option value="offgrid-solar">Off-Grid Solar Solution</option>
+                                                <option value="hybrid-solar">Hybrid Solar System</option>
+                                                <option value="servo-stabilizer">Servo Stabilizer</option>
+                                                <option value="ups-inverter">UPS & Inverter</option>
+                                                <option value="battery-backup">Battery Backup</option>
+                                                <option value="cc-cameras">CC Cameras & Security</option>
+                                                <option value="computer-systems">Computer Systems</option>
+                                                <option value="other">Other/Not Sure</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 wow fadeInUp" data-wow-delay=".5s">
+                                        <div class="form-clt">
+                                            <select name="property-type" id="property-type" class="nice-select">
+                                                <option value="">Property Type:</option>
+                                                <option value="home-residential">Home/Residential</option>
+                                                <option value="commercial-office">Commercial/Office</option>
+                                                <option value="industrial">Industrial</option>
+                                                <option value="agricultural-farm">Agricultural/Farm</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 wow fadeInUp" data-wow-delay=".6s">
+                                        <div class="form-clt">
+                                            <select name="electricity-bill" id="electricity-bill" class="nice-select">
+                                                <option value="">Approximate Monthly Electricity Bill: (Optional)
+                                                </option>
+                                                <option value="below-2000">Below ₹2,000</option>
+                                                <option value="2000-5000">₹2,000 - ₹5,000</option>
+                                                <option value="5000-10000">₹5,000 - ₹10,000</option>
+                                                <option value="10000-20000">₹10,000 - ₹20,000</option>
+                                                <option value="above-20000">Above ₹20,000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 wow fadeInUp" data-wow-delay=".7s">
+                                        <div class="form-clt">
+                                            <textarea name="message" id="message"
+                                                placeholder="Your Message/Requirements*" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 wow fadeInUp text-center" data-wow-delay=".8s">
+                                        <button type="submit" class="theme-btn">
+                                            Get Free Consultation <i class="fa-solid fa-square-arrow-up-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Process Section Start -->
+    <section class="work-process-section fix section-padding" style="padding-bottom: 30px !important;">
+        <div class="container">
+            <div class="section-title text-center">
+                <span class="wow fadeInUp">work process</span>
+                <h2 class="wow fadeInUp mb-3" data-wow-delay=".3s"> Our Installation Process - Simple & Hassle-Free</h2>
+                <p class="wow fadeInUp" data-wow-delay=".5s">From initial consultation to final commissioning, we handle
+                    everything. Our
+                    streamlined process ensures your solar or power solution is up and running quickly and efficiently.
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
+                    <div class="work-process-thumb" style="margin-top: 195px;">
+                        <img src="assets/img/process.avif" alt="img" loading="lazy">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="work-process-right-items">
+                        <div class="icon-items wow fadeInUp" data-wow-delay=".3s">
+                            <div class="icon">
+                                <img src="assets/img/process/05.svg" alt="img">
+                            </div>
+                            <div class="content">
+                                <h5>Custom System Design & Proposal</h5><br>
+                                <p>We design a customized solar/power system, provide detailed quotation with component
+                                    specifications, explain savings and ROI, and answer all your questions. </p>
+                            </div>
+                        </div>
+                        <div class="icon-items wow fadeInUp" data-wow-delay=".5s">
+                            <div class="icon">
+                                <img src="assets/img/process/06.svg" alt="img">
+                            </div>
+                            <div class="content">
+                                <h5>Free Site Assessment & Consultation</h5><br>
+                                <p>Our engineers visit your location, assess your energy needs, evaluate roof/space
+                                    availability, and recommend the optimal solution tailored to your requirements.</p>
+                            </div>
+                        </div>
+                        <div class="icon-items wow fadeInUp" data-wow-delay=".3s">
+                            <div class="icon">
+                                <img src="assets/img/process/07.svg" alt="img">
+                            </div>
+                            <div class="content">
+                                <h5>Professional Installation & Commissioning </h5><br>
+                                <p>Expert installation by our qualified team, quality equipment from trusted brands,
+                                    complete safety compliance, system testing and commissioning, and operational
+                                    training.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section Start -->
+    <section class="testimonial-section fix section-padding">
+        <div class="container">
+            <div class="section-title text-center">
+                <span class="wow fadeInUp"
+                    style="color: #556B2F; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">Success
+                    Stories</span>
+                <h2 class="wow fadeInUp" data-wow-delay=".3s" style="margin-top: 10px; font-weight: 800;">What Our
+                    Clients Say</h2>
+                <div style="width: 70px; height: 4px; background: #556B2F; margin: 20px auto; border-radius: 2px;">
+                </div>
+            </div>
+            <div class="swiper testimonial-slider testimonial-wrapper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="testimonial-box-items">
+                            <i class="fas fa-quote-right quote-icon"></i>
+                            <div class="star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>
+                                "MN Enterprises installed a 5kW solar system on our home, and we've seen our electricity
+                                bill drop by 70%. The team was professional, the installation was quick, and the system
+                                has been running flawlessly for months. Highly recommended!"
+                            </p>
+                            <div class="client-info-item">
+                                <div class="avatar">RK</div>
+                                <div class="content">
+                                    <h5>Mr. Ramesh Kumar</h5>
+                                    <span>Homeowner, Anantapur</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-box-items">
+                            <i class="fas fa-quote-right quote-icon"></i>
+                            <div class="star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>
+                                "We needed a reliable power backup solution for our manufacturing unit. MN Enterprises
+                                provided a complete setup with UPS, inverters, and batteries. Zero downtime since
+                                installation. Excellent service!"
+                            </p>
+                            <div class="client-info-item">
+                                <div class="avatar">PR</div>
+                                <div class="content">
+                                    <h5>Ms. Priya Reddy</h5>
+                                    <span>Factory Owner, Anantapur</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-box-items">
+                            <i class="fas fa-quote-right quote-icon"></i>
+                            <div class="star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>
+                                "As a farmer, inconsistent power supply was a major challenge for irrigation. The
+                                off-grid solar system from MN Enterprises has been a game-changer—reliable power
+                                whenever we need it. Great investment!"
+                            </p>
+                            <div class="client-info-item">
+                                <div class="avatar">VN</div>
+                                <div class="content">
+                                    <h5>Mr. Venkatesh Naidu</h5>
+                                    <span>Farmer, Rural Anantapur</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="testimonial-box-items">
+                            <i class="fas fa-quote-right quote-icon"></i>
+                            <div class="star">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>
+                                "Professional team, quality products, and transparent pricing. MN Enterprises handled
+                                our commercial solar project from start to finish without any hassles. Very satisfied
+                                with their work!"
+                            </p>
+                            <div class="client-info-item">
+                                <div class="avatar">SB</div>
+                                <div class="content">
+                                    <h5>Mr. Suresh Babu</h5>
+                                    <span>Business Owner, Anantapur</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section Start -->
+    <section class="news-section fix section-padding" style="padding-top: 30px !important;">
+        <div class="container">
+            <div class="section-title-area">
+                <div class="section-title">
+                    <span class="wow fadeInUp">our blogs</span>
+                    <h2 class="wow fadeInUp" data-wow-delay=".3s">Solar & Energy-Related <br> Blog Topics </h2>
+                </div>
+                <a href="news.html" class="theme-btn wow fadeInUp" data-wow-delay=".5s">Discover More <i
+                        class="fas fa-arrow-right-long"></i></a>
+            </div>
+            <div class="row g-4">
+                <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                    <div class="news-card-items-2">
+                        <div class="news-content">
+                            <ul class="post-date">
+                                <li>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    October 19, 2023
+                                </li>
+                            </ul>
+                            <h5><a href="news.html">Benefits of Solar Energy for Anantapur Residents</a></h5>
+                        </div>
+                        <div class="news-image">
+                            <img src="assets/img/news/post-1.jpg" alt="img" loading="lazy">
+                        </div>
+                        <div class="news-button">
+                            <a href="news.html" class="link-btn">READ MORE <i class="far fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
+                    <div class="news-card-items-2">
+                        <div class="news-content">
+                            <ul class="post-date">
+                                <li>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    February 5, 2023
+                                </li>
+                            </ul>
+                            <h5><a href="news.html">On-Grid vs Off-Grid vs Hybrid: Which Solar System is Right
+                                    for You?</a></h5>
+                        </div>
+                        <div class="news-image">
+                            <img src="assets/img/news/post-2.jpg" alt="img" loading="lazy">
+                        </div>
+                        <div class="news-button">
+                            <a href="news.html" class="link-btn">READ MORE <i class="far fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
+                    <div class="news-card-items-2">
+                        <div class="news-content">
+                            <ul class="post-date">
+                                <li>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    September 1, 2024
+                                </li>
+                            </ul>
+                            <h5><a href="news.html">Government Subsidies and Schemes for Solar Installation in
+                                    2025</a></h5>
+                        </div>
+                        <div class="news-image">
+                            <img src="assets/img/news/post-3.jpg" alt="img" loading="lazy">
+                        </div>
+                        <div class="news-button">
+                            <a href="news.html" class="link-btn">READ MORE <i class="far fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".8s">
+                    <div class="news-card-items-2">
+                        <div class="news-content">
+                            <ul class="post-date">
+                                <li>
+                                    <i class="fas fa-calendar-alt"></i>
+                                    March 27, 2025
+                                </li>
+                            </ul>
+                            <h5><a href="news.html">How to Maximize Your Solar Investment: Maintenance Tips</a>
+                            </h5>
+                        </div>
+                        <div class="news-image">
+                            <img src="assets/img/news/post-4.jpg" alt="img" loading="lazy">
+                        </div>
+                        <div class="news-button">
+                            <a href="news.html" class="link-btn">READ MORE <i class="far fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section Start -->
+    <footer class="footer-section footer-bg">
+        <div class="container">
+            <div class="footer-widgets-wrapper">
+                <div class="row">
+                    <!-- Column 1: About Company -->
+                    <div class="col-xl-3 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <a href="index.html">
+                                    <img src="assets/img/logo/MN LOGO.svg" alt="MN Enterprises Logo"
+                                        style="width: 120px; height: auto;">
+                                </a>
+                            </div>
+                            <div class="footer-content">
+                                <h4 class="text-white mb-3">MN Enterprises</h4>
+                                <p>
+                                    Based in Anantapur, MN Enterprises is your trusted partner for solar energy
+                                    solutions, power backup systems, and complete energy independence. A reliable power
+                                    to homes and businesses across Andhra Pradesh.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Essential Links -->
+                    <div class="col-xl-3 col-lg-6 col-md-6 ps-lg-4 wow fadeInUp" data-wow-delay=".4s">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <h4 class="text-white">Essential Links</h4>
+                            </div>
+                            <ul class="list-area">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="about.html">About Us</a></li>
+                                <li><a href="service.html">Our Services</a></li>
+
+                                <li><a href="news.html">Blog</a></li>
+                                <li><a href="gallery.html">Gallery</a></li>
+                                <li><a href="contact.html">Contact Us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Column 3: Contact Info -->
+                    <div class="col-xl-3 col-lg-6 col-md-6 ps-lg-4 wow fadeInUp" data-wow-delay=".6s">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <h4 class="text-white">Get in Touch</h4>
+                            </div>
+                            <div class="footer-content">
+                                <ul class="contact-info">
+                                    <li>
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <p>
+                                            <strong>Address:</strong><br>
+                                            D.No: 6-71, Near ACB Office,<br>
+                                            TV Tower, Lenin Nagar,<br>
+                                            Anantapur - 515001, AP
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-phone"></i>
+                                        <p>
+                                            <strong>Help Desk:</strong><br>
+                                            <a href="tel:+919010100175">+91 9010100175</a>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <i class="fa-solid fa-envelope"></i>
+                                        <p>
+                                            <strong>Email:</strong><br>
+                                            <a href="mailto:mnenterprises.atp@gmail.com">mnenterprises.atp@gmail.com</a>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 4: Follow Us -->
+                    <div class="col-xl-3 col-lg-6 col-md-6 ps-lg-4 wow fadeInUp" data-wow-delay=".8s">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <h4 class="text-white">Stay Connected</h4>
+                            </div>
+                            <div class="footer-content">
+                                <div class="social-icon d-flex align-items-center mb-4">
+                                    <a href="https://www.facebook.com/share/1CZJM6XeSp/?mibextid=wwXIfr" target="_blank"
+                                        title="Facebook">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="https://www.instagram.com/mnenterprises2025?igsh=emt5NjBpZmJvOXR6&utm_source=qr"
+                                        target="_blank" title="Instagram">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                    <a href="https://wa.me/919010100175" target="_blank" title="WhatsApp">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </a>
+                                    <a href="https://youtube.com/@mnenterprisesatp?si=rsqrIqAk492jJwlB" target="_blank"
+                                        title="YouTube">
+                                        <i class="fab fa-youtube"></i>
+                                    </a>
+                                </div>
+                                <div class="newsletter-section">
+                                    <h5 class="text-white mb-2">Newsletter</h5>
+                                    <p class="mb-3">Get updates on solar schemes, energy tips, and exclusive offers.</p>
+                                    <form action="#" method="post" class="newsletter-form">
+                                        <div class="input-group">
+                                            <input type="email" class="form-control" placeholder="Your email" required>
+                                            <button type="submit" class="theme-btn">
+                                                <i class="fa-solid fa-paper-plane"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-wrapper text-center">
+                    <p class="wow fadeInUp" data-wow-delay=".3s">
+                        © <span class="footer-m-trigger" id="footerMTrigger">M</span><a href="index.html">N
+                            Enterprises</a> 2025 | <span>All Rights</span> Reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--<< All JS Plugins >>-->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <!--<< Bootstrap Js >>-->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!--<< Swiper Slider Js >>-->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="assets/js/viewport.jquery.js"></script>
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <script src="assets/js/jquery.waypoints.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/circle-progress.js"></script>
+    <script src="assets/js/jquery.meanmenu.min.js"></script>
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <!--<< Main.js >>-->
+    <script src="assets/js/main.js"></script>
+
+    <!-- Dashboard Access Script -->
+    <!-- Password Modal -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="dashboard-password-modal" id="passwordModal">
+        <h3>Access Dashboard</h3>
+        <p>Enter the password to access the dashboard</p>
+        <div class="password-input-group">
+            <input type="password" id="dashboardPassword" placeholder="Enter password">
+            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+        </div>
+        <div class="error-message" id="errorMessage">Incorrect password. Please try again.</div>
+        <div class="modal-buttons">
+            <button class="modal-btn modal-btn-cancel" id="cancelBtn">Cancel</button>
+            <button class="modal-btn modal-btn-submit" id="submitBtn">Submit</button>
+        </div>
+    </div>
+
+
+
+    <script>
+        (function () {
+            'use strict';
+            // Secure SHA-256 hash of 'mn99'
+            const CORRECT_HASH = '0f2579b35d22e1c0739de191a6d177ca73569ea2a3175e8dbd60c523a0bb66e3';
+
+            const footerMTrigger = document.getElementById('footerMTrigger');
+            const passwordModal = document.getElementById('passwordModal');
+            const modalOverlay = document.getElementById('modalOverlay');
+            const passwordInput = document.getElementById('dashboardPassword');
+            const togglePassword = document.getElementById('togglePassword');
+            const submitBtn = document.getElementById('submitBtn');
+            const cancelBtn = document.getElementById('cancelBtn');
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Hashing function to compare passwords securely
+            async function sha256(message) {
+                const msgBuffer = new TextEncoder().encode(message);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            }
+
+            function openModal() {
+                passwordModal.classList.add('active');
+                modalOverlay.classList.add('active');
+                passwordInput.value = '';
+                errorMessage.classList.remove('show');
+                passwordInput.focus();
+            }
+
+            function closeModal() {
+                passwordModal.classList.remove('active');
+                modalOverlay.classList.remove('active');
+                passwordInput.value = '';
+                errorMessage.classList.remove('show');
+            }
+
+            function togglePasswordVisibility() {
+                const type = passwordInput.type === 'password' ? 'text' : 'password';
+                passwordInput.type = type;
+                togglePassword.classList.toggle('fa-eye');
+                togglePassword.classList.toggle('fa-eye-slash');
+            }
+
+            async function verifyPassword() {
+                const enteredPassword = passwordInput.value.trim();
+                const enteredHash = await sha256(enteredPassword);
+
+                if (enteredHash === CORRECT_HASH) {
+                    sessionStorage.setItem('dashboardAccess', 'true');
+                    window.location.href = 'dashboard.html';
+                } else {
+                    errorMessage.classList.add('show');
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                    passwordInput.style.animation = 'shake 0.5s ease';
+                    setTimeout(() => { passwordInput.style.animation = ''; }, 500);
+                }
+            }
+
+            if (footerMTrigger) footerMTrigger.addEventListener('click', openModal);
+            if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+            if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+            if (togglePassword) togglePassword.addEventListener('click', togglePasswordVisibility);
+            if (submitBtn) submitBtn.addEventListener('click', verifyPassword);
+
+            passwordInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') verifyPassword();
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && passwordModal.classList.contains('active')) closeModal();
+            });
+        })();
+    </script>
+</body>
+
+</html>

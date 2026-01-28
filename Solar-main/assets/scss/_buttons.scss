@@ -1,0 +1,158 @@
+//>>>>> Component Button Here <<<<<//
+.theme-btn {
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+    outline: none !important;
+    background-color: $theme-color;
+    color: $white;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 0;
+    letter-spacing: 0;
+    padding: 14px 40px;
+    transition: 500ms;
+    text-transform: capitalize;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    z-index: 9;
+
+    i {
+        margin-left: 5px;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-top: 35px solid $header-color;
+        border-bottom: 35px solid $header-color;
+        border-right: 35px solid transparent;
+        transform: translateX(-100%);
+        transition: 0.6s;
+        z-index: -1;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-top: 35px solid $header-color;
+        border-bottom: 35px solid $header-color;
+        border-left: 35px solid transparent;
+        transform: translateX(100%);
+        transition: 0.6s;
+        z-index: -1;
+    }
+
+    &:hover {
+        color: $white;
+
+        &::before {
+            transform: translateX(-20%);
+        }
+
+        &::after {
+            transform: translateX(20%);
+        }
+    }
+
+    &.theme-color-2 {
+        background-color: $theme-color-2;
+    }
+
+    &.bg-color {
+        background-color: #333F4D;
+
+        &::before {
+            border-top: 35px solid $white;
+        border-bottom: 35px solid $white;
+        }
+
+        &::after {
+            border-top: 35px solid $white;
+            border-bottom: 35px solid $white;
+        }
+
+        &:hover {
+            color: $header-color;
+        }
+    }
+
+
+    @include breakpoint (max-md){
+        padding: 16px 32px;
+    }
+
+    @include breakpoint (max-sm){
+        padding: 14px 30px;
+    }
+}
+
+.link-btn {
+    text-transform: capitalize;
+    color: $header-color;
+    font-weight: 600;
+    display: inline-block;
+    font-size: 16px;
+
+    i {
+        margin-left: 8px;
+    }
+
+    &:hover {
+        color: $theme-color;
+    }
+}
+
+.arrow-btn {
+    font-size: 16px;
+    position: relative;
+    transform: translateX(0);
+    transition: 0.7s;
+    display: inline-block;
+    text-align: center;
+    border-radius: 100%;
+    color: $theme-color;
+    text-decoration: underline;
+
+    i {
+        font-size: 18px;
+        transform: rotate(-40deg);
+    }
+
+
+    &::before {
+        position: absolute;
+        content: "Read More";
+        font-weight: 700;
+        color: $theme-color;
+        font-size: 16px;
+        left: -95px;
+        top: -2px;
+        @include transition;
+        opacity: 0;
+    }
+
+    &:hover {
+        transform: translateX(95px);
+        color: $theme-color;
+
+        i {
+            transform: rotate(0);
+        }
+
+        &::before {
+            opacity: 1;
+        }
+    }
+}
+
+//>>>>> Component Button End <<<<<//

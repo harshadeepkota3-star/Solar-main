@@ -1,0 +1,25 @@
+/* Journey Section Alignment Fix */
+.work-process-box-items {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 350px;
+}
+
+.work-process-box-items p {
+    flex-grow: 1;
+    min-height: 60px;
+}
+
+.work-process-box-items .icon-items {
+    min-height: 65px;
+}
+
+/* Ensure all cards have equal height */
+.work-process-section .row>div {
+    display: flex;
+}
+
+.work-process-section .row>div>.work-process-box-items {
+    width: 100%;
+}
