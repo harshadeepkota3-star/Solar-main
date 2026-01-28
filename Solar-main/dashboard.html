@@ -110,9 +110,10 @@
             max-width: 100%;
             border-collapse: collapse;
             font-family: 'Arial', sans-serif;
-            font-size: 11px;
+            font-size: 14px;
             background: #fff;
             border: 2px solid #000;
+            font-weight: 600;
         }
 
         .report-form th,
@@ -135,12 +136,13 @@
             width: 100%;
             border: none;
             background: transparent;
-            font-size: 11px;
+            font-size: 14px;
             font-family: 'Arial', sans-serif;
-            padding: 2px 4px;
+            padding: 4px 6px;
             box-sizing: border-box;
             outline: none;
             color: #000 !important;
+            font-weight: 600;
         }
 
         .report-form input:focus,
@@ -166,12 +168,12 @@
         }
 
         .report-form .company-address {
-            font-size: 10px;
+            font-size: 12px;
             margin: 5px 0;
         }
 
         .report-form .company-contact {
-            font-size: 10px;
+            font-size: 12px;
             font-weight: bold;
         }
 
@@ -254,7 +256,8 @@
         }
 
         .report-form .signature-cell {
-            min-height: 60px;
+            min-height: 100px;
+            /* Increased from 60px */
             height: auto;
             vertical-align: top;
             padding: 8px !important;
@@ -270,9 +273,10 @@
             max-width: 100%;
             border-collapse: collapse;
             font-family: 'Arial', sans-serif;
-            font-size: 12px;
+            font-size: 14px;
             background: #fff;
             border: 2px solid #000;
+            font-weight: 600;
         }
 
         .serial-form th,
@@ -287,12 +291,13 @@
             width: 100%;
             border: none;
             background: transparent;
-            font-size: 12px;
+            font-size: 14px;
             font-family: 'Arial', sans-serif;
-            padding: 2px 4px;
+            padding: 4px 6px;
             box-sizing: border-box;
             outline: none;
             color: #000 !important;
+            font-weight: 600;
         }
 
         .serial-form input:focus {
@@ -312,7 +317,7 @@
 
         .serial-form .label-cell {
             font-weight: bold;
-            width: 120px;
+            width: 150px;
         }
 
         .serial-form .empty-row td {
@@ -320,7 +325,8 @@
         }
 
         .serial-form .signature-cell {
-            min-height: 60px;
+            min-height: 100px;
+            /* Increased from 60px */
             height: auto;
             vertical-align: top;
             padding: 8px !important;
@@ -351,7 +357,7 @@
             /* Reset page margins and setup for portrait */
             @page {
                 size: A4 portrait;
-                margin: 8mm 5mm 8mm 5mm;
+                margin: 5mm;
             }
 
             /* Reset dashboard content for print */
@@ -360,6 +366,7 @@
                 min-height: auto !important;
                 margin: 0 !important;
                 overflow: visible !important;
+                width: 100% !important;
             }
 
             .dashboard-unlocked {
@@ -386,10 +393,11 @@
                 page-break-inside: avoid;
                 width: 100% !important;
                 max-width: 100% !important;
-                font-size: 7px !important;
+                font-size: 9px !important;
                 margin: 0 !important;
                 border-collapse: collapse !important;
-                table-layout: fixed !important;
+                table-layout: auto !important;
+                /* Changed from fixed to auto to prevent cut-off */
             }
 
             .report-form th,
@@ -397,7 +405,8 @@
             .serial-form th,
             .serial-form td {
                 padding: 1px 2px !important;
-                font-size: 7px !important;
+                font-size: 9px !important;
+                /* Increased from 7px */
                 border: 1px solid #000 !important;
                 word-wrap: break-word !important;
                 overflow: hidden !important;
@@ -407,7 +416,8 @@
             .report-form textarea,
             .serial-form input,
             .serial-form textarea {
-                font-size: 7px !important;
+                font-size: 9px !important;
+                /* Increased from 7px */
                 padding: 0px 1px !important;
                 width: 100% !important;
                 box-sizing: border-box !important;
@@ -420,7 +430,8 @@
 
             .report-form .company-address,
             .report-form .company-contact {
-                font-size: 7px !important;
+                font-size: 9px !important;
+                /* Increased from 7px */
             }
 
             body {
@@ -428,6 +439,7 @@
                 margin: 0 !important;
                 padding: 0 !important;
                 overflow: visible !important;
+                width: 100% !important;
             }
 
             .container {
@@ -435,6 +447,7 @@
                 width: 100% !important;
                 padding: 0 !important;
                 margin: 0 !important;
+                overflow: visible !important;
             }
 
             /* Ensure logo and header cells fit properly */
@@ -452,14 +465,16 @@
             .report-form .label-cell,
             .serial-form .label-cell {
                 white-space: nowrap !important;
-                font-size: 6px !important;
+                font-size: 8px !important;
+                /* Increased from 6px */
                 padding: 1px !important;
             }
 
             /* Optimize section headers */
             .report-form .section-header,
             .serial-form .section-header {
-                font-size: 7px !important;
+                font-size: 9px !important;
+                /* Increased from 7px */
                 font-weight: bold !important;
                 padding: 1px !important;
             }
@@ -472,7 +487,8 @@
             }
 
             /* Hide new action buttons in print */
-            .action-btn-group button {
+            .action-btn-group button,
+            .remove-photo-btn {
                 display: none !important;
             }
 
@@ -485,6 +501,13 @@
                 max-width: 150px !important;
                 max-height: 80px !important;
                 border: 1px solid #000 !important;
+            }
+
+            /* Hide placeholders in print */
+            input::placeholder,
+            textarea::placeholder {
+                color: transparent !important;
+                opacity: 0 !important;
             }
         }
 
@@ -543,23 +566,23 @@
         /* Responsive adjustments */
         @media (max-width: 992px) {
             .service-report-container {
-                padding: 10px;
+                padding: 15px;
                 overflow-x: auto;
             }
 
             .report-form,
             .serial-form {
-                min-width: 800px;
+                min-width: 1000px;
                 /* Force minimum width to allow scrolling instead of extreme squishing */
-                font-size: 10px;
+                font-size: 13px;
             }
 
             .report-form th,
             .report-form td,
             .serial-form th,
             .serial-form td {
-                padding: 4px;
-                font-size: 10px;
+                padding: 6px;
+                font-size: 13px;
             }
         }
 
@@ -589,7 +612,7 @@
 
             .report-form,
             .serial-form {
-                min-width: 750px;
+                min-width: 900px;
             }
 
             .form-actions {
@@ -710,13 +733,10 @@
             display: block;
         }
 
-        .preview-img.active {
-            display: block;
-        }
-
         .passport-photo-box {
             width: 80px;
             height: 100px;
+            /* Reverted to 100px */
             border: none;
             margin: 0 auto;
             position: relative;
@@ -725,6 +745,13 @@
             justify-content: center;
             background: #fdfdfd;
             transition: all 0.2s ease;
+        }
+
+        .photo-cell {
+            min-height: 120px;
+            /* Field height as requested */
+            vertical-align: middle;
+            padding: 10px !important;
         }
 
         .passport-photo-box:hover {
@@ -1061,7 +1088,7 @@
                                 <p class="company-address">D.No:- 6-71, Near ACB Office, TV TOWER, Lenin Nagar,
                                     Anantapur, Andhra Pradesh, 515002</p>
                                 <p class="company-contact">Mobile: 8688595988, 9676468976 | Email:
-                                    mnenterprises.atp@gmail.com</p>
+                                    mnenterprises.atp@gmail.com | mnenterprisess.co.in</p>
                             </td>
                         </tr>
                         <tr class="gstin-row">
@@ -1414,45 +1441,53 @@
                         <!-- Photo Row -->
                         <tr>
                             <td class="label-cell">PHOTO:</td>
-                            <td colspan="3">
+                            <td colspan="3" class="photo-cell">
                                 <div class="upload-controls"
-                                    style="flex-direction: row; align-items: center; justify-content: center; gap: 0px;">
+                                    style="flex-direction: row; align-items: center; justify-content: center; gap: 10px;">
                                     <div class="action-btn-group">
                                         <button type="button" class="action-btn"
-                                            onclick="triggerCamera('engineerPhotoPreview1', 'engineerPhoto1', 'engineerPhotoRemove1')">
+                                            onclick="triggerFileInput('engineerPhotoInput1')" title="Upload">
+                                            <i class="fas fa-upload"></i> Upload
+                                        </button>
+                                        <button type="button" class="action-btn"
+                                            onclick="triggerCamera('engineerPhotoPreview1', 'engineerPhoto1', 'engineerPhotoRemove1')"
+                                            title="Camera">
                                             <i class="fas fa-camera"></i> Camera
                                         </button>
                                     </div>
                                     <div class="passport-photo-box">
-                                        <span id="engineerPhotoPlaceholder1">Passport Photo<br>(Camera Only)</span>
                                         <img id="engineerPhotoPreview1" class="preview-img" style="object-fit: cover;">
                                         <button class="remove-photo-btn" id="engineerPhotoRemove1"
-                                            onclick="removeImage(event, 'engineerPhotoPreview1', 'engineerPhoto1', 'engineerPhotoPlaceholder1', 'engineerPhotoRemove1')">&times;</button>
+                                            onclick="removeImage(event, 'engineerPhotoPreview1', 'engineerPhoto1', null, 'engineerPhotoRemove1')">&times;</button>
                                         <input type="hidden" id="engineerPhoto1">
                                     </div>
                                     <input type="file" id="engineerPhotoInput1" style="display:none" accept="image/*"
-                                        onchange="handleImageUpload(event, 'engineerPhotoPreview1', 'engineerPhoto1', 'engineerPhotoPlaceholder1', 'engineerPhotoRemove1')">
+                                        onchange="handleImageUpload(event, 'engineerPhotoPreview1', 'engineerPhoto1', null, 'engineerPhotoRemove1')">
                                 </div>
                             </td>
                             <td class="label-cell">PHOTO:</td>
-                            <td colspan="3">
+                            <td colspan="3" class="photo-cell">
                                 <div class="upload-controls"
-                                    style="flex-direction: row; align-items: center; justify-content: center; gap: 0px;">
+                                    style="flex-direction: row; align-items: center; justify-content: center; gap: 10px;">
                                     <div class="action-btn-group">
                                         <button type="button" class="action-btn"
-                                            onclick="triggerCamera('customerPhotoPreview1', 'customerPhoto1', 'customerPhotoRemove1')">
+                                            onclick="triggerFileInput('customerPhotoInput1')" title="Upload">
+                                            <i class="fas fa-upload"></i> Upload
+                                        </button>
+                                        <button type="button" class="action-btn"
+                                            onclick="triggerCamera('customerPhotoPreview1', 'customerPhoto1', 'customerPhotoRemove1')"
+                                            title="Camera">
                                             <i class="fas fa-camera"></i> Camera
                                         </button>
                                     </div>
                                     <div class="passport-photo-box">
-                                        <span id="customerPhotoPlaceholder1">Passport Photo<br>(Camera Only)</span>
                                         <img id="customerPhotoPreview1" class="preview-img" style="object-fit: cover;">
                                         <button class="remove-photo-btn" id="customerPhotoRemove1"
-                                            onclick="removeImage(event, 'customerPhotoPreview1', 'customerPhoto1', 'customerPhotoPlaceholder1', 'customerPhotoRemove1')">&times;</button>
+                                            onclick="removeImage(event, 'customerPhotoPreview1', 'customerPhoto1', null, 'customerPhotoRemove1')">&times;</button>
                                         <input type="hidden" id="customerPhoto1">
                                     </div>
                                     <input type="file" id="customerPhotoInput1" style="display:none" accept="image/*"
-                                        onchange="handleImageUpload(event, 'customerPhotoPreview1', 'customerPhoto1', 'customerPhotoPlaceholder1', 'customerPhotoRemove1')">
+                                        onchange="handleImageUpload(event, 'customerPhotoPreview1', 'customerPhoto1', null, 'customerPhotoRemove1')">
                                 </div>
                             </td>
                         </tr>
@@ -2512,45 +2547,53 @@
                         <!-- Photo Row -->
                         <tr>
                             <td class="label-cell">PHOTO:</td>
-                            <td colspan="2">
+                            <td colspan="2" class="photo-cell">
                                 <div class="upload-controls"
-                                    style="flex-direction: row; align-items: center; justify-content: center; gap: 0px;">
+                                    style="flex-direction: row; align-items: center; justify-content: center; gap: 10px;">
                                     <div class="action-btn-group">
                                         <button type="button" class="action-btn"
-                                            onclick="triggerCamera('engineerPhotoPreview2', 'engineerPhoto2', 'engineerPhotoRemove2')">
+                                            onclick="triggerFileInput('engineerPhotoInput2')" title="Upload">
+                                            <i class="fas fa-upload"></i> Upload
+                                        </button>
+                                        <button type="button" class="action-btn"
+                                            onclick="triggerCamera('engineerPhotoPreview2', 'engineerPhoto2', 'engineerPhotoRemove2')"
+                                            title="Camera">
                                             <i class="fas fa-camera"></i> Camera
                                         </button>
                                     </div>
                                     <div class="passport-photo-box">
-                                        <span id="engineerPhotoPlaceholder2">Passport Photo<br>(Camera Only)</span>
                                         <img id="engineerPhotoPreview2" class="preview-img" style="object-fit: cover;">
                                         <button class="remove-photo-btn" id="engineerPhotoRemove2"
-                                            onclick="removeImage(event, 'engineerPhotoPreview2', 'engineerPhoto2', 'engineerPhotoPlaceholder2', 'engineerPhotoRemove2')">&times;</button>
+                                            onclick="removeImage(event, 'engineerPhotoPreview2', 'engineerPhoto2', null, 'engineerPhotoRemove2')">&times;</button>
                                         <input type="hidden" id="engineerPhoto2">
                                     </div>
                                     <input type="file" id="engineerPhotoInput2" style="display:none" accept="image/*"
-                                        onchange="handleImageUpload(event, 'engineerPhotoPreview2', 'engineerPhoto2', 'engineerPhotoPlaceholder2', 'engineerPhotoRemove2')">
+                                        onchange="handleImageUpload(event, 'engineerPhotoPreview2', 'engineerPhoto2', null, 'engineerPhotoRemove2')">
                                 </div>
                             </td>
                             <td class="label-cell">PHOTO:</td>
-                            <td colspan="2">
+                            <td colspan="2" class="photo-cell">
                                 <div class="upload-controls"
-                                    style="flex-direction: row; align-items: center; justify-content: center; gap: 0px;">
+                                    style="flex-direction: row; align-items: center; justify-content: center; gap: 10px;">
                                     <div class="action-btn-group">
                                         <button type="button" class="action-btn"
-                                            onclick="triggerCamera('customerPhotoPreview2', 'customerPhoto2', 'customerPhotoRemove2')">
+                                            onclick="triggerFileInput('customerPhotoInput2')" title="Upload">
+                                            <i class="fas fa-upload"></i> Upload
+                                        </button>
+                                        <button type="button" class="action-btn"
+                                            onclick="triggerCamera('customerPhotoPreview2', 'customerPhoto2', 'customerPhotoRemove2')"
+                                            title="Camera">
                                             <i class="fas fa-camera"></i> Camera
                                         </button>
                                     </div>
                                     <div class="passport-photo-box">
-                                        <span id="customerPhotoPlaceholder2">Passport Photo<br>(Camera Only)</span>
                                         <img id="customerPhotoPreview2" class="preview-img" style="object-fit: cover;">
                                         <button class="remove-photo-btn" id="customerPhotoRemove2"
-                                            onclick="removeImage(event, 'customerPhotoPreview2', 'customerPhoto2', 'customerPhotoPlaceholder2', 'customerPhotoRemove2')">&times;</button>
+                                            onclick="removeImage(event, 'customerPhotoPreview2', 'customerPhoto2', null, 'customerPhotoRemove2')">&times;</button>
                                         <input type="hidden" id="customerPhoto2">
                                     </div>
                                     <input type="file" id="customerPhotoInput2" style="display:none" accept="image/*"
-                                        onchange="handleImageUpload(event, 'customerPhotoPreview2', 'customerPhoto2', 'customerPhotoPlaceholder2', 'customerPhotoRemove2')">
+                                        onchange="handleImageUpload(event, 'customerPhotoPreview2', 'customerPhoto2', null, 'customerPhotoRemove2')">
                                 </div>
                             </td>
                         </tr>
@@ -3225,6 +3268,7 @@
                 window.location.href = 'index.html';
             });
         });
+
     </script>
 </body>
 
