@@ -688,28 +688,45 @@
         }
 
         .btn-paste {
-            background: #28a745;
-        }
-
-        .btn-paste:hover {
-            background: #218838;
-        }
-
-        .hidden-file-input {
-            display: none;
+            display: none !important;
         }
 
         .preview-container {
             margin-top: 5px;
-            max-width: 100%;
+            max-width: fit-content;
             display: none;
+            position: relative;
         }
 
         .preview-img {
             max-width: 100px;
-            max-height: 50px;
+            max-height: 80px;
             border: 1px solid #ccc;
             border-radius: 4px;
+            display: block;
+        }
+
+        .btn-remove-photo {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .btn-remove-photo:hover {
+            background: #c82333;
         }
 
         .signature-cell .action-btn-group {
@@ -1260,7 +1277,10 @@
                                     capture="environment" onchange="handleFileSelect(event, 'engSig1Preview')">
                                 <input type="file" id="engSig1Up" class="hidden-file-input" accept="image/*"
                                     onchange="handleFileSelect(event, 'engSig1Preview')">
-                                <div id="engSig1Preview" class="preview-container"><img src="" class="preview-img">
+                                <div id="engSig1Preview" class="preview-container">
+                                    <button class="btn-remove-photo"
+                                        onclick="clearPhoto('engSig1Preview', ['engSig1Cam', 'engSig1Up'])">×</button>
+                                    <img src="" class="preview-img">
                                 </div>
                             </td>
                             <td class="label-cell signature-cell" colspan="2">SIGNATURE:</td>
@@ -1276,7 +1296,10 @@
                                     capture="environment" onchange="handleFileSelect(event, 'custSig1Preview')">
                                 <input type="file" id="custSig1Up" class="hidden-file-input" accept="image/*"
                                     onchange="handleFileSelect(event, 'custSig1Preview')">
-                                <div id="custSig1Preview" class="preview-container"><img src="" class="preview-img">
+                                <div id="custSig1Preview" class="preview-container">
+                                    <button class="btn-remove-photo"
+                                        onclick="clearPhoto('custSig1Preview', ['custSig1Cam', 'custSig1Up'])">×</button>
+                                    <img src="" class="preview-img">
                                 </div>
                             </td>
                         </tr>
@@ -1284,39 +1307,47 @@
                         <!-- Name Row -->
                         <tr>
                             <td class="label-cell">NAME:</td>
+                            <td colspan="3"><input type="text" id="engineerName1" placeholder="Enter name"></td>
+                            <td class="label-cell">NAME:</td>
+                            <td colspan="3"><input type="text" id="customerName1" placeholder="Enter name"></td>
+                        </tr>
+
+                        <!-- Photo Row -->
+                        <tr>
+                            <td class="label-cell">PHOTO:</td>
                             <td colspan="3">
                                 <div class="action-btn-group">
-                                    <input type="text" id="engineerName1" placeholder="Enter name">
-                                    <button class="mini-action-btn btn-paste"
-                                        onclick="handlePasteAction('engineerName1', 'engName1Preview')">Paste</button>
-                                    <button class="mini-action-btn" onclick="triggerCamera('engName1Cam')"><i
+                                    <button class="mini-action-btn" onclick="triggerCamera('engPhoto1Cam')"><i
                                             class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('engName1Up')"><i
+                                    <button class="mini-action-btn" onclick="triggerUpload('engPhoto1Up')"><i
                                             class="fas fa-upload"></i></button>
                                 </div>
-                                <input type="file" id="engName1Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'engName1Preview')">
-                                <input type="file" id="engName1Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'engName1Preview')">
-                                <div id="engName1Preview" class="preview-container"><img src="" class="preview-img">
+                                <input type="file" id="engPhoto1Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'engPhoto1Preview')">
+                                <input type="file" id="engPhoto1Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'engPhoto1Preview')">
+                                <div id="engPhoto1Preview" class="preview-container">
+                                    <button class="btn-remove-photo"
+                                        onclick="clearPhoto('engPhoto1Preview', ['engPhoto1Cam', 'engPhoto1Up'])">×</button>
+                                    <img src="" class="preview-img">
                                 </div>
                             </td>
-                            <td class="label-cell">NAME:</td>
+                            <td class="label-cell">PHOTO:</td>
                             <td colspan="3">
                                 <div class="action-btn-group">
-                                    <input type="text" id="customerName1" placeholder="Enter name">
-                                    <button class="mini-action-btn btn-paste"
-                                        onclick="handlePasteAction('customerName1', 'custName1Preview')">Paste</button>
-                                    <button class="mini-action-btn" onclick="triggerCamera('custName1Cam')"><i
+                                    <button class="mini-action-btn" onclick="triggerCamera('custPhoto1Cam')"><i
                                             class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('custName1Up')"><i
+                                    <button class="mini-action-btn" onclick="triggerUpload('custPhoto1Up')"><i
                                             class="fas fa-upload"></i></button>
                                 </div>
-                                <input type="file" id="custName1Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'custName1Preview')">
-                                <input type="file" id="custName1Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'custName1Preview')">
-                                <div id="custName1Preview" class="preview-container"><img src="" class="preview-img">
+                                <input type="file" id="custPhoto1Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'custPhoto1Preview')">
+                                <input type="file" id="custPhoto1Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'custPhoto1Preview')">
+                                <div id="custPhoto1Preview" class="preview-container">
+                                    <button class="btn-remove-photo"
+                                        onclick="clearPhoto('custPhoto1Preview', ['custPhoto1Cam', 'custPhoto1Up'])">×</button>
+                                    <img src="" class="preview-img">
                                 </div>
                             </td>
                         </tr>
@@ -1499,7 +1530,10 @@
                                     capture="environment" onchange="handleFileSelect(event, 'engSig2Preview')">
                                 <input type="file" id="engSig2Up" class="hidden-file-input" accept="image/*"
                                     onchange="handleFileSelect(event, 'engSig2Preview')">
-                                <div id="engSig2Preview" class="preview-container"><img src="" class="preview-img">
+                                <div id="engSig2Preview" class="preview-container">
+                                    <button class="btn-remove-photo"
+                                        onclick="clearPhoto('engSig2Preview', ['engSig2Cam', 'engSig2Up'])">×</button>
+                                    <img src="" class="preview-img">
                                 </div>
                             </td>
                             <td class="label-cell signature-cell">SIGNATURE:</td>
@@ -1515,7 +1549,10 @@
                                     capture="environment" onchange="handleFileSelect(event, 'custSig2Preview')">
                                 <input type="file" id="custSig2Up" class="hidden-file-input" accept="image/*"
                                     onchange="handleFileSelect(event, 'custSig2Preview')">
-                                <div id="custSig2Preview" class="preview-container"><img src="" class="preview-img">
+                                <div id="custSig2Preview" class="preview-container">
+                                    <button class="btn-remove-photo"
+                                        onclick="clearPhoto('custSig2Preview', ['custSig2Cam', 'custSig2Up'])">×</button>
+                                    <img src="" class="preview-img">
                                 </div>
                             </td>
                         </tr>
@@ -1523,39 +1560,47 @@
                         <!-- Name Row -->
                         <tr>
                             <td class="label-cell">NAME:</td>
+                            <td colspan="2"><input type="text" id="engineerName2" placeholder="Enter name"></td>
+                            <td class="label-cell">NAME:</td>
+                            <td colspan="2"><input type="text" id="customerName2" placeholder="Enter name"></td>
+                        </tr>
+
+                        <!-- Photo Row -->
+                        <tr>
+                            <td class="label-cell">PHOTO:</td>
                             <td colspan="2">
                                 <div class="action-btn-group">
-                                    <input type="text" id="engineerName2" placeholder="Enter name">
-                                    <button class="mini-action-btn btn-paste"
-                                        onclick="handlePasteAction('engineerName2', 'engName2Preview')">Paste</button>
-                                    <button class="mini-action-btn" onclick="triggerCamera('engName2Cam')"><i
+                                    <button class="mini-action-btn" onclick="triggerCamera('engPhoto2Cam')"><i
                                             class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('engName2Up')"><i
+                                    <button class="mini-action-btn" onclick="triggerUpload('engPhoto2Up')"><i
                                             class="fas fa-upload"></i></button>
                                 </div>
-                                <input type="file" id="engName2Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'engName2Preview')">
-                                <input type="file" id="engName2Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'engName2Preview')">
-                                <div id="engName2Preview" class="preview-container"><img src="" class="preview-img">
+                                <input type="file" id="engPhoto2Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'engPhoto2Preview')">
+                                <input type="file" id="engPhoto2Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'engPhoto2Preview')">
+                                <div id="engPhoto2Preview" class="preview-container">
+                                    <button class="btn-remove-photo"
+                                        onclick="clearPhoto('engPhoto2Preview', ['engPhoto2Cam', 'engPhoto2Up'])">×</button>
+                                    <img src="" class="preview-img">
                                 </div>
                             </td>
-                            <td class="label-cell">NAME:</td>
+                            <td class="label-cell">PHOTO:</td>
                             <td colspan="2">
                                 <div class="action-btn-group">
-                                    <input type="text" id="customerName2" placeholder="Enter name">
-                                    <button class="mini-action-btn btn-paste"
-                                        onclick="handlePasteAction('customerName2', 'custName2Preview')">Paste</button>
-                                    <button class="mini-action-btn" onclick="triggerCamera('custName2Cam')"><i
+                                    <button class="mini-action-btn" onclick="triggerCamera('custPhoto2Cam')"><i
                                             class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('custName2Up')"><i
+                                    <button class="mini-action-btn" onclick="triggerUpload('custPhoto2Up')"><i
                                             class="fas fa-upload"></i></button>
                                 </div>
-                                <input type="file" id="custName2Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'custName2Preview')">
-                                <input type="file" id="custName2Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'custName2Preview')">
-                                <div id="custName2Preview" class="preview-container"><img src="" class="preview-img">
+                                <input type="file" id="custPhoto2Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'custPhoto2Preview')">
+                                <input type="file" id="custPhoto2Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'custPhoto2Preview')">
+                                <div id="custPhoto2Preview" class="preview-container">
+                                    <button class="btn-remove-photo"
+                                        onclick="clearPhoto('custPhoto2Preview', ['custPhoto2Cam', 'custPhoto2Up'])">×</button>
+                                    <img src="" class="preview-img">
                                 </div>
                             </td>
                         </tr>
@@ -1771,43 +1816,17 @@
             }
         }
 
-        function handlePasteAction(inputId, previewId) {
-            alert("Please focus the input field and press Ctrl+V to paste a photo.");
-            document.getElementById(inputId).focus();
+        function clearPhoto(previewId, inputIds) {
+            const previewContainer = document.getElementById(previewId);
+            const previewImg = previewContainer.querySelector('img');
+            previewImg.src = '';
+            previewContainer.style.display = 'none';
+
+            // Clear the file inputs as well
+            inputIds.forEach(id => {
+                document.getElementById(id).value = '';
+            });
         }
-
-        // Global Paste Event Listener for Photos
-        document.addEventListener('paste', function (event) {
-            const items = (event.clipboardData || event.originalEvent.clipboardData).items;
-            let targetId = event.target.id;
-
-            // Check if current focused element is one of our target inputs
-            if (!targetId || !targetId.includes('Name')) return;
-
-            // Find the corresponding preview container
-            let previewId = '';
-            if (targetId === 'engineerName1') previewId = 'engName1Preview';
-            else if (targetId === 'customerName1') previewId = 'custName1Preview';
-            else if (targetId === 'engineerName2') previewId = 'engName2Preview';
-            else if (targetId === 'customerName2') previewId = 'custName2Preview';
-
-            if (!previewId) return;
-
-            for (let index in items) {
-                const item = items[index];
-                if (item.kind === 'file' && item.type.startsWith('image/')) {
-                    const blob = item.getAsFile();
-                    const reader = new FileReader();
-                    reader.onload = function (e) {
-                        const previewContainer = document.getElementById(previewId);
-                        const previewImg = previewContainer.querySelector('img');
-                        previewImg.src = e.target.result;
-                        previewContainer.style.display = 'block';
-                    };
-                    reader.readAsDataURL(blob);
-                }
-            }
-        });
 
         // ============================================
         // Form Management Functions
