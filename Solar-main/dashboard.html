@@ -656,81 +656,116 @@
             font-size: 14px;
         }
 
-        /* Action Button Styles */
-        .action-btn-group {
+        /* Image Upload Styles */
+        .upload-controls {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             gap: 5px;
+            align-items: center;
+            justify-content: center;
             width: 100%;
         }
 
-        .action-btn-group input {
-            flex-grow: 1;
+        .action-btn-group {
+            display: flex;
+            gap: 5px;
         }
 
-        .mini-action-btn {
+        .action-btn-group.hidden {
+            display: none;
+        }
+
+        .action-btn {
             background: #6b8e23;
             color: white;
             border: none;
-            border-radius: 3px;
-            padding: 2px 6px;
+            padding: 4px 8px;
+            border-radius: 4px;
             font-size: 10px;
             cursor: pointer;
-            transition: all 0.2s;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 3px;
         }
 
-        .mini-action-btn:hover {
+        .action-btn:hover {
             background: #556b2f;
         }
 
-        .btn-paste {
-            display: none !important;
-        }
-
         .preview-container {
-            margin-top: 5px;
-            max-width: fit-content;
-            display: none;
+            width: 100%;
+            height: 60px;
+            /* Fixed height to prevent expansion */
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            overflow: hidden;
+            border: 1px dashed #ccc;
+            background: #fafafa;
         }
 
         .preview-img {
-            max-width: 100px;
-            max-height: 80px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Fill the field completely as requested */
+            display: none;
+        }
+
+        .preview-img.active {
             display: block;
         }
 
-        .btn-remove-photo {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 10px;
+        .preview-img.active {
+            display: block;
+        }
+
+        .passport-photo-box {
+            width: 100px;
+            height: 120px;
+            border: 1px dashed #666;
+            margin: 0 auto;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            background: #fdfdfd;
+        }
+
+        .passport-photo-box:hover {
+            background: #f0f0f0;
+        }
+
+        .passport-photo-box span {
+            font-size: 10px;
+            color: #666;
+            text-align: center;
+            padding: 5px;
+        }
+
+        .remove-photo-btn {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            border: 2px solid white;
+            cursor: pointer;
             z-index: 10;
         }
 
-        .btn-remove-photo:hover {
-            background: #c82333;
-        }
-
-        .signature-cell .action-btn-group {
-            padding-top: 5px;
+        .remove-photo-btn.active {
+            display: flex;
         }
     </style>
 </head>
@@ -1266,41 +1301,11 @@
                         <tr>
                             <td class="label-cell signature-cell" colspan="2">SIGNATURE:</td>
                             <td colspan="2" class="signature-cell">
-                                <div class="action-btn-group">
-                                    <input type="text" id="engineerSignature1" placeholder="Engineer Signature">
-                                    <button class="mini-action-btn" onclick="triggerCamera('engSig1Cam')"><i
-                                            class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('engSig1Up')"><i
-                                            class="fas fa-upload"></i></button>
-                                </div>
-                                <input type="file" id="engSig1Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'engSig1Preview')">
-                                <input type="file" id="engSig1Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'engSig1Preview')">
-                                <div id="engSig1Preview" class="preview-container">
-                                    <button class="btn-remove-photo"
-                                        onclick="clearPhoto('engSig1Preview', ['engSig1Cam', 'engSig1Up'])">×</button>
-                                    <img src="" class="preview-img">
-                                </div>
+                                <input type="text" id="engineerSignature1" placeholder="Engineer Signature">
                             </td>
                             <td class="label-cell signature-cell" colspan="2">SIGNATURE:</td>
                             <td colspan="2" class="signature-cell">
-                                <div class="action-btn-group">
-                                    <input type="text" id="customerSignature1" placeholder="Customer Signature">
-                                    <button class="mini-action-btn" onclick="triggerCamera('custSig1Cam')"><i
-                                            class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('custSig1Up')"><i
-                                            class="fas fa-upload"></i></button>
-                                </div>
-                                <input type="file" id="custSig1Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'custSig1Preview')">
-                                <input type="file" id="custSig1Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'custSig1Preview')">
-                                <div id="custSig1Preview" class="preview-container">
-                                    <button class="btn-remove-photo"
-                                        onclick="clearPhoto('custSig1Preview', ['custSig1Cam', 'custSig1Up'])">×</button>
-                                    <img src="" class="preview-img">
-                                </div>
+                                <input type="text" id="customerSignature1" placeholder="Customer Signature">
                             </td>
                         </tr>
 
@@ -1316,39 +1321,9 @@
                         <tr>
                             <td class="label-cell">PHOTO:</td>
                             <td colspan="3">
-                                <div class="action-btn-group">
-                                    <button class="mini-action-btn" onclick="triggerCamera('engPhoto1Cam')"><i
-                                            class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('engPhoto1Up')"><i
-                                            class="fas fa-upload"></i></button>
-                                </div>
-                                <input type="file" id="engPhoto1Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'engPhoto1Preview')">
-                                <input type="file" id="engPhoto1Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'engPhoto1Preview')">
-                                <div id="engPhoto1Preview" class="preview-container">
-                                    <button class="btn-remove-photo"
-                                        onclick="clearPhoto('engPhoto1Preview', ['engPhoto1Cam', 'engPhoto1Up'])">×</button>
-                                    <img src="" class="preview-img">
-                                </div>
                             </td>
                             <td class="label-cell">PHOTO:</td>
                             <td colspan="3">
-                                <div class="action-btn-group">
-                                    <button class="mini-action-btn" onclick="triggerCamera('custPhoto1Cam')"><i
-                                            class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('custPhoto1Up')"><i
-                                            class="fas fa-upload"></i></button>
-                                </div>
-                                <input type="file" id="custPhoto1Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'custPhoto1Preview')">
-                                <input type="file" id="custPhoto1Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'custPhoto1Preview')">
-                                <div id="custPhoto1Preview" class="preview-container">
-                                    <button class="btn-remove-photo"
-                                        onclick="clearPhoto('custPhoto1Preview', ['custPhoto1Cam', 'custPhoto1Up'])">×</button>
-                                    <img src="" class="preview-img">
-                                </div>
                             </td>
                         </tr>
 
@@ -1519,40 +1494,48 @@
                         <tr>
                             <td class="label-cell signature-cell">SIGNATURE:</td>
                             <td colspan="2" class="signature-cell">
-                                <div class="action-btn-group">
-                                    <input type="text" id="engineerSignature2" placeholder="Engineer Signature">
-                                    <button class="mini-action-btn" onclick="triggerCamera('engSig2Cam')"><i
-                                            class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('engSig2Up')"><i
-                                            class="fas fa-upload"></i></button>
-                                </div>
-                                <input type="file" id="engSig2Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'engSig2Preview')">
-                                <input type="file" id="engSig2Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'engSig2Preview')">
-                                <div id="engSig2Preview" class="preview-container">
-                                    <button class="btn-remove-photo"
-                                        onclick="clearPhoto('engSig2Preview', ['engSig2Cam', 'engSig2Up'])">×</button>
-                                    <img src="" class="preview-img">
+                                <div class="upload-controls">
+                                    <div class="preview-container">
+                                        <img id="engineerSignaturePreview2" class="preview-img">
+                                        <button class="remove-photo-btn" id="engineerSigRemove2"
+                                            onclick="removeImage(event, 'engineerSignaturePreview2', 'engineerSignature2', null, 'engineerSigRemove2')">&times;</button>
+                                        <input type="hidden" id="engineerSignature2">
+                                    </div>
+                                    <div class="action-btn-group">
+                                        <button type="button" class="action-btn"
+                                            onclick="triggerFileInput('engineerSigInput2')">
+                                            <i class="fas fa-upload"></i> Upload
+                                        </button>
+                                        <button type="button" class="action-btn"
+                                            onclick="triggerCamera('engineerSignaturePreview2', 'engineerSignature2', 'engineerSigRemove2')">
+                                            <i class="fas fa-camera"></i> Camera
+                                        </button>
+                                    </div>
+                                    <input type="file" id="engineerSigInput2" style="display:none" accept="image/*"
+                                        onchange="handleImageUpload(event, 'engineerSignaturePreview2', 'engineerSignature2', null, 'engineerSigRemove2')">
                                 </div>
                             </td>
                             <td class="label-cell signature-cell">SIGNATURE:</td>
                             <td colspan="2" class="signature-cell">
-                                <div class="action-btn-group">
-                                    <input type="text" id="customerSignature2" placeholder="Customer Signature">
-                                    <button class="mini-action-btn" onclick="triggerCamera('custSig2Cam')"><i
-                                            class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('custSig2Up')"><i
-                                            class="fas fa-upload"></i></button>
-                                </div>
-                                <input type="file" id="custSig2Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'custSig2Preview')">
-                                <input type="file" id="custSig2Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'custSig2Preview')">
-                                <div id="custSig2Preview" class="preview-container">
-                                    <button class="btn-remove-photo"
-                                        onclick="clearPhoto('custSig2Preview', ['custSig2Cam', 'custSig2Up'])">×</button>
-                                    <img src="" class="preview-img">
+                                <div class="upload-controls">
+                                    <div class="preview-container">
+                                        <img id="customerSignaturePreview2" class="preview-img">
+                                        <button class="remove-photo-btn" id="customerSigRemove2"
+                                            onclick="removeImage(event, 'customerSignaturePreview2', 'customerSignature2', null, 'customerSigRemove2')">&times;</button>
+                                        <input type="hidden" id="customerSignature2">
+                                    </div>
+                                    <div class="action-btn-group">
+                                        <button type="button" class="action-btn"
+                                            onclick="triggerFileInput('customerSigInput2')">
+                                            <i class="fas fa-upload"></i> Upload
+                                        </button>
+                                        <button type="button" class="action-btn"
+                                            onclick="triggerCamera('customerSignaturePreview2', 'customerSignature2', 'customerSigRemove2')">
+                                            <i class="fas fa-camera"></i> Camera
+                                        </button>
+                                    </div>
+                                    <input type="file" id="customerSigInput2" style="display:none" accept="image/*"
+                                        onchange="handleImageUpload(event, 'customerSignaturePreview2', 'customerSignature2', null, 'customerSigRemove2')">
                                 </div>
                             </td>
                         </tr>
@@ -1569,38 +1552,26 @@
                         <tr>
                             <td class="label-cell">PHOTO:</td>
                             <td colspan="2">
-                                <div class="action-btn-group">
-                                    <button class="mini-action-btn" onclick="triggerCamera('engPhoto2Cam')"><i
-                                            class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('engPhoto2Up')"><i
-                                            class="fas fa-upload"></i></button>
-                                </div>
-                                <input type="file" id="engPhoto2Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'engPhoto2Preview')">
-                                <input type="file" id="engPhoto2Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'engPhoto2Preview')">
-                                <div id="engPhoto2Preview" class="preview-container">
-                                    <button class="btn-remove-photo"
-                                        onclick="clearPhoto('engPhoto2Preview', ['engPhoto2Cam', 'engPhoto2Up'])">×</button>
-                                    <img src="" class="preview-img">
+                                <div class="passport-photo-box" onclick="triggerFileInput('engineerPhotoInput2')">
+                                    <span id="engineerPhotoPlaceholder2">Passport Photo<br>(Upload File)</span>
+                                    <img id="engineerPhotoPreview2" class="preview-img" style="object-fit: cover;">
+                                    <button class="remove-photo-btn" id="engineerPhotoRemove2"
+                                        onclick="removeImage(event, 'engineerPhotoPreview2', 'engineerPhoto2', 'engineerPhotoPlaceholder2', 'engineerPhotoRemove2')">&times;</button>
+                                    <input type="hidden" id="engineerPhoto2">
+                                    <input type="file" id="engineerPhotoInput2" style="display:none" accept="image/*"
+                                        onchange="handleImageUpload(event, 'engineerPhotoPreview2', 'engineerPhoto2', 'engineerPhotoPlaceholder2', 'engineerPhotoRemove2')">
                                 </div>
                             </td>
                             <td class="label-cell">PHOTO:</td>
                             <td colspan="2">
-                                <div class="action-btn-group">
-                                    <button class="mini-action-btn" onclick="triggerCamera('custPhoto2Cam')"><i
-                                            class="fas fa-camera"></i></button>
-                                    <button class="mini-action-btn" onclick="triggerUpload('custPhoto2Up')"><i
-                                            class="fas fa-upload"></i></button>
-                                </div>
-                                <input type="file" id="custPhoto2Cam" class="hidden-file-input" accept="image/*"
-                                    capture="environment" onchange="handleFileSelect(event, 'custPhoto2Preview')">
-                                <input type="file" id="custPhoto2Up" class="hidden-file-input" accept="image/*"
-                                    onchange="handleFileSelect(event, 'custPhoto2Preview')">
-                                <div id="custPhoto2Preview" class="preview-container">
-                                    <button class="btn-remove-photo"
-                                        onclick="clearPhoto('custPhoto2Preview', ['custPhoto2Cam', 'custPhoto2Up'])">×</button>
-                                    <img src="" class="preview-img">
+                                <div class="passport-photo-box" onclick="triggerFileInput('customerPhotoInput2')">
+                                    <span id="customerPhotoPlaceholder2">Passport Photo<br>(Upload File)</span>
+                                    <img id="customerPhotoPreview2" class="preview-img" style="object-fit: cover;">
+                                    <button class="remove-photo-btn" id="customerPhotoRemove2"
+                                        onclick="removeImage(event, 'customerPhotoPreview2', 'customerPhoto2', 'customerPhotoPlaceholder2', 'customerPhotoRemove2')">&times;</button>
+                                    <input type="hidden" id="customerPhoto2">
+                                    <input type="file" id="customerPhotoInput2" style="display:none" accept="image/*"
+                                        onchange="handleImageUpload(event, 'customerPhotoPreview2', 'customerPhoto2', 'customerPhotoPlaceholder2', 'customerPhotoRemove2')">
                                 </div>
                             </td>
                         </tr>
@@ -1793,44 +1764,125 @@
         // No additional initialization needed here for modal logic as it's moved to index.html
 
 
-        // Camera and Upload Functions
-        function triggerCamera(inputId) {
-            document.getElementById(inputId).click();
-        }
-
-        function triggerUpload(inputId) {
-            document.getElementById(inputId).click();
-        }
-
-        function handleFileSelect(event, previewId) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    const previewContainer = document.getElementById(previewId);
-                    const previewImg = previewContainer.querySelector('img');
-                    previewImg.src = e.target.result;
-                    previewContainer.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function clearPhoto(previewId, inputIds) {
-            const previewContainer = document.getElementById(previewId);
-            const previewImg = previewContainer.querySelector('img');
-            previewImg.src = '';
-            previewContainer.style.display = 'none';
-
-            // Clear the file inputs as well
-            inputIds.forEach(id => {
-                document.getElementById(id).value = '';
-            });
-        }
 
         // ============================================
         // Form Management Functions
         // ============================================
+
+        // --- Image Handling Helpers ---
+
+        function triggerFileInput(inputId) {
+            document.getElementById(inputId).click();
+        }
+
+        function triggerCamera(previewId, hiddenId, removeBtnId = null) {
+            // Check if the browser supports mediaDevices
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                const camInput = document.createElement('input');
+                camInput.type = 'file';
+                camInput.accept = 'image/*';
+                camInput.capture = 'environment';
+
+                camInput.onchange = (e) => {
+                    // Extract placeholderId if possible (for photos)
+                    let placeholderId = null;
+                    if (previewId.includes('Photo')) {
+                        placeholderId = previewId.replace('Preview', 'Placeholder');
+                    }
+                    handleImageUpload(e, previewId, hiddenId, placeholderId, removeBtnId);
+                };
+                camInput.click();
+            } else {
+                alert("Camera access is not supported by your browser.");
+            }
+        }
+
+        function handleImageUpload(event, previewId, hiddenId, placeholderId = null, removeBtnId = null) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const base64String = e.target.result;
+
+                // Update preview
+                const preview = document.getElementById(previewId);
+                if (preview) {
+                    preview.src = base64String;
+                    preview.classList.add('active');
+                }
+
+                // Update hidden field
+                const hidden = document.getElementById(hiddenId);
+                if (hidden) {
+                    hidden.value = base64String;
+                }
+
+                // Hide upload buttons for signatures/photos
+                const controlsContainer = event.target.closest('.upload-controls') || event.target.closest('.passport-photo-box');
+                if (controlsContainer) {
+                    const btnGroup = controlsContainer.querySelector('.action-btn-group');
+                    if (btnGroup) btnGroup.classList.add('hidden');
+
+                    // Specific to passport photo box which uses onclick
+                    if (controlsContainer.classList.contains('passport-photo-box')) {
+                        controlsContainer.style.pointerEvents = 'none';
+                        const removeBtn = controlsContainer.querySelector('.remove-photo-btn');
+                        if (removeBtn) removeBtn.style.pointerEvents = 'auto';
+                    }
+                }
+
+                // Handle placeholder and remove button for photos
+                if (placeholderId) {
+                    const placeholder = document.getElementById(placeholderId);
+                    if (placeholder) placeholder.style.display = 'none';
+                }
+                if (removeBtnId) {
+                    const removeBtn = document.getElementById(removeBtnId);
+                    if (removeBtn) removeBtn.classList.add('active');
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeImage(event, previewId, hiddenId, placeholderId, removeBtnId) {
+            event.stopPropagation(); // Prevent triggering file input click
+
+            const preview = document.getElementById(previewId);
+            const hidden = document.getElementById(hiddenId);
+            const placeholder = document.getElementById(placeholderId);
+            const removeBtn = document.getElementById(removeBtnId);
+
+            if (preview) {
+                preview.src = '';
+                preview.classList.remove('active');
+            }
+            if (hidden) hidden.value = '';
+            if (placeholder) placeholder.style.display = 'block';
+            if (removeBtn) removeBtn.classList.remove('active');
+
+            // Show upload buttons again
+            const uploadControls = preview.closest('.upload-controls') || preview.closest('.passport-photo-box');
+            if (uploadControls) {
+                const btnGroup = uploadControls.querySelector('.action-btn-group');
+                if (btnGroup) btnGroup.classList.remove('hidden');
+
+                if (uploadControls.classList.contains('passport-photo-box')) {
+                    uploadControls.style.pointerEvents = 'auto';
+                }
+            }
+
+            // Correctly clear the file input based on naming patterns
+            let inputId = '';
+            if (previewId.includes('Signature')) {
+                inputId = previewId.replace('SignaturePreview', 'SigInput');
+            } else if (previewId.includes('Photo')) {
+                inputId = previewId.replace('PhotoPreview', 'PhotoInput');
+            }
+
+            const input = document.getElementById(inputId);
+            if (input) input.value = '';
+        }
 
         // Save form data to localStorage
         function saveFormData() {
@@ -1934,7 +1986,12 @@
                     engineerName2: document.getElementById('engineerName2')?.value || '',
                     customerName2: document.getElementById('customerName2')?.value || '',
                     engineerDate2: document.getElementById('engineerDate2')?.value || '',
-                    customerDate2: document.getElementById('customerDate2')?.value || ''
+                    customerDate2: document.getElementById('customerDate2')?.value || '',
+                    // New Image Fields
+                    engineerSignature2: document.getElementById('engineerSignature2')?.value || '',
+                    customerSignature2: document.getElementById('customerSignature2')?.value || '',
+                    engineerPhoto2: document.getElementById('engineerPhoto2')?.value || '',
+                    customerPhoto2: document.getElementById('customerPhoto2')?.value || ''
                 },
                 // Battery serial numbers
                 batteries: []
@@ -1987,6 +2044,34 @@
             if (desc2) desc2.value = 'BATTERY';
             if (desc3) desc3.value = 'SOLAR PV PANELS';
 
+            // Clear new image fields and previews
+            const imagePreviews = document.querySelectorAll('.preview-img');
+            imagePreviews.forEach(img => {
+                img.src = '';
+                img.classList.remove('active');
+            });
+
+            const hiddenFields = ['engineerSignature2', 'customerSignature2', 'engineerPhoto2', 'customerPhoto2'];
+            hiddenFields.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+
+            // Show placeholders
+            const placeholders = document.querySelectorAll('.passport-photo-box span');
+            placeholders.forEach(span => span.style.display = 'block');
+
+            // Hide remove buttons
+            const removeBtns = document.querySelectorAll('.remove-photo-btn');
+            removeBtns.forEach(btn => btn.classList.remove('active'));
+
+            // Show all upload controls
+            const btnGroups = document.querySelectorAll('.action-btn-group');
+            btnGroups.forEach(group => group.classList.remove('hidden'));
+
+            const photoBoxes = document.querySelectorAll('.passport-photo-box');
+            photoBoxes.forEach(box => box.style.pointerEvents = 'auto');
+
             // Remove from localStorage
             localStorage.removeItem('mnServiceReportData');
 
@@ -2035,6 +2120,58 @@
                         const element = document.getElementById('battery' + (index + 1));
                         if (element) {
                             element.value = value;
+                        }
+                    });
+                }
+
+                // Load image data and restore previews
+                if (formData.serialNumbers) {
+                    const images = {
+                        'engineerSignature2': 'engineerSignaturePreview2',
+                        'customerSignature2': 'customerSignaturePreview2',
+                        'engineerPhoto2': 'engineerPhotoPreview2',
+                        'customerPhoto2': 'customerPhotoPreview2'
+                    };
+
+                    Object.keys(images).forEach(fieldId => {
+                        const base64 = formData.serialNumbers[fieldId];
+                        if (base64) {
+                            const preview = document.getElementById(images[fieldId]);
+                            const removeBtnId = images[fieldId].replace('Preview', fieldId.includes('Sig') ? 'Remove' : 'Remove');
+                            // Actually the naming is SigRemove and PhotoRemove. 
+                            // Let's make it consistent.
+                            let rBtnId = '';
+                            if (fieldId.includes('Signature')) rBtnId = fieldId.replace('Signature', 'SigRemove');
+                            else rBtnId = fieldId.replace('Photo', 'PhotoRemove');
+
+                            const removeBtn = document.getElementById(rBtnId);
+
+                            if (preview) {
+                                preview.src = base64;
+                                preview.classList.add('active');
+                            }
+                            if (removeBtn) {
+                                removeBtn.classList.add('active');
+                            }
+
+                            // Hide upload controls during load
+                            const container = preview.closest('.upload-controls') || preview.closest('.passport-photo-box');
+                            if (container) {
+                                const btnGroup = container.querySelector('.action-btn-group');
+                                if (btnGroup) btnGroup.classList.add('hidden');
+                                if (container.classList.contains('passport-photo-box')) {
+                                    container.style.pointerEvents = 'none';
+                                    const rBtn = container.querySelector('.remove-photo-btn');
+                                    if (rBtn) rBtn.style.pointerEvents = 'auto';
+                                }
+                            }
+
+                            // Handle photo specifics
+                            if (fieldId.includes('Photo')) {
+                                const placeholderId = images[fieldId].replace('Preview', 'Placeholder');
+                                const placeholder = document.getElementById(placeholderId);
+                                if (placeholder) placeholder.style.display = 'none';
+                            }
                         }
                     });
                 }
