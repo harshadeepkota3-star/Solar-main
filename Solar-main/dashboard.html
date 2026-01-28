@@ -466,6 +466,22 @@
                 width: 10px !important;
                 height: 10px !important;
             }
+
+            /* Hide new action buttons in print */
+            .action-btn-group button {
+                display: none !important;
+            }
+
+            .preview-container {
+                display: block !important;
+                margin-top: 5px !important;
+            }
+
+            .preview-img {
+                max-width: 150px !important;
+                max-height: 80px !important;
+                border: 1px solid #000 !important;
+            }
         }
 
         /* Form action buttons */
@@ -638,6 +654,66 @@
             color: #6b8e23;
             font-weight: bold;
             font-size: 14px;
+        }
+
+        /* Action Button Styles */
+        .action-btn-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            width: 100%;
+        }
+
+        .action-btn-group input {
+            flex-grow: 1;
+        }
+
+        .mini-action-btn {
+            background: #6b8e23;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            padding: 2px 6px;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+        }
+
+        .mini-action-btn:hover {
+            background: #556b2f;
+        }
+
+        .btn-paste {
+            background: #28a745;
+        }
+
+        .btn-paste:hover {
+            background: #218838;
+        }
+
+        .hidden-file-input {
+            display: none;
+        }
+
+        .preview-container {
+            margin-top: 5px;
+            max-width: 100%;
+            display: none;
+        }
+
+        .preview-img {
+            max-width: 100px;
+            max-height: 50px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .signature-cell .action-btn-group {
+            padding-top: 5px;
         }
     </style>
 </head>
@@ -1172,19 +1248,77 @@
                         <!-- Signature Row -->
                         <tr>
                             <td class="label-cell signature-cell" colspan="2">SIGNATURE:</td>
-                            <td colspan="2" class="signature-cell"><input type="text" id="engineerSignature1"
-                                    placeholder=""></td>
+                            <td colspan="2" class="signature-cell">
+                                <div class="action-btn-group">
+                                    <input type="text" id="engineerSignature1" placeholder="Engineer Signature">
+                                    <button class="mini-action-btn" onclick="triggerCamera('engSig1Cam')"><i
+                                            class="fas fa-camera"></i></button>
+                                    <button class="mini-action-btn" onclick="triggerUpload('engSig1Up')"><i
+                                            class="fas fa-upload"></i></button>
+                                </div>
+                                <input type="file" id="engSig1Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'engSig1Preview')">
+                                <input type="file" id="engSig1Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'engSig1Preview')">
+                                <div id="engSig1Preview" class="preview-container"><img src="" class="preview-img">
+                                </div>
+                            </td>
                             <td class="label-cell signature-cell" colspan="2">SIGNATURE:</td>
-                            <td colspan="2" class="signature-cell"><input type="text" id="customerSignature1"
-                                    placeholder=""></td>
+                            <td colspan="2" class="signature-cell">
+                                <div class="action-btn-group">
+                                    <input type="text" id="customerSignature1" placeholder="Customer Signature">
+                                    <button class="mini-action-btn" onclick="triggerCamera('custSig1Cam')"><i
+                                            class="fas fa-camera"></i></button>
+                                    <button class="mini-action-btn" onclick="triggerUpload('custSig1Up')"><i
+                                            class="fas fa-upload"></i></button>
+                                </div>
+                                <input type="file" id="custSig1Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'custSig1Preview')">
+                                <input type="file" id="custSig1Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'custSig1Preview')">
+                                <div id="custSig1Preview" class="preview-container"><img src="" class="preview-img">
+                                </div>
+                            </td>
                         </tr>
 
                         <!-- Name Row -->
                         <tr>
                             <td class="label-cell">NAME:</td>
-                            <td colspan="3"><input type="text" id="engineerName1" placeholder="Enter name"></td>
+                            <td colspan="3">
+                                <div class="action-btn-group">
+                                    <input type="text" id="engineerName1" placeholder="Enter name">
+                                    <button class="mini-action-btn btn-paste"
+                                        onclick="handlePasteAction('engineerName1', 'engName1Preview')">Paste</button>
+                                    <button class="mini-action-btn" onclick="triggerCamera('engName1Cam')"><i
+                                            class="fas fa-camera"></i></button>
+                                    <button class="mini-action-btn" onclick="triggerUpload('engName1Up')"><i
+                                            class="fas fa-upload"></i></button>
+                                </div>
+                                <input type="file" id="engName1Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'engName1Preview')">
+                                <input type="file" id="engName1Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'engName1Preview')">
+                                <div id="engName1Preview" class="preview-container"><img src="" class="preview-img">
+                                </div>
+                            </td>
                             <td class="label-cell">NAME:</td>
-                            <td colspan="3"><input type="text" id="customerName1" placeholder="Enter name"></td>
+                            <td colspan="3">
+                                <div class="action-btn-group">
+                                    <input type="text" id="customerName1" placeholder="Enter name">
+                                    <button class="mini-action-btn btn-paste"
+                                        onclick="handlePasteAction('customerName1', 'custName1Preview')">Paste</button>
+                                    <button class="mini-action-btn" onclick="triggerCamera('custName1Cam')"><i
+                                            class="fas fa-camera"></i></button>
+                                    <button class="mini-action-btn" onclick="triggerUpload('custName1Up')"><i
+                                            class="fas fa-upload"></i></button>
+                                </div>
+                                <input type="file" id="custName1Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'custName1Preview')">
+                                <input type="file" id="custName1Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'custName1Preview')">
+                                <div id="custName1Preview" class="preview-container"><img src="" class="preview-img">
+                                </div>
+                            </td>
                         </tr>
 
                         <!-- Date Row -->
@@ -1353,19 +1487,77 @@
                         <!-- Signature Row -->
                         <tr>
                             <td class="label-cell signature-cell">SIGNATURE:</td>
-                            <td colspan="2" class="signature-cell"><input type="text" id="engineerSignature2"
-                                    placeholder=""></td>
+                            <td colspan="2" class="signature-cell">
+                                <div class="action-btn-group">
+                                    <input type="text" id="engineerSignature2" placeholder="Engineer Signature">
+                                    <button class="mini-action-btn" onclick="triggerCamera('engSig2Cam')"><i
+                                            class="fas fa-camera"></i></button>
+                                    <button class="mini-action-btn" onclick="triggerUpload('engSig2Up')"><i
+                                            class="fas fa-upload"></i></button>
+                                </div>
+                                <input type="file" id="engSig2Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'engSig2Preview')">
+                                <input type="file" id="engSig2Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'engSig2Preview')">
+                                <div id="engSig2Preview" class="preview-container"><img src="" class="preview-img">
+                                </div>
+                            </td>
                             <td class="label-cell signature-cell">SIGNATURE:</td>
-                            <td colspan="2" class="signature-cell"><input type="text" id="customerSignature2"
-                                    placeholder=""></td>
+                            <td colspan="2" class="signature-cell">
+                                <div class="action-btn-group">
+                                    <input type="text" id="customerSignature2" placeholder="Customer Signature">
+                                    <button class="mini-action-btn" onclick="triggerCamera('custSig2Cam')"><i
+                                            class="fas fa-camera"></i></button>
+                                    <button class="mini-action-btn" onclick="triggerUpload('custSig2Up')"><i
+                                            class="fas fa-upload"></i></button>
+                                </div>
+                                <input type="file" id="custSig2Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'custSig2Preview')">
+                                <input type="file" id="custSig2Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'custSig2Preview')">
+                                <div id="custSig2Preview" class="preview-container"><img src="" class="preview-img">
+                                </div>
+                            </td>
                         </tr>
 
                         <!-- Name Row -->
                         <tr>
                             <td class="label-cell">NAME:</td>
-                            <td colspan="2"><input type="text" id="engineerName2" placeholder="Enter name"></td>
+                            <td colspan="2">
+                                <div class="action-btn-group">
+                                    <input type="text" id="engineerName2" placeholder="Enter name">
+                                    <button class="mini-action-btn btn-paste"
+                                        onclick="handlePasteAction('engineerName2', 'engName2Preview')">Paste</button>
+                                    <button class="mini-action-btn" onclick="triggerCamera('engName2Cam')"><i
+                                            class="fas fa-camera"></i></button>
+                                    <button class="mini-action-btn" onclick="triggerUpload('engName2Up')"><i
+                                            class="fas fa-upload"></i></button>
+                                </div>
+                                <input type="file" id="engName2Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'engName2Preview')">
+                                <input type="file" id="engName2Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'engName2Preview')">
+                                <div id="engName2Preview" class="preview-container"><img src="" class="preview-img">
+                                </div>
+                            </td>
                             <td class="label-cell">NAME:</td>
-                            <td colspan="2"><input type="text" id="customerName2" placeholder="Enter name"></td>
+                            <td colspan="2">
+                                <div class="action-btn-group">
+                                    <input type="text" id="customerName2" placeholder="Enter name">
+                                    <button class="mini-action-btn btn-paste"
+                                        onclick="handlePasteAction('customerName2', 'custName2Preview')">Paste</button>
+                                    <button class="mini-action-btn" onclick="triggerCamera('custName2Cam')"><i
+                                            class="fas fa-camera"></i></button>
+                                    <button class="mini-action-btn" onclick="triggerUpload('custName2Up')"><i
+                                            class="fas fa-upload"></i></button>
+                                </div>
+                                <input type="file" id="custName2Cam" class="hidden-file-input" accept="image/*"
+                                    capture="environment" onchange="handleFileSelect(event, 'custName2Preview')">
+                                <input type="file" id="custName2Up" class="hidden-file-input" accept="image/*"
+                                    onchange="handleFileSelect(event, 'custName2Preview')">
+                                <div id="custName2Preview" class="preview-container"><img src="" class="preview-img">
+                                </div>
+                            </td>
                         </tr>
 
                         <!-- Date Row -->
@@ -1555,6 +1747,67 @@
     <script>
         // No additional initialization needed here for modal logic as it's moved to index.html
 
+
+        // Camera and Upload Functions
+        function triggerCamera(inputId) {
+            document.getElementById(inputId).click();
+        }
+
+        function triggerUpload(inputId) {
+            document.getElementById(inputId).click();
+        }
+
+        function handleFileSelect(event, previewId) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const previewContainer = document.getElementById(previewId);
+                    const previewImg = previewContainer.querySelector('img');
+                    previewImg.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function handlePasteAction(inputId, previewId) {
+            alert("Please focus the input field and press Ctrl+V to paste a photo.");
+            document.getElementById(inputId).focus();
+        }
+
+        // Global Paste Event Listener for Photos
+        document.addEventListener('paste', function (event) {
+            const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+            let targetId = event.target.id;
+
+            // Check if current focused element is one of our target inputs
+            if (!targetId || !targetId.includes('Name')) return;
+
+            // Find the corresponding preview container
+            let previewId = '';
+            if (targetId === 'engineerName1') previewId = 'engName1Preview';
+            else if (targetId === 'customerName1') previewId = 'custName1Preview';
+            else if (targetId === 'engineerName2') previewId = 'engName2Preview';
+            else if (targetId === 'customerName2') previewId = 'custName2Preview';
+
+            if (!previewId) return;
+
+            for (let index in items) {
+                const item = items[index];
+                if (item.kind === 'file' && item.type.startsWith('image/')) {
+                    const blob = item.getAsFile();
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const previewContainer = document.getElementById(previewId);
+                        const previewImg = previewContainer.querySelector('img');
+                        previewImg.src = e.target.result;
+                        previewContainer.style.display = 'block';
+                    };
+                    reader.readAsDataURL(blob);
+                }
+            }
+        });
 
         // ============================================
         // Form Management Functions
