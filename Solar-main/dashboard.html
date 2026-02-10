@@ -204,8 +204,6 @@
         .report-form .label-cell {
             font-weight: bold;
             white-space: nowrap;
-            width: auto;
-            min-width: fit-content;
         }
 
         .report-form .checkbox-group {
@@ -272,6 +270,7 @@
         /* Serial Numbers Table Styles */
         .serial-form {
             width: 100%;
+            min-width: 1000px;
             max-width: 100%;
             border-collapse: collapse;
             font-family: 'Arial', sans-serif;
@@ -279,6 +278,7 @@
             background: #fff;
             border: 2px solid #000;
             font-weight: 600;
+            table-layout: fixed;
         }
 
         .serial-form th,
@@ -317,14 +317,89 @@
             text-align: center;
         }
 
-        .serial-form .label-cell {
-            font-weight: bold;
-            width: 150px;
+        /* INDEPENDENT LAYOUTS FOR SERIAL NUMBERS FORM */
+
+        /* TOP SECTION: Automatic widths for tight fit */
+        #serialNumbersFormTop {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: auto;
+            border: 2px solid #000;
+            margin-bottom: -2px;
+            /* Seamless overlap with bottom table */
         }
 
-        .serial-form .empty-row td {
-            min-height: 45px;
-            height: auto;
+        #serialNumbersFormTop td {
+            border: 1px solid #000;
+            padding: 8px 12px;
+        }
+
+        /* Question column: shrink to fit text */
+        #serialNumbersFormTop tr td:nth-child(1) {
+            width: 1%;
+            white-space: nowrap;
+            border-right: none !important;
+            padding-right: 0 !important;
+        }
+
+        /* Colon column: shrink to fit */
+        #serialNumbersFormTop tr td:nth-child(2) {
+            width: 1%;
+            border-left: none !important;
+            border-right: none !important;
+            padding: 8px 5px !important;
+            text-align: center;
+        }
+
+        /* QTY and NO columns: identical fixed sizes */
+        #serialNumbersFormTop tr td:nth-child(3),
+        #serialNumbersFormTop tr td:nth-child(4) {
+            width: 100px !important;
+            border-left: none !important;
+            text-align: left;
+        }
+
+        /* QTY and NO Inputs: Professional uniform sizing */
+        #serialNumbersFormTop input[placeholder="QTY"],
+        #serialNumbersFormTop input[placeholder="NO"] {
+            width: 80px !important;
+            border: 1px solid #ccc !important;
+            border-radius: 4px;
+            padding: 4px !important;
+            text-align: center;
+        }
+
+        /* Serial Label: tight fit */
+        #serialNumbersFormTop tr td:nth-child(5) {
+            width: 1%;
+            white-space: nowrap;
+        }
+
+        /* Serial Input: take remaining space */
+        #serialNumbersFormTop tr td:nth-child(6) {
+            width: auto;
+        }
+
+        /* BOTTOM SECTION: Strict 50/50 split for balance */
+        #serialNumbersFormBottom {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            border: 2px solid #000;
+        }
+
+        #serialNumbersFormBottom .empty-row td,
+        #serialNumbersFormBottom .section-header {
+            width: 50% !important;
+        }
+
+        /* Central divider reinforcement for batteries */
+        #serialNumbersFormBottom .empty-row td:first-child {
+            border-right: 2px solid #000;
+        }
+
+        .serial-form .label-cell {
+            font-weight: bold;
         }
 
         .serial-form .signature-cell {
@@ -335,187 +410,6 @@
             padding: 8px !important;
         }
 
-        /* Print Styles */
-        @media print {
-
-            /* Hide all website elements */
-            .preloader,
-            .mouse-cursor,
-            .scroll-up,
-            .fix-area,
-            .offcanvas__overlay,
-            .header-section-2,
-            .search-wrap,
-            .modal-overlay,
-            .dashboard-password-modal,
-            .dashboard-locked,
-            .dashboard-welcome,
-            .form-actions,
-            .form-divider,
-            .footer-section,
-            #header-sticky {
-                display: none !important;
-            }
-
-            /* Reset page margins and setup for portrait */
-            @page {
-                size: A4 portrait;
-                margin: 5mm;
-            }
-
-            /* Reset dashboard content for print */
-            .dashboard-content {
-                padding: 0 !important;
-                min-height: auto !important;
-                margin: 0 !important;
-                overflow: visible !important;
-                width: 100% !important;
-            }
-
-            .dashboard-unlocked {
-                display: block !important;
-                padding: 0 !important;
-            }
-
-            .service-report-container {
-                box-shadow: none !important;
-                padding: 0 !important;
-                margin: 0 0 5mm 0 !important;
-                page-break-after: always;
-                width: 100% !important;
-                max-width: 100% !important;
-                overflow: visible !important;
-            }
-
-            .service-report-container:last-of-type {
-                page-break-after: auto;
-            }
-
-            .report-form,
-            .serial-form {
-                page-break-inside: avoid;
-                width: 100% !important;
-                max-width: 100% !important;
-                font-size: 9px !important;
-                margin: 0 !important;
-                border-collapse: collapse !important;
-                table-layout: auto !important;
-                /* Changed from fixed to auto to prevent cut-off */
-            }
-
-            .report-form th,
-            .report-form td,
-            .serial-form th,
-            .serial-form td {
-                padding: 1px 2px !important;
-                font-size: 9px !important;
-                /* Increased from 7px */
-                border: 1px solid #000 !important;
-                word-wrap: break-word !important;
-                overflow: hidden !important;
-            }
-
-            .report-form input,
-            .report-form textarea,
-            .serial-form input,
-            .serial-form textarea {
-                font-size: 9px !important;
-                /* Increased from 7px */
-                padding: 0px 1px !important;
-                width: 100% !important;
-                box-sizing: border-box !important;
-            }
-
-            .report-form .company-name {
-                font-size: 14px !important;
-                font-weight: bold !important;
-            }
-
-            .report-form .company-address,
-            .report-form .company-contact {
-                font-size: 9px !important;
-                /* Increased from 7px */
-            }
-
-            body {
-                background: #fff !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                overflow: visible !important;
-                width: 100% !important;
-            }
-
-            .container {
-                max-width: 100% !important;
-                width: 100% !important;
-                padding: 0 !important;
-                margin: 0 !important;
-                overflow: visible !important;
-            }
-
-            /* Ensure logo and header cells fit properly */
-            .report-form .logo-cell {
-                width: 100px !important;
-                padding: 2px !important;
-            }
-
-            .report-form .logo-cell img {
-                max-width: 90px !important;
-                height: auto !important;
-                display: block !important;
-                margin: 0 auto !important;
-            }
-
-            /* Optimize label cells */
-            .report-form .label-cell,
-            .serial-form .label-cell {
-                white-space: nowrap !important;
-                font-size: 8px !important;
-                /* Increased from 6px */
-                padding: 1px !important;
-            }
-
-            /* Optimize section headers */
-            .report-form .section-header,
-            .serial-form .section-header {
-                font-size: 9px !important;
-                /* Increased from 7px */
-                font-weight: bold !important;
-                padding: 1px !important;
-            }
-
-            /* Optimize checkboxes */
-            .report-form input[type="checkbox"],
-            .serial-form input[type="checkbox"] {
-                width: 10px !important;
-                height: 10px !important;
-            }
-
-            /* Hide new action buttons in print */
-            .action-btn-group button,
-            .remove-photo-btn {
-                display: none !important;
-            }
-
-            .preview-container {
-                display: block !important;
-                margin-top: 5px !important;
-            }
-
-            .preview-img {
-                max-width: 300px !important;
-                max-height: 250px !important;
-                border: 1px solid #000 !important;
-                object-fit: contain !important;
-            }
-
-            /* Hide placeholders in print */
-            input::placeholder,
-            textarea::placeholder {
-                color: transparent !important;
-                opacity: 0 !important;
-            }
-        }
 
         /* Form action buttons */
         .form-actions {
@@ -813,13 +707,13 @@
             border-radius: 4px;
             background: #fff !important;
             min-height: 40px;
+            min-width: 200px;
             height: auto;
             resize: none;
             overflow: hidden;
             word-wrap: break-word;
             display: block;
             field-sizing: content;
-            /* Modern browsers */
         }
 
         .compact-upload-controls {
@@ -880,10 +774,360 @@
             position: absolute;
             z-index: 10;
         }
+
+        .photo-number-placeholder {
+            position: absolute;
+            font-size: 14px;
+            font-weight: bold;
+            color: #ccc;
+            z-index: 1;
+        }
+
+        @media print {
+            .photo-number-placeholder {
+                color: #888 !important;
+                font-size: 12px !important;
+            }
+        }
+
+        /* Print Styles */
+        /* Watermark Styles - Hidden on screen, shown in print */
+        .print-watermark {
+            display: none;
+        }
+
+        @media print {
+            .print-watermark {
+                display: flex !important;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                justify-content: center;
+                align-items: center;
+                z-index: -1000;
+                pointer-events: none;
+                opacity: 0.20 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .print-watermark img {
+                width: 70%;
+                max-width: 600px;
+                transform: rotate(0deg);
+                filter: grayscale(100%);
+            }
+
+
+            /* Hide all website elements */
+            .preloader,
+            .mouse-cursor,
+            .scroll-up,
+            .fix-area,
+            .offcanvas__overlay,
+            .header-section-2,
+            .search-wrap,
+            .modal-overlay,
+            .dashboard-password-modal,
+            .dashboard-locked,
+            .dashboard-welcome,
+            .form-actions,
+            .form-divider,
+            .footer-section,
+            #header-sticky {
+                display: none !important;
+            }
+
+            /* Reset page margins and setup for portrait */
+            @page {
+                size: A4 portrait;
+                margin: 3mm;
+            }
+
+            /* Reset dashboard content for print */
+            .dashboard-content,
+            .dashboard-body,
+            .dashboard-unlocked {
+                display: block !important;
+                background: transparent !important;
+                background-color: transparent !important;
+                padding: 0 !important;
+                min-height: auto !important;
+                margin: 0 !important;
+                overflow: visible !important;
+                width: 100% !important;
+            }
+
+            .service-report-container {
+                background: transparent !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin: 0 0 2mm 0 !important;
+                page-break-after: always;
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow: visible !important;
+            }
+
+            .service-report-container:last-of-type {
+                page-break-after: auto;
+            }
+
+            .report-form,
+            .serial-form,
+            #serialNumbersFormTop,
+            #serialNumbersFormBottom {
+                background: transparent !important;
+                page-break-inside: avoid;
+                width: 100% !important;
+                max-width: 100% !important;
+                font-size: 10px !important;
+                margin: 0 !important;
+                border-collapse: collapse !important;
+            }
+
+            #serialNumbersFormBottom {
+                table-layout: fixed !important;
+            }
+
+            #serialNumbersFormTop {
+                table-layout: auto !important;
+            }
+
+            .report-form th,
+            .report-form td,
+            .serial-form th,
+            .serial-form td {
+                background: transparent !important;
+                padding: 1px 2px !important;
+                font-size: 9px !important;
+                border: 1px solid #000 !important;
+                word-wrap: break-word !important;
+                overflow: hidden !important;
+            }
+
+            .report-form input,
+            .report-form textarea,
+            .serial-form input,
+            .serial-form textarea {
+                background: transparent !important;
+                border: none !important;
+                font-size: 11px !important;
+                padding: 0px 1px !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+                min-height: auto !important;
+            }
+
+            .report-form .company-name {
+                font-size: 24px !important;
+                font-weight: 800 !important;
+                text-transform: uppercase;
+            }
+
+            .report-form .company-address,
+            .report-form .company-contact,
+            .report-form .gstin-row td {
+                font-size: 13px !important;
+                font-weight: 700 !important;
+                color: #000 !important;
+            }
+
+            body {
+                background: transparent !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
+                width: 100% !important;
+            }
+
+            .container {
+                max-width: 100% !important;
+                width: 100% !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                overflow: visible !important;
+            }
+
+            /* Ensure logo and header cells fit properly */
+            .report-form .logo-cell {
+                width: 130px !important;
+                padding: 1px !important;
+            }
+
+            .report-form .logo-cell img {
+                max-width: 125px !important;
+                height: auto !important;
+                display: block !important;
+                margin: 0 auto !important;
+            }
+
+            /* Optimize label cells */
+            .report-form .label-cell,
+            .serial-form .label-cell {
+                white-space: nowrap !important;
+                font-size: 10px !important;
+                /* Increased from 6px */
+                padding: 1px !important;
+            }
+
+            /* Optimize section headers */
+            .report-form .section-header,
+            .serial-form .section-header {
+                background: transparent !important;
+                font-size: 12px !important;
+                font-weight: 800 !important;
+                padding: 2px 1px !important;
+                text-transform: uppercase;
+            }
+
+
+            /* Optimize checkboxes */
+            .report-form input[type="checkbox"],
+            .serial-form input[type="checkbox"] {
+                width: 10px !important;
+                height: 10px !important;
+            }
+
+            /* Hide new action buttons in print */
+            .action-btn-group button,
+            .remove-photo-btn,
+            .passport-photo-box span {
+                display: none !important;
+            }
+
+            .passport-photo-box {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+
+            .preview-container {
+                display: flex !important;
+                justify-content: center;
+                align-items: center;
+                margin-top: 5px !important;
+                background: transparent !important;
+                border: none !important;
+                min-height: 0 !important;
+                min-width: 0 !important;
+                box-shadow: none !important;
+            }
+
+            .preview-img {
+                max-width: 300px !important;
+                max-height: 250px !important;
+                border: 1px solid #000 !important;
+                object-fit: contain !important;
+                /* Only display if it has the active class */
+                display: none;
+            }
+
+            .preview-img.active {
+                display: block !important;
+            }
+
+            /* FORCE COMPLETE TRANSPARENCY - TARGET ALL CONTAINER COLLECTIONS */
+            .service-report-container,
+            .report-form,
+            .serial-form,
+            .report-form td,
+            .report-form th,
+            .serial-form td,
+            .serial-form th,
+            .serial-field-wrapper,
+            .preview-container,
+            .passport-photo-box,
+            .compact-upload-controls {
+                background: transparent !important;
+                background-color: transparent !important;
+                border-color: #000 !important;
+            }
+
+            /* TARGET ALL TEXT INPUTS AND TEXTAREAS */
+            input[type="text"],
+            input[type="number"],
+            input[type="date"],
+            textarea,
+            .report-form input:not([type="checkbox"]),
+            .report-form textarea,
+            .serial-form input:not([type="checkbox"]),
+            .serial-form textarea,
+            .serial-field-wrapper input:not([type="checkbox"]),
+            .serial-field-wrapper textarea {
+                background: transparent !important;
+                background-color: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                appearance: none;
+                -webkit-appearance: none;
+            }
+
+            /* ENSURE CHECKBOXES ARE VISIBLE */
+            input[type="checkbox"] {
+                appearance: auto !important;
+                -webkit-appearance: checkbox !important;
+                width: 12px !important;
+                height: 12px !important;
+                border: 1px solid #000 !important;
+                background: transparent !important;
+                display: inline-block !important;
+                visibility: visible !important;
+                opacity: 1 !important;
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+
+            /* Ensure placeholder text is hidden */
+            input::placeholder,
+            textarea::placeholder {
+                color: transparent !important;
+                opacity: 0 !important;
+            }
+
+            .print-footer {
+                display: block !important;
+                position: fixed;
+                bottom: 5mm;
+                right: 5mm;
+                font-size: 10px !important;
+                color: #000 !important;
+                font-weight: 800 !important;
+                z-index: 1000;
+            }
+
+            .print-footer .page-number:after {
+                content: counter(page);
+            }
+
+            /* Tighten specific rows */
+            .signature-cell {
+                min-height: 40px !important;
+                padding: 2px !important;
+            }
+
+            .certification-row td {
+                padding: 4px !important;
+            }
+        }
+
+        /* Screen only - hide print footer */
+        .print-footer {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
+    <div class="print-watermark">
+        <img src="assets/img/logo/MN LOGO.svg" alt="MN Enterprises Watermark">
+    </div>
+
+    <div class="print-footer">
+        <span id="printMneLabel">MNE: </span><span id="printMneValue"></span> | Page <span class="page-number"></span>
+    </div>
 
     <!-- Preloader Start -->
     <div id="preloader" class="preloader">
@@ -1345,20 +1589,21 @@
                         <!-- Nature of Complaint Row -->
                         <tr>
                             <td class="label-cell" colspan="2">NATURE OF COMPLAINT:</td>
-                            <td colspan="6"><textarea id="natureOfComplaint"
+                            <td colspan="6"><textarea id="natureOfComplaint" rows="2"
                                     placeholder="Enter nature of complaint"></textarea></td>
                         </tr>
 
                         <!-- Action Taken Row -->
                         <tr>
                             <td class="label-cell" colspan="2">ACTION TAKEN:</td>
-                            <td colspan="6"><textarea id="actionTaken" placeholder="Enter action taken"></textarea></td>
+                            <td colspan="6"><textarea id="actionTaken" rows="2"
+                                    placeholder="Enter action taken"></textarea></td>
                         </tr>
 
                         <!-- Spares Replaced Row -->
                         <tr>
                             <td class="label-cell" colspan="2">SPARES REPLACED IF ANY:</td>
-                            <td colspan="6"><textarea id="sparesReplaced"
+                            <td colspan="6"><textarea id="sparesReplaced" rows="2"
                                     placeholder="Enter spares replaced"></textarea></td>
                         </tr>
 
@@ -1429,7 +1674,7 @@
                         </tr>
 
                         <!-- Certification Row -->
-                        <tr>
+                        <tr class="certification-row">
                             <td colspan="8" style="text-align:center; font-style:italic; padding:15px;">
                                 Certified that the above equipment are working in good condition and to our satisfaction
                             </td>
@@ -1521,7 +1766,7 @@
                      FORM 2: Serial Numbers
                      ============================================ -->
                 <div class="service-report-container">
-                    <table class="serial-form" id="serialNumbersForm">
+                    <table class="serial-form" id="serialNumbersFormTop">
                         <!-- Serial Numbers Header -->
                         <tr>
                             <td class="section-header" colspan="6">SERIAL NUMBERS</td>
@@ -1669,7 +1914,9 @@
                                 </div>
                             </td>
                         </tr>
+                    </table>
 
+                    <table class="serial-form" id="serialNumbersFormBottom">
                         <!-- Batteries/Panel Header Row -->
                         <tr>
                             <td class="section-header" colspan="3">BATTERIES/PANEL BATCH CODE / SERIAL Nos.</td>
@@ -1680,9 +1927,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery1" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery1" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">1</span>
                                             <img id="batteryPreview1" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove1"
                                                 onclick="removeImage(event, 'batteryPreview1', 'batteryImage1', null, 'batteryRemove1')">&times;</button>
@@ -1706,9 +1954,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery2" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery2" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">2</span>
                                             <img id="batteryPreview2" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove2"
                                                 onclick="removeImage(event, 'batteryPreview2', 'batteryImage2', null, 'batteryRemove2')">&times;</button>
@@ -1734,9 +1983,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery3" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery3" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">3</span>
                                             <img id="batteryPreview3" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove3"
                                                 onclick="removeImage(event, 'batteryPreview3', 'batteryImage3', null, 'batteryRemove3')">&times;</button>
@@ -1760,9 +2010,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery4" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery4" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">4</span>
                                             <img id="batteryPreview4" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove4"
                                                 onclick="removeImage(event, 'batteryPreview4', 'batteryImage4', null, 'batteryRemove4')">&times;</button>
@@ -1788,9 +2039,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery5" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery5" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">5</span>
                                             <img id="batteryPreview5" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove5"
                                                 onclick="removeImage(event, 'batteryPreview5', 'batteryImage5', null, 'batteryRemove5')">&times;</button>
@@ -1814,9 +2066,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery6" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery6" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">6</span>
                                             <img id="batteryPreview6" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove6"
                                                 onclick="removeImage(event, 'batteryPreview6', 'batteryImage6', null, 'batteryRemove6')">&times;</button>
@@ -1842,9 +2095,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery7" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery7" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">7</span>
                                             <img id="batteryPreview7" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove7"
                                                 onclick="removeImage(event, 'batteryPreview7', 'batteryImage7', null, 'batteryRemove7')">&times;</button>
@@ -1868,9 +2122,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery8" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery8" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">8</span>
                                             <img id="batteryPreview8" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove8"
                                                 onclick="removeImage(event, 'batteryPreview8', 'batteryImage8', null, 'batteryRemove8')">&times;</button>
@@ -1896,9 +2151,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery9" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery9" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">9</span>
                                             <img id="batteryPreview9" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove9"
                                                 onclick="removeImage(event, 'batteryPreview9', 'batteryImage9', null, 'batteryRemove9')">&times;</button>
@@ -1922,9 +2178,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery10" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery10" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">10</span>
                                             <img id="batteryPreview10" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove10"
                                                 onclick="removeImage(event, 'batteryPreview10', 'batteryImage10', null, 'batteryRemove10')">&times;</button>
@@ -1950,9 +2207,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery11" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery11" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">11</span>
                                             <img id="batteryPreview11" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove11"
                                                 onclick="removeImage(event, 'batteryPreview11', 'batteryImage11', null, 'batteryRemove11')">&times;</button>
@@ -1976,9 +2234,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery12" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery12" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">12</span>
                                             <img id="batteryPreview12" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove12"
                                                 onclick="removeImage(event, 'batteryPreview12', 'batteryImage12', null, 'batteryRemove12')">&times;</button>
@@ -2004,9 +2263,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery13" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery13" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">13</span>
                                             <img id="batteryPreview13" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove13"
                                                 onclick="removeImage(event, 'batteryPreview13', 'batteryImage13', null, 'batteryRemove13')">&times;</button>
@@ -2030,9 +2290,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery14" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery14" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">14</span>
                                             <img id="batteryPreview14" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove14"
                                                 onclick="removeImage(event, 'batteryPreview14', 'batteryImage14', null, 'batteryRemove14')">&times;</button>
@@ -2058,9 +2319,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery15" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery15" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">15</span>
                                             <img id="batteryPreview15" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove15"
                                                 onclick="removeImage(event, 'batteryPreview15', 'batteryImage15', null, 'batteryRemove15')">&times;</button>
@@ -2084,9 +2346,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery16" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery16" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">16</span>
                                             <img id="batteryPreview16" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove16"
                                                 onclick="removeImage(event, 'batteryPreview16', 'batteryImage16', null, 'batteryRemove16')">&times;</button>
@@ -2112,9 +2375,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery17" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery17" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">17</span>
                                             <img id="batteryPreview17" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove17"
                                                 onclick="removeImage(event, 'batteryPreview17', 'batteryImage17', null, 'batteryRemove17')">&times;</button>
@@ -2138,9 +2402,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery18" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery18" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">18</span>
                                             <img id="batteryPreview18" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove18"
                                                 onclick="removeImage(event, 'batteryPreview18', 'batteryImage18', null, 'batteryRemove18')">&times;</button>
@@ -2166,9 +2431,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery19" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery19" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">19</span>
                                             <img id="batteryPreview19" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove19"
                                                 onclick="removeImage(event, 'batteryPreview19', 'batteryImage19', null, 'batteryRemove19')">&times;</button>
@@ -2192,9 +2458,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery20" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery20" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">20</span>
                                             <img id="batteryPreview20" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove20"
                                                 onclick="removeImage(event, 'batteryPreview20', 'batteryImage20', null, 'batteryRemove20')">&times;</button>
@@ -2220,9 +2487,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery21" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery21" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">21</span>
                                             <img id="batteryPreview21" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove21"
                                                 onclick="removeImage(event, 'batteryPreview21', 'batteryImage21', null, 'batteryRemove21')">&times;</button>
@@ -2246,9 +2514,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery22" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery22" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">22</span>
                                             <img id="batteryPreview22" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove22"
                                                 onclick="removeImage(event, 'batteryPreview22', 'batteryImage22', null, 'batteryRemove22')">&times;</button>
@@ -2274,9 +2543,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery23" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery23" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">23</span>
                                             <img id="batteryPreview23" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove23"
                                                 onclick="removeImage(event, 'batteryPreview23', 'batteryImage23', null, 'batteryRemove23')">&times;</button>
@@ -2300,9 +2570,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery24" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery24" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">24</span>
                                             <img id="batteryPreview24" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove24"
                                                 onclick="removeImage(event, 'batteryPreview24', 'batteryImage24', null, 'batteryRemove24')">&times;</button>
@@ -2328,9 +2599,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery25" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery25" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">25</span>
                                             <img id="batteryPreview25" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove25"
                                                 onclick="removeImage(event, 'batteryPreview25', 'batteryImage25', null, 'batteryRemove25')">&times;</button>
@@ -2354,9 +2626,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery26" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery26" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">26</span>
                                             <img id="batteryPreview26" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove26"
                                                 onclick="removeImage(event, 'batteryPreview26', 'batteryImage26', null, 'batteryRemove26')">&times;</button>
@@ -2382,9 +2655,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery27" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery27" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">27</span>
                                             <img id="batteryPreview27" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove27"
                                                 onclick="removeImage(event, 'batteryPreview27', 'batteryImage27', null, 'batteryRemove27')">&times;</button>
@@ -2408,9 +2682,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery28" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery28" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">28</span>
                                             <img id="batteryPreview28" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove28"
                                                 onclick="removeImage(event, 'batteryPreview28', 'batteryImage28', null, 'batteryRemove28')">&times;</button>
@@ -2436,9 +2711,10 @@
                         <tr class="empty-row">
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery29" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery29" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">29</span>
                                             <img id="batteryPreview29" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove29"
                                                 onclick="removeImage(event, 'batteryPreview29', 'batteryImage29', null, 'batteryRemove29')">&times;</button>
@@ -2462,9 +2738,10 @@
                             </td>
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
-                                    <textarea id="battery30" placeholder="Enter batch code/serial" rows="1"></textarea>
+                                    <textarea id="battery30" placeholder="" rows="1"></textarea>
                                     <div class="compact-upload-controls">
                                         <div class="preview-container">
+                                            <span class="photo-number-placeholder">30</span>
                                             <img id="batteryPreview30" class="preview-img">
                                             <button class="remove-photo-btn" id="batteryRemove30"
                                                 onclick="removeImage(event, 'batteryPreview30', 'batteryImage30', null, 'batteryRemove30')">&times;</button>
@@ -3297,6 +3574,27 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function () {
             loadSavedData();
+
+            // Sync MNE No for print
+            const mneInput = document.getElementById('mneNo');
+            const printMneValue = document.getElementById('printMneValue');
+            const printMneLabel = document.getElementById('printMneLabel');
+
+            function updatePrintMne() {
+                const val = mneInput.value.trim();
+                printMneValue.textContent = val;
+                // If it's empty, hide the label too
+                if (val === '') {
+                    printMneLabel.style.display = 'none';
+                } else {
+                    printMneLabel.style.display = 'inline';
+                }
+            }
+
+            if (mneInput && printMneValue) {
+                mneInput.addEventListener('input', updatePrintMne);
+                updatePrintMne(); // Initial sync
+            }
 
             // Logout functionalitiy
             document.getElementById('dashboardLogout').addEventListener('click', function () {
