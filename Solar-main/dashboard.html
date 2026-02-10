@@ -178,14 +178,16 @@
         }
 
         .report-form .logo-cell {
-            width: 100px;
+            width: 150px;
             text-align: center;
             vertical-align: middle;
         }
 
         .report-form .logo-cell img {
-            max-width: 80px;
+            max-width: 170px;
             height: auto;
+            display: block;
+            margin: 0 auto;
         }
 
         .report-form .gstin-row td {
@@ -453,13 +455,15 @@
 
             /* Ensure logo and header cells fit properly */
             .report-form .logo-cell {
-                width: 60px !important;
+                width: 100px !important;
                 padding: 2px !important;
             }
 
             .report-form .logo-cell img {
-                max-width: 55px !important;
+                max-width: 90px !important;
                 height: auto !important;
+                display: block !important;
+                margin: 0 auto !important;
             }
 
             /* Optimize label cells */
@@ -1331,6 +1335,10 @@
                                     INVERTER</label>
                                 <label style="margin-left:10px;"><input type="checkbox" id="chargeController"> CHARGE
                                     CONTROLLER</label>
+                                <label style="margin-left:10px;"><input type="checkbox" id="UPS"> UPS</label>
+                                <label style="margin-left:10px;"><input type="checkbox" id="servoStabilizer"> SERVO
+                                    STABILIZER</label>
+                                <label style="margin-left:10px;"><input type="checkbox" id="batteries"> BATTRIES</label>
                             </td>
                         </tr>
 
@@ -1493,59 +1501,7 @@
                             <td colspan="3"><input type="text" id="customerName1" placeholder="Enter name"></td>
                         </tr>
 
-                        <!-- Photo Row -->
-                        <tr>
-                            <td class="label-cell">PHOTO:</td>
-                            <td colspan="3" class="photo-cell">
-                                <div class="upload-controls"
-                                    style="flex-direction: row; align-items: center; justify-content: center; gap: 10px;">
-                                    <div class="action-btn-group">
-                                        <button type="button" class="action-btn"
-                                            onclick="triggerFileInput('engineerPhotoInput1')" title="Upload">
-                                            <i class="fas fa-upload"></i> Upload
-                                        </button>
-                                        <button type="button" class="action-btn"
-                                            onclick="triggerCamera('engineerPhotoPreview1', 'engineerPhoto1', 'engineerPhotoRemove1')"
-                                            title="Camera">
-                                            <i class="fas fa-camera"></i> Camera
-                                        </button>
-                                    </div>
-                                    <div class="passport-photo-box">
-                                        <img id="engineerPhotoPreview1" class="preview-img" style="object-fit: cover;">
-                                        <button class="remove-photo-btn" id="engineerPhotoRemove1"
-                                            onclick="removeImage(event, 'engineerPhotoPreview1', 'engineerPhoto1', null, 'engineerPhotoRemove1')">&times;</button>
-                                        <input type="hidden" id="engineerPhoto1">
-                                    </div>
-                                    <input type="file" id="engineerPhotoInput1" style="display:none" accept="image/*"
-                                        onchange="handleImageUpload(event, 'engineerPhotoPreview1', 'engineerPhoto1', null, 'engineerPhotoRemove1')">
-                                </div>
-                            </td>
-                            <td class="label-cell">PHOTO:</td>
-                            <td colspan="3" class="photo-cell">
-                                <div class="upload-controls"
-                                    style="flex-direction: row; align-items: center; justify-content: center; gap: 10px;">
-                                    <div class="action-btn-group">
-                                        <button type="button" class="action-btn"
-                                            onclick="triggerFileInput('customerPhotoInput1')" title="Upload">
-                                            <i class="fas fa-upload"></i> Upload
-                                        </button>
-                                        <button type="button" class="action-btn"
-                                            onclick="triggerCamera('customerPhotoPreview1', 'customerPhoto1', 'customerPhotoRemove1')"
-                                            title="Camera">
-                                            <i class="fas fa-camera"></i> Camera
-                                        </button>
-                                    </div>
-                                    <div class="passport-photo-box">
-                                        <img id="customerPhotoPreview1" class="preview-img" style="object-fit: cover;">
-                                        <button class="remove-photo-btn" id="customerPhotoRemove1"
-                                            onclick="removeImage(event, 'customerPhotoPreview1', 'customerPhoto1', null, 'customerPhotoRemove1')">&times;</button>
-                                        <input type="hidden" id="customerPhoto1">
-                                    </div>
-                                    <input type="file" id="customerPhotoInput1" style="display:none" accept="image/*"
-                                        onchange="handleImageUpload(event, 'customerPhotoPreview1', 'customerPhoto1', null, 'customerPhotoRemove1')">
-                                </div>
-                            </td>
-                        </tr>
+
 
                         <!-- Date Row -->
                         <tr>
