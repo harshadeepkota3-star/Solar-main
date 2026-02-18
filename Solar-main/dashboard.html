@@ -843,7 +843,7 @@
             /* Reset page margins and setup for portrait */
             @page {
                 size: A4 portrait;
-                margin: 3mm;
+                margin: 10mm;
             }
 
             /* Reset dashboard content for print */
@@ -858,6 +858,7 @@
                 margin: 0 !important;
                 overflow: visible !important;
                 width: 100% !important;
+                max-width: 100% !important;
             }
 
             .service-report-container {
@@ -883,13 +884,15 @@
                 page-break-inside: avoid;
                 width: 100% !important;
                 max-width: 100% !important;
+                min-width: 0 !important;
                 font-size: 10px !important;
                 margin: 0 !important;
                 border-collapse: collapse !important;
+                table-layout: auto !important;
             }
 
             #serialNumbersFormBottom {
-                table-layout: fixed !important;
+                table-layout: auto !important;
             }
 
             #serialNumbersFormTop {
@@ -905,7 +908,7 @@
                 font-size: 9px !important;
                 border: 1px solid #000 !important;
                 word-wrap: break-word !important;
-                overflow: hidden !important;
+                overflow: visible !important;
             }
 
             .report-form input,
@@ -1002,6 +1005,9 @@
                 background: transparent !important;
                 border: none !important;
                 box-shadow: none !important;
+                width: auto !important;
+                height: auto !important;
+                max-width: 100% !important;
             }
 
             .preview-container {
@@ -1017,8 +1023,17 @@
             }
 
             .preview-img {
-                max-width: 300px !important;
-                max-height: 250px !important;
+                max-width: 100% !important;
+                max-height: 200px !important;
+                border: 1px solid #000 !important;
+                object-fit: contain !important;
+                /* Only display if it has the active class */
+                display: none;
+            }
+
+            .preview-img {
+                max-width: 100% !important;
+                max-height: 200px !important;
                 border: 1px solid #000 !important;
                 object-fit: contain !important;
                 /* Only display if it has the active class */
@@ -1027,6 +1042,17 @@
 
             .preview-img.active {
                 display: block !important;
+            }
+
+            .photo-cell {
+                height: auto !important;
+                min-height: 0 !important;
+                padding: 5px !important;
+            }
+
+            .upload-controls {
+                height: auto !important;
+                min-height: 0 !important;
             }
 
             /* FORCE COMPLETE TRANSPARENCY - TARGET ALL CONTAINER COLLECTIONS */
