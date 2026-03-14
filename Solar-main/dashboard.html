@@ -705,8 +705,8 @@
 
         .serial-field-wrapper {
             display: flex;
-            align-items: flex-start;
-            gap: 12px;
+            flex-direction: column;
+            gap: 8px;
             width: 100%;
             padding: 5px 0;
             min-height: 50px;
@@ -714,14 +714,13 @@
 
         .serial-field-wrapper input[type="text"],
         .serial-field-wrapper textarea {
-            flex: 1;
+            width: 100%;
             padding: 8px 12px !important;
             font-size: 15px !important;
             border: 1px solid #ccc !important;
             border-radius: 4px;
             background: #fff !important;
             min-height: 40px;
-            min-width: 200px;
             height: auto;
             resize: none;
             overflow: hidden;
@@ -738,8 +737,8 @@
 
         .compact-upload-controls {
             display: flex;
-            align-items: center;
-            gap: 8px;
+            align-items: flex-start;
+            gap: 12px;
             flex-shrink: 0;
         }
 
@@ -796,11 +795,12 @@
         }
 
         .photo-number-placeholder {
-            position: absolute;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: bold;
-            color: #ccc;
-            z-index: 1;
+            color: #333;
+            min-width: 25px;
+            padding-top: 10px;
+            flex-shrink: 0;
         }
 
         @media print {
@@ -942,6 +942,14 @@
                 width: 100% !important;
                 box-sizing: border-box !important;
                 min-height: auto !important;
+                height: auto !important; /* Forces height to fit content in print */
+            }
+
+            .preview-container,
+            .compact-upload-controls,
+            .serial-field-wrapper {
+                min-height: auto !important;
+                height: auto !important;
             }
 
             .report-form .company-name {
@@ -1479,14 +1487,12 @@
                             </td>
                             <td class="label-cell">UNIT SL No:</td>
                             <td colspan="3">
-                                <div
-                                    style="display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 5px 0;">
+                                <div style="display: flex; align-items: flex-start; gap: 10px; width: 100%; padding: 5px 0;">
                                     <textarea id="unitSlNo" placeholder="Enter unit SL no" class="adaptive-field"
-                                        style="flex: 1; min-height: 40px; resize: none; overflow: hidden; border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; font-weight: 600;"
+                                        style="flex: 1; min-height: 40px; resize: none; overflow: hidden; border: 1px solid #ccc; border-radius: 4px; padding: 8px 12px; font-weight: 600; width: auto;"
                                         oninput="autoResize(this)"></textarea>
-                                    <div class="upload-controls" style="width: auto;">
-                                        <div class="preview-container"
-                                            style="min-width: 80px; min-height: 40px; height: auto; max-width: 300px; max-height: 250px;">
+                                    <div class="compact-upload-controls" style="width: auto; flex-shrink: 0;">
+                                        <div class="preview-container" style="border: 1px solid #ddd; border-radius: 4px; padding: 5px; background: #f9f9f9; min-width: 120px; width: fit-content; min-height: 40px;">
                                             <img id="unitSlNoPreview" class="preview-img">
                                             <button class="remove-photo-btn" id="unitSlNoRemove"
                                                 onclick="removeImage(event, 'unitSlNoPreview', 'unitSlNoImage', null, 'unitSlNoRemove')">&times;</button>
@@ -1974,14 +1980,14 @@
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
                                     <textarea id="battery1" placeholder="" rows="1"></textarea>
-                                    <div class="compact-upload-controls">
-                                        <div class="preview-container">
-                                            <span class="photo-number-placeholder">1</span>
-                                            <img id="batteryPreview1" class="preview-img">
-                                            <button class="remove-photo-btn" id="batteryRemove1"
-                                                onclick="removeImage(event, 'batteryPreview1', 'batteryImage1', null, 'batteryRemove1')">&times;</button>
-                                            <input type="hidden" id="batteryImage1">
-                                        </div>
+                                        <div class="compact-upload-controls">
+                                            <span class="photo-number-placeholder">1.</span>
+                                            <div class="preview-container">
+                                                <img id="batteryPreview1" class="preview-img">
+                                                <button class="remove-photo-btn" id="batteryRemove1"
+                                                    onclick="removeImage(event, 'batteryPreview1', 'batteryImage1', null, 'batteryRemove1')">&times;</button>
+                                                <input type="hidden" id="batteryImage1">
+                                            </div>
                                         <div class="action-btn-group">
                                             <button type="button" class="action-btn"
                                                 onclick="triggerFileInput('batteryInput1')" title="Upload">
@@ -2001,14 +2007,14 @@
                             <td colspan="3">
                                 <div class="serial-field-wrapper">
                                     <textarea id="battery2" placeholder="" rows="1"></textarea>
-                                    <div class="compact-upload-controls">
-                                        <div class="preview-container">
-                                            <span class="photo-number-placeholder">2</span>
-                                            <img id="batteryPreview2" class="preview-img">
-                                            <button class="remove-photo-btn" id="batteryRemove2"
-                                                onclick="removeImage(event, 'batteryPreview2', 'batteryImage2', null, 'batteryRemove2')">&times;</button>
-                                            <input type="hidden" id="batteryImage2">
-                                        </div>
+                                        <div class="compact-upload-controls">
+                                            <span class="photo-number-placeholder">2.</span>
+                                            <div class="preview-container">
+                                                <img id="batteryPreview2" class="preview-img">
+                                                <button class="remove-photo-btn" id="batteryRemove2"
+                                                    onclick="removeImage(event, 'batteryPreview2', 'batteryImage2', null, 'batteryRemove2')">&times;</button>
+                                                <input type="hidden" id="batteryImage2">
+                                            </div>
                                         <div class="action-btn-group">
                                             <button type="button" class="action-btn"
                                                 onclick="triggerFileInput('batteryInput2')" title="Upload">
